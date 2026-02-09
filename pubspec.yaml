@@ -19,6 +19,7 @@ dependencies:
   # Database & Storage
   path_provider: ^2.1.1
   shared_preferences: ^2.2.2
+  package_info_plus: ^4.0.0  # 约束版本以避免 Gradle 兼容性问题
 
   # Network & API
   http: ^1.1.2
@@ -41,7 +42,7 @@ dependencies:
   collection: ^1.18.0
 
   # Error Tracking
-  sentry_flutter: ^8.0.0
+  sentry_flutter: ^7.14.0
 
   # Widgets
   # flutter_widget_from_html: ^0.14.0  # 暂时禁用（依赖just_audio→audio_session）
