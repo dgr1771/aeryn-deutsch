@@ -13,6 +13,22 @@ allprojects {
         }
     }
 }
+
+// 为所有子项目提供 Flutter 版本信息
+subprojects {
+    afterEvaluate {
+        if (project.hasProperty("android")) {
+            val android = project.extensions.getByName("android")
+            if (android is com.android.build.gradle.LibraryExtension) {
+                android.compileSdk = 36
+                android.defaultConfig {
+                    minSdk = 21
+                    targetSdk = 36
+                }
+            }
+        }
+    }
+}
 allprojects {
     gradle.projectsEvaluated {
         tasks.withType<JavaCompile> {
