@@ -144,7 +144,7 @@ C1-C2 (12-24个月)：10000+词，接近母语者水平
 📧 联系我们
 • 网站: aeryn-deutsch.com
 • 邮箱: 6784243@qq.com
-• 微信: AerynDeutsch
+• 微信: echo1771
 
 🔗 隐私政策: aeryn-deutsch.com/privacy
 📄 服务条款: aeryn-deutsch.com/terms
