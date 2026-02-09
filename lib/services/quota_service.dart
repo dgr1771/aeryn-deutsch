@@ -4,9 +4,8 @@ library;
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-// 导入SubscriptionType
-import 'subscription_service.dart';
+// subscription-type
+import 'subscription_service.dart' show SubscriptionType;
 
 /// 配额类型
 enum QuotaType {

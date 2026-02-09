@@ -4,6 +4,7 @@ library;
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'ai_conversation_service.dart' show AIServiceConfig;
 
 /// 订阅类型
 enum SubscriptionType {
@@ -266,10 +267,10 @@ class SubscriptionService {
     await _quotaService!.initialize();
 
     // 根据订阅状态设置配额
-    if (isTrial) {
+    if (_currentSubscription?.isTrial ?? false) {
       await _quotaService!.setTrialQuota();
-    } else if (isPaid && subscriptionType != null) {
-      await _quotaService!.setPaidQuota(subscriptionType!);
+    } else if ((_currentSubscription?.isPaid ?? false) && (_currentSubscription?.type != null)) {
+      await _quotaService!.setPaidQuota(_currentSubscription!.type!);
     } else {
       await _quotaService!.setTrialQuota();  // 免费用户使用基础配额
     }
@@ -468,12 +469,12 @@ class SubscriptionService {
     engines.add('ruleBased');
 
     // 如果在试用期或已付费，可以使用基础AI
-    if (isActive) {
+    if (_currentSubscription?.isActive ?? false) {
       engines.add('basic_ai');
     }
 
     // 如果已付费，可以使用所有高级AI
-    if (isPaid) {
+    if (_currentSubscription?.isPaid ?? false) {
       final configuredProviders = AIServiceConfig.getConfiguredProviders();
       engines.addAll(configuredProviders.map((p) => p.toLowerCase()));
     }
@@ -490,7 +491,7 @@ class SubscriptionService {
         return providers.first.toLowerCase();
       }
       return 'basic_ai';
-    } else if (isTrial) {
+    } else if (_currentSubscription?.isTrial ?? false) {
       // 试用期用户使用基础AI
       return 'basic_ai';
     } else {
@@ -501,13 +502,13 @@ class SubscriptionService {
 
   /// 获取试用剩余天数
   int get trialDaysRemaining {
-    if (!isTrial) return 0;
+    if (!(_currentSubscription?.isTrial ?? false)) return 0;
     return daysRemaining;
   }
 
   /// 试用是否即将结束（2天内）
   bool get isTrialEndingSoon {
-    if (!isTrial) return false;
+    if (!(_currentSubscription?.isTrial ?? false)) return false;
     return trialDaysRemaining <= 2 && trialDaysRemaining > 0;
   }
 
