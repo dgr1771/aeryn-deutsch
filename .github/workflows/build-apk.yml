@@ -26,29 +26,18 @@ jobs:
           channel: 'stable'
           cache: false
 
-      - name: 完全清理并重新生成
+      - name: 清理并获取依赖
         run: |
-          echo "=== 清理所有缓存和生成的文件 ==="
+          echo "=== 清理缓存 ==="
           flutter clean
-          cd android
-          ./gradlew clean
-          cd ..
-          rm -rf .dart_tool
-          rm -f pubspec.lock
-          rm -rf build
+          rm -rf build/
           echo "✅ 清理完成"
-
-      - name: 获取依赖并生成文件
-        run: |
+          echo ""
+          echo "=== 获取依赖 ==="
           flutter pub get
           echo "✅ 依赖获取完成"
-          # 预构建以生成GeneratedPluginRegistrant.java
-          flutter build apk --debug --target-platform android-arm64
-          echo "✅ 预构建完成，GeneratedPluginRegistrant.java已生成"
-          echo "=== 检查GeneratedPluginRegistrant ==="
-          head -20 android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
 
-      - name: 检查V2 Embedding配置
+      - name: 验证V2 Embedding配置
         run: |
           echo "=== MainActivity.kt (V2 Embedding) ==="
           cat android/app/src/main/kotlin/com/aeryn/deutsch/MainActivity.kt
