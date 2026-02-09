@@ -128,8 +128,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              statusColor.withValues(alpha: 0.2),
-              statusColor.withValues(alpha: 0.1),
+              statusColor.withOpacity(0.2),
+              statusColor.withOpacity(0.1),
             ],
           ),
         ),
@@ -193,8 +193,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Colors.deepPurple.withValues(alpha: 0.2),
-              Colors.purple.withValues(alpha: 0.1),
+              Colors.deepPurple.withOpacity(0.2),
+              Colors.purple.withOpacity(0.1),
             ],
           ),
         ),
@@ -326,8 +326,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                plan.color.withValues(alpha: 0.15),
-                plan.color.withValues(alpha: 0.05),
+                plan.color.withOpacity(0.15),
+                plan.color.withOpacity(0.05),
               ],
             ),
           ),
@@ -398,7 +398,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.red.withValues(alpha: 0.1),
+                        color: Colors.red.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(

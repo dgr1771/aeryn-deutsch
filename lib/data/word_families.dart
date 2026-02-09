@@ -294,7 +294,7 @@ final List<WordFamily> exampleWordFamilies = [
       Word(
         word: 'das Gespräch',
         article: 'das',
-        gender: GermanGender.neuter,
+        gender: GermanGender.das,
         meaning: '对话、谈话',
         example: 'Wir führen ein Gespräch.',
         frequency: 400,
@@ -304,7 +304,7 @@ final List<WordFamily> exampleWordFamilies = [
       Word(
         word: 'die Aussprache',
         article: 'die',
-        gender: GermanGender.feminine,
+        gender: GermanGender.die,
         meaning: '发音',
         example: 'Die Aussprache ist wichtig.',
         frequency: 320,
@@ -358,7 +358,7 @@ final List<WordFamily> exampleWordFamilies = [
       Word(
         word: 'der Schüler',
         article: 'der',
-        gender: GermanGender.masculine,
+        gender: GermanGender.der,
         meaning: '学生',
         example: 'Der Schüler lernt fleißig.',
         frequency: 450,
@@ -368,7 +368,7 @@ final List<WordFamily> exampleWordFamilies = [
       Word(
         word: 'die Lernung',
         article: 'die',
-        gender: GermanGender.feminine,
+        gender: GermanGender.die,
         meaning: '学习过程',
         example: 'Die Lernung braucht Zeit.',
         frequency: 200,
@@ -424,7 +424,7 @@ final List<WordFamily> exampleWordFamilies = [
       Word(
         word: 'die Arbeit',
         article: 'die',
-        gender: GermanGender.feminine,
+        gender: GermanGender.die,
         meaning: '工作、劳动',
         example: 'Die Arbeit ist wichtig.',
         frequency: 700,
@@ -434,7 +434,7 @@ final List<WordFamily> exampleWordFamilies = [
       Word(
         word: 'der Arbeiter',
         article: 'der',
-        gender: GermanGender.masculine,
+        gender: GermanGender.der,
         meaning: '工人',
         example: 'Der Arbeiter arbeitet hart.',
         frequency: 400,
@@ -444,7 +444,7 @@ final List<WordFamily> exampleWordFamilies = [
       Word(
         word: 'die Arbeitszeit',
         article: 'die',
-        gender: GermanGender.feminine,
+        gender: GermanGender.die,
         meaning: '工作时间',
         example: 'Die Arbeitszeit ist 8 Stunden.',
         frequency: 350,
@@ -464,7 +464,7 @@ final List<WordFamily> exampleWordFamilies = [
       Word(
         word: 'die Arbeitslosigkeit',
         article: 'die',
-        gender: GermanGender.feminine,
+        gender: GermanGender.die,
         meaning: '失业',
         example: 'Die Arbeitslosigkeit ist hoch.',
         frequency: 280,

@@ -6,19 +6,19 @@ import '../core/grammar_engine.dart';
 
 /// 定冠词变位表
 final Map<GermanGender, Map<GermanCase, Map<Number, String>>> definiteArticles = {
-  GermanGender.masculine: {
+  GermanGender.der: {
     GermanCase.nominativ: {Number.singular: 'der', Number.plural: 'die'},
     GermanCase.akkusativ: {Number.singular: 'den', Number.plural: 'die'},
     GermanCase.dativ: {Number.singular: 'dem', Number.plural: 'den'},
     GermanCase.genitiv: {Number.singular: 'des', Number.plural: 'der'},
   },
-  GermanGender.feminine: {
+  GermanGender.die: {
     GermanCase.nominativ: {Number.singular: 'die', Number.plural: 'die'},
     GermanCase.akkusativ: {Number.singular: 'die', Number.plural: 'die'},
     GermanCase.dativ: {Number.singular: 'der', Number.plural: 'den'},
     GermanCase.genitiv: {Number.singular: 'der', Number.plural: 'der'},
   },
-  GermanGender.neuter: {
+  GermanGender.das: {
     GermanCase.nominativ: {Number.singular: 'das', Number.plural: 'die'},
     GermanCase.akkusativ: {Number.singular: 'das', Number.plural: 'die'},
     GermanCase.dativ: {Number.singular: 'dem', Number.plural: 'den'},
@@ -28,19 +28,19 @@ final Map<GermanGender, Map<GermanCase, Map<Number, String>>> definiteArticles =
 
 /// 不定冠词变位表（仅单数）
 final Map<GermanGender, Map<GermanCase, String>> indefiniteArticles = {
-  GermanGender.masculine: {
+  GermanGender.der: {
     GermanCase.nominativ: 'ein',
     GermanCase.akkusativ: 'einen',
     GermanCase.dativ: 'einem',
     GermanCase.genitiv: 'eines',
   },
-  GermanGender.feminine: {
+  GermanGender.die: {
     GermanCase.nominativ: 'eine',
     GermanCase.akkusativ: 'eine',
     GermanCase.dativ: 'einer',
     GermanCase.genitiv: 'einer',
   },
-  GermanGender.neuter: {
+  GermanGender.das: {
     GermanCase.nominativ: 'ein',
     GermanCase.akkusativ: 'ein',
     GermanCase.dativ: 'einem',
@@ -50,19 +50,19 @@ final Map<GermanGender, Map<GermanCase, String>> indefiniteArticles = {
 
 /// 否定冠词变位表
 final Map<GermanGender, Map<GermanCase, Map<Number, String>>> negativeArticles = {
-  GermanGender.masculine: {
+  GermanGender.der: {
     GermanCase.nominativ: {Number.singular: 'kein', Number.plural: 'keine'},
     GermanCase.akkusativ: {Number.singular: 'keinen', Number.plural: 'keine'},
     GermanCase.dativ: {Number.singular: 'keinem', Number.plural: 'keinen'},
     GermanCase.genitiv: {Number.singular: 'keines', Number.plural: 'keiner'},
   },
-  GermanGender.feminine: {
+  GermanGender.die: {
     GermanCase.nominativ: {Number.singular: 'keine', Number.plural: 'keine'},
     GermanCase.akkusativ: {Number.singular: 'keine', Number.plural: 'keine'},
     GermanCase.dativ: {Number.singular: 'keiner', Number.plural: 'keinen'},
     GermanCase.genitiv: {Number.singular: 'keiner', Number.plural: 'keiner'},
   },
-  GermanGender.neuter: {
+  GermanGender.das: {
     GermanCase.nominativ: {Number.singular: 'kein', Number.plural: 'keine'},
     GermanCase.akkusativ: {Number.singular: 'kein', Number.plural: 'keine'},
     GermanCase.dativ: {Number.singular: 'keinem', Number.plural: 'keinen'},
@@ -77,7 +77,7 @@ final List<NounPhraseDeclension> commonNounDeclensions = [
   // der Mann - 男人
   NounPhraseDeclension(
     noun: 'Mann',
-    gender: GermanGender.masculine,
+    gender: GermanGender.der,
     number: Number.singular,
     definiteArticle: {
       GermanCase.nominativ: 'der',
@@ -108,7 +108,7 @@ final List<NounPhraseDeclension> commonNounDeclensions = [
   // der Tag - 天
   NounPhraseDeclension(
     noun: 'Tag',
-    gender: GermanGender.masculine,
+    gender: GermanGender.der,
     number: Number.singular,
     definiteArticle: {
       GermanCase.nominativ: 'der',
@@ -139,7 +139,7 @@ final List<NounPhraseDeclension> commonNounDeclensions = [
   // der Hund - 狗
   NounPhraseDeclension(
     noun: 'Hund',
-    gender: GermanGender.masculine,
+    gender: GermanGender.der,
     number: Number.singular,
     definiteArticle: {
       GermanCase.nominativ: 'der',
@@ -172,7 +172,7 @@ final List<NounPhraseDeclension> commonNounDeclensions = [
   // die Frau - 女人/妻子
   NounPhraseDeclension(
     noun: 'Frau',
-    gender: GermanGender.feminine,
+    gender: GermanGender.die,
     number: Number.singular,
     definiteArticle: {
       GermanCase.nominativ: 'die',
@@ -203,7 +203,7 @@ final List<NounPhraseDeclension> commonNounDeclensions = [
   // die Zeit - 时间
   NounPhraseDeclension(
     noun: 'Zeit',
-    gender: GermanGender.feminine,
+    gender: GermanGender.die,
     number: Number.singular,
     definiteArticle: {
       GermanCase.nominativ: 'die',
@@ -234,7 +234,7 @@ final List<NounPhraseDeclension> commonNounDeclensions = [
   // die Hand - 手
   NounPhraseDeclension(
     noun: 'Hand',
-    gender: GermanGender.feminine,
+    gender: GermanGender.die,
     number: Number.singular,
     definiteArticle: {
       GermanCase.nominativ: 'die',
@@ -267,7 +267,7 @@ final List<NounPhraseDeclension> commonNounDeclensions = [
   // das Kind - 孩子
   NounPhraseDeclension(
     noun: 'Kind',
-    gender: GermanGender.neuter,
+    gender: GermanGender.das,
     number: Number.singular,
     definiteArticle: {
       GermanCase.nominativ: 'das',
@@ -298,7 +298,7 @@ final List<NounPhraseDeclension> commonNounDeclensions = [
   // das Buch - 书
   NounPhraseDeclension(
     noun: 'Buch',
-    gender: GermanGender.neuter,
+    gender: GermanGender.das,
     number: Number.singular,
     definiteArticle: {
       GermanCase.nominativ: 'das',
@@ -329,7 +329,7 @@ final List<NounPhraseDeclension> commonNounDeclensions = [
   // das Haus - 房子
   NounPhraseDeclension(
     noun: 'Haus',
-    gender: GermanGender.neuter,
+    gender: GermanGender.das,
     number: Number.singular,
     definiteArticle: {
       GermanCase.nominativ: 'das',
@@ -362,7 +362,7 @@ final List<NounPhraseDeclension> commonNounDeclensions = [
   // die Kinder - 孩子们 (复数)
   NounPhraseDeclension(
     noun: 'Kinder',
-    gender: GermanGender.neuter,
+    gender: GermanGender.das,
     number: Number.plural,
     definiteArticle: {
       GermanCase.nominativ: 'die',
@@ -387,7 +387,7 @@ final List<NounPhraseDeclension> commonNounDeclensions = [
   // die Bücher - 书 (复数)
   NounPhraseDeclension(
     noun: 'Bücher',
-    gender: GermanGender.neuter,
+    gender: GermanGender.das,
     number: Number.plural,
     definiteArticle: {
       GermanCase.nominativ: 'die',

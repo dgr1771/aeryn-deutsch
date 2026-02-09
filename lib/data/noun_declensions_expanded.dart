@@ -13,7 +13,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
   // der Tisch - 桌子
   NounPhraseDeclension(
     noun: 'Tisch',
-    gender: GermanGender.masculine,
+    gender: GermanGender.der,
     number: Number.singular,
     definiteArticle: {
       GermanCase.nominativ: 'der',
@@ -44,7 +44,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
   // der Stuhl - 椅子
   NounPhraseDeclension(
     noun: 'Stuhl',
-    gender: GermanGender.masculine,
+    gender: GermanGender.der,
     number: Number.singular,
     definiteArticle: {
       GermanCase.nominativ: 'der',
@@ -75,7 +75,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
   // der Baum - 树
   NounPhraseDeclension(
     noun: 'Baum',
-    gender: GermanGender.masculine,
+    gender: GermanGender.der,
     number: Number.singular,
     definiteArticle: {
       GermanCase.nominativ: 'der',
@@ -106,7 +106,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
   // der Computer - 电脑
   NounPhraseDeclension(
     noun: 'Computer',
-    gender: GermanGender.masculine,
+    gender: GermanGender.der,
     number: Number.singular,
     definitiveArticle: {
       GermanCase.nominativ: 'der',
@@ -137,7 +137,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
   // der Student - 大学生
   NounPhraseDeclension(
     noun: 'Student',
-    gender: GermanGender.masculine,
+    gender: GermanGender.der,
     number: Number.singular,
     definitiveArticle: {
       GermanCase.nominativ: 'der',
@@ -170,7 +170,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
   // die Stadt - 城市
   NounPhraseDeclension(
     noun: 'Stadt',
-    gender: GermanGender.feminine,
+    gender: GermanGender.die,
     number: Number.singular,
     definitiveArticle: {
       GermanCase.nominativ: 'die',
@@ -201,7 +201,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
   // die Universität - 大学
   NounPhraseDeclension(
     noun: 'Universität',
-    gender: GermanGender.feminine,
+    gender: GermanGender.die,
     number: Number.singular,
     definitiveArticle: {
       GermanCase.nominativ: 'die',
@@ -232,7 +232,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
   // die Straße - 街道
   NounPhraseDeclension(
     noun: 'Straße',
-    gender: GermanGender.feminine,
+    gender: GermanGender.die,
     number: Number.singular,
     definitiveArticle: {
       GermanCase.nominativ: 'die',
@@ -263,7 +263,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
   // die Schule - 学校
   NounPhraseDeclension(
     noun: 'Schule',
-    gender: GermanGender.feminine,
+    gender: GermanGender.die,
     number: Number.singular,
     definitiveArticle: {
       GermanCase.nominativ: 'die',
@@ -294,7 +294,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
   // die Party - 派对
   NounPhraseDeclension(
     noun: 'Party',
-    gender: GermanGender.feminine,
+    gender: GermanGender.die,
     number: Number.singular,
     definitiveArticle: {
       GermanCase.nominativ: 'die',
@@ -327,7 +327,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
   // das Auto - 汽车
   NounPhraseDeclension(
     noun: 'Auto',
-    gender: GermanGender.neuter,
+    gender: GermanGender.das,
     number: Number.singular,
     definitiveArticle: {
       GermanCase.nominativ: 'das',
@@ -358,7 +358,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
   // das Fahrrad - 自行车
   NounPhraseDeclension(
     noun: 'Fahrrad',
-    gender: GermanGender.neuter,
+    gender: GermanGender.das,
     number: Number.singular,
     definitiveArticle: {
       GermanCase.nominativ: 'das',
@@ -389,7 +389,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
   // das Hotel - 酒店
   NounPhraseDeclension(
     noun: 'Hotel',
-    gender: GermanGender.neuter,
+    gender: GermanGender.das,
     number: Number.singular,
     definitiveArticle: {
       GermanCase.nominativ: 'das',
@@ -420,7 +420,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
   // das Problem - 问题
   NounPhraseDeclension(
     noun: 'Problem',
-    gender: GermanGender.neuter,
+    gender: GermanGender.das,
     number: Number.singular,
     definitiveArticle: {
       GermanCase.nominativ: 'das',
@@ -451,7 +451,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
   // das Gefühl - 感觉
   NounPhraseDeclension(
     noun: 'Gefühl',
-    gender: GermanGender.neuter,
+    gender: GermanGender.das,
     number: Number.singular,
     definitiveArticle: {
       GermanCase.nominativ: 'das',

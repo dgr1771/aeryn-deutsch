@@ -167,50 +167,50 @@ final List<AdjectiveEndingRule> adjectiveDeclensionRules = [
 final Map<GermanCase, Map<Number, Map<GermanGender, String>>> weakEndings = {
   GermanCase.nominativ: {
     Number.singular: {
-      GermanGender.masculine: 'e',
-      GermanGender.feminine: 'e',
-      GermanGender.neuter: 'e',
+      GermanGender.der: 'e',
+      GermanGender.die: 'e',
+      GermanGender.das: 'e',
     },
     Number.plural: {
-      GermanGender.masculine: 'en',
-      GermanGender.feminine: 'en',
-      GermanGender.neuter: 'en',
+      GermanGender.der: 'en',
+      GermanGender.die: 'en',
+      GermanGender.das: 'en',
     },
   },
   GermanCase.akkusativ: {
     Number.singular: {
-      GermanGender.masculine: 'en',
-      GermanGender.feminine: 'e',
-      GermanGender.neuter: 'e',
+      GermanGender.der: 'en',
+      GermanGender.die: 'e',
+      GermanGender.das: 'e',
     },
     Number.plural: {
-      GermanGender.masculine: 'en',
-      GermanGender.feminine: 'en',
-      GermanGender.neuter: 'en',
+      GermanGender.der: 'en',
+      GermanGender.die: 'en',
+      GermanGender.das: 'en',
     },
   },
   GermanCase.dativ: {
     Number.singular: {
-      GermanGender.masculine: 'en',
-      GermanGender.feminine: 'en',
-      GermanGender.neuter: 'en',
+      GermanGender.der: 'en',
+      GermanGender.die: 'en',
+      GermanGender.das: 'en',
     },
     Number.plural: {
-      GermanGender.masculine: 'en',
-      GermanGender.feminine: 'en',
-      GermanGender.neuter: 'en',
+      GermanGender.der: 'en',
+      GermanGender.die: 'en',
+      GermanGender.das: 'en',
     },
   },
   GermanCase.genitiv: {
     Number.singular: {
-      GermanGender.masculine: 'en',
-      GermanGender.feminine: 'en',
-      GermanGender.neuter: 'en',
+      GermanGender.der: 'en',
+      GermanGender.die: 'en',
+      GermanGender.das: 'en',
     },
     Number.plural: {
-      GermanGender.masculine: 'en',
-      GermanGender.feminine: 'en',
-      GermanGender.neuter: 'en',
+      GermanGender.der: 'en',
+      GermanGender.die: 'en',
+      GermanGender.das: 'en',
     },
   },
 };
@@ -219,50 +219,50 @@ final Map<GermanCase, Map<Number, Map<GermanGender, String>>> weakEndings = {
 final Map<GermanCase, Map<Number, Map<GermanGender, String>>> strongEndings = {
   GermanCase.nominativ: {
     Number.singular: {
-      GermanGender.masculine: 'er',
-      GermanGender.feminine: 'e',
-      GermanGender.neuter: 'es',
+      GermanGender.der: 'er',
+      GermanGender.die: 'e',
+      GermanGender.das: 'es',
     },
     Number.plural: {
-      GermanGender.masculine: 'e',
-      GermanGender.feminine: 'e',
-      GermanGender.neuter: 'e',
+      GermanGender.der: 'e',
+      GermanGender.die: 'e',
+      GermanGender.das: 'e',
     },
   },
   GermanCase.akkusativ: {
     Number.singular: {
-      GermanGender.masculine: 'en',
-      GermanGender.feminine: 'e',
-      GermanGender.neuter: 'es',
+      GermanGender.der: 'en',
+      GermanGender.die: 'e',
+      GermanGender.das: 'es',
     },
     Number.plural: {
-      GermanGender.masculine: 'e',
-      GermanGender.feminine: 'e',
-      GermanGender.neuter: 'e',
+      GermanGender.der: 'e',
+      GermanGender.die: 'e',
+      GermanGender.das: 'e',
     },
   },
   GermanCase.dativ: {
     Number.singular: {
-      GermanGender.masculine: 'em',
-      GermanGender.feminine: 'er',
-      GermanGender.neuter: 'em',
+      GermanGender.der: 'em',
+      GermanGender.die: 'er',
+      GermanGender.das: 'em',
     },
     Number.plural: {
-      GermanGender.masculine: 'en',
-      GermanGender.feminine: 'en',
-      GermanGender.neuter: 'en',
+      GermanGender.der: 'en',
+      GermanGender.die: 'en',
+      GermanGender.das: 'en',
     },
   },
   GermanCase.genitiv: {
     Number.singular: {
-      GermanGender.masculine: 'en',
-      GermanGender.feminine: 'er',
-      GermanGender.neuter: 'en',
+      GermanGender.der: 'en',
+      GermanGender.die: 'er',
+      GermanGender.das: 'en',
     },
     Number.plural: {
-      GermanGender.masculine: 'en',
-      GermanGender.feminine: 'en',
-      GermanGender.neuter: 'en',
+      GermanGender.der: 'en',
+      GermanGender.die: 'en',
+      GermanGender.das: 'en',
     },
   },
 };
@@ -271,50 +271,50 @@ final Map<GermanCase, Map<Number, Map<GermanGender, String>>> strongEndings = {
 final Map<GermanCase, Map<Number, Map<GermanGender, String>>> mixedEndings = {
   GermanCase.nominativ: {
     Number.singular: {
-      GermanGender.masculine: 'er',
-      GermanGender.feminine: 'e',
-      GermanGender.neuter: 'es',
+      GermanGender.der: 'er',
+      GermanGender.die: 'e',
+      GermanGender.das: 'es',
     },
     Number.plural: {
-      GermanGender.masculine: 'en',
-      GermanGender.feminine: 'en',
-      GermanGender.neuter: 'en',
+      GermanGender.der: 'en',
+      GermanGender.die: 'en',
+      GermanGender.das: 'en',
     },
   },
   GermanCase.akkusativ: {
     Number.singular: {
-      GermanGender.masculine: 'en',
-      GermanGender.feminine: 'e',
-      GermanGender.neuter: 'es',
+      GermanGender.der: 'en',
+      GermanGender.die: 'e',
+      GermanGender.das: 'es',
     },
     Number.plural: {
-      GermanGender.masculine: 'en',
-      GermanGender.feminine: 'en',
-      GermanGender.neuter: 'en',
+      GermanGender.der: 'en',
+      GermanGender.die: 'en',
+      GermanGender.das: 'en',
     },
   },
   GermanCase.dativ: {
     Number.singular: {
-      GermanGender.masculine: 'en',
-      GermanGender.feminine: 'en',
-      GermanGender.neuter: 'en',
+      GermanGender.der: 'en',
+      GermanGender.die: 'en',
+      GermanGender.das: 'en',
     },
     Number.plural: {
-      GermanGender.masculine: 'en',
-      GermanGender.feminine: 'en',
-      GermanGender.neuter: 'en',
+      GermanGender.der: 'en',
+      GermanGender.die: 'en',
+      GermanGender.das: 'en',
     },
   },
   GermanCase.genitiv: {
     Number.singular: {
-      GermanGender.masculine: 'en',
-      GermanGender.feminine: 'en',
-      GermanGender.neuter: 'en',
+      GermanGender.der: 'en',
+      GermanGender.die: 'en',
+      GermanGender.das: 'en',
     },
     Number.plural: {
-      GermanGender.masculine: 'en',
-      GermanGender.feminine: 'en',
-      GermanGender.neuter: 'en',
+      GermanGender.der: 'en',
+      GermanGender.die: 'en',
+      GermanGender.das: 'en',
     },
   },
 };

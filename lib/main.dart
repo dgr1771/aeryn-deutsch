@@ -7,19 +7,20 @@ import 'ui/screens/ai_conversation_screen.dart';
 import 'ui/screens/speech_learning_screen.dart';
 import 'ui/screens/pomodoro_screen.dart';
 import 'ui/screens/subscription_screen.dart';
-import 'services/error_tracking_service.dart';
+// import 'services/error_tracking_service.dart';  // 暂时禁用：依赖问题
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // 仅在生产环境启用错误追踪
-  if (kReleaseMode) {
-    await ErrorTrackingService.instance.initialize(
-      dsn: const String.fromEnvironment('SENTRY_DSN'),
-      environment: 'production',
-      tracesSampleRate: 0.1,
-    );
-  }
+  // 暂时禁用：sentry_flutter 依赖问题
+  // if (kReleaseMode) {
+  //   await ErrorTrackingService.instance.initialize(
+  //     dsn: const String.fromEnvironment('SENTRY_DSN'),
+  //     environment: 'production',
+  //     tracesSampleRate: 0.1,
+  //   );
+  // }
 
   runApp(const AerynDeutschApp());
 }

@@ -128,9 +128,9 @@ class _HomeScreenState extends State<HomeScreen> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                GrammarEngine.genderColors['der']!.withValues(alpha: 0.1),
-                GrammarEngine.genderColors['die']!.withValues(alpha: 0.1),
-                GrammarEngine.genderColors['das']!.withValues(alpha: 0.1),
+                GrammarEngine.genderColors['der']!.withOpacity(0.1),
+                GrammarEngine.genderColors['die']!.withOpacity(0.1),
+                GrammarEngine.genderColors['das']!.withOpacity(0.1),
               ],
             ),
           ),
@@ -241,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: GrammarEngine.genderColors['die']!.withValues(alpha: 0.1),
+                    color: GrammarEngine.genderColors['die']!.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
@@ -393,8 +393,8 @@ class _HomeScreenState extends State<HomeScreen> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                color.withValues(alpha: 0.1),
-                color.withValues(alpha: 0.05),
+                color.withOpacity(0.1),
+                color.withOpacity(0.05),
               ],
             ),
           ),
@@ -454,7 +454,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     margin: const EdgeInsets.only(right: 4),
                     decoration: BoxDecoration(
                       color: hasActivity
-                          ? GrammarEngine.genderColors['der']!.withValues(alpha: 0.3 + (index % 5) * 0.15)
+                          ? GrammarEngine.genderColors['der']!.withOpacity(0.3 + (index % 5) * 0.15)
                           : Colors.grey[200],
                       borderRadius: BorderRadius.circular(4),
                     ),

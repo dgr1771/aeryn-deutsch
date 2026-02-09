@@ -82,13 +82,13 @@ class Word {
       switch (gender.toString().toLowerCase()) {
         case 'der':
         case 'masculine':
-          return GermanGender.masculine;
+          return GermanGender.der;
         case 'die':
         case 'feminine':
-          return GermanGender.feminine;
+          return GermanGender.die;
         case 'das':
         case 'neuter':
-          return GermanGender.neuter;
+          return GermanGender.das;
         default:
           return GermanGender.none;
       }

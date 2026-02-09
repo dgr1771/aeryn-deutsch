@@ -248,9 +248,9 @@ class _LearningPathScreenState extends State<LearningPathScreen> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                GrammarEngine.genderColors['der']!.withValues(alpha: 0.1),
-                GrammarEngine.genderColors['die']!.withValues(alpha: 0.1),
-                GrammarEngine.genderColors['das']!.withValues(alpha: 0.1),
+                GrammarEngine.genderColors['der']!.withOpacity(0.1),
+                GrammarEngine.genderColors['die']!.withOpacity(0.1),
+                GrammarEngine.genderColors['das']!.withOpacity(0.1),
               ],
             ),
           ),
@@ -351,7 +351,7 @@ class _LearningPathScreenState extends State<LearningPathScreen> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
+            color: Colors.black.withOpacity(0.05),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -403,7 +403,7 @@ class _LearningPathScreenState extends State<LearningPathScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: GrammarEngine.genderColors['die']!.withValues(alpha: 0.1),
+                  color: GrammarEngine.genderColors['die']!.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
@@ -425,7 +425,7 @@ class _LearningPathScreenState extends State<LearningPathScreen> {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.05),
+                  color: Colors.black.withOpacity(0.05),
                   blurRadius: 10,
                   offset: const Offset(0, 2),
                 ),
@@ -474,12 +474,12 @@ class _LearningPathScreenState extends State<LearningPathScreen> {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: isUnlocked
-            ? GrammarEngine.genderColors['der']!.withValues(alpha: 0.05)
+            ? GrammarEngine.genderColors['der']!.withOpacity(0.05)
             : Colors.grey[100],
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: isUnlocked
-              ? GrammarEngine.genderColors['der']!.withValues(alpha: 0.2)
+              ? GrammarEngine.genderColors['der']!.withOpacity(0.2)
               : Colors.grey[300]!,
           width: 1,
         ),

@@ -369,8 +369,8 @@ class _ReadingScreenState extends State<ReadingScreen> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            GrammarEngine.genderColors['der']!.withValues(alpha: 0.1),
-            GrammarEngine.genderColors['die']!.withValues(alpha: 0.1),
+            GrammarEngine.genderColors['der']!.withOpacity(0.1),
+            GrammarEngine.genderColors['die']!.withOpacity(0.1),
           ],
         ),
         borderRadius: BorderRadius.circular(16),
@@ -444,7 +444,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: difficultyColor.withValues(alpha: 0.1),
+                      color: difficultyColor.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
@@ -518,7 +518,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.05),
+                  color: Colors.black.withOpacity(0.05),
                   blurRadius: 10,
                 ),
               ],
@@ -550,9 +550,9 @@ class _ReadingScreenState extends State<ReadingScreen> {
                     padding: EdgeInsets.symmetric(horizontal: 2, vertical: 1),
                     decoration: BoxDecoration(
                       color: isLearned
-                          ? Colors.green.withValues(alpha: 0.2)
+                          ? Colors.green.withOpacity(0.2)
                           : isHighlighted
-                              ? Colors.orange.withValues(alpha: 0.2)
+                              ? Colors.orange.withOpacity(0.2)
                               : null,
                       borderRadius: BorderRadius.circular(4),
                     ),
@@ -598,7 +598,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: GrammarEngine.genderColors['der']!.withValues(alpha: 0.2),
+          color: GrammarEngine.genderColors['der']!.withOpacity(0.2),
         ),
       ),
       child: Column(
@@ -672,7 +672,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
+            color: Colors.black.withOpacity(0.05),
             blurRadius: 10,
           ),
         ],

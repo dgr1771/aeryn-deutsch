@@ -3,14 +3,6 @@ library;
 
 import '../core/grammar_engine.dart';
 
-/// 格
-enum GermanCase {
-  nominativ,  // 第一格 - 主格
-  akkusativ,  // 第四格 - 宾格
-  dativ,      // 第三格 - 间接格
-  genitiv,    // 第二格 - 所有格
-}
-
 /// 数
 enum Number {
   singular,   // 单数

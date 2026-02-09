@@ -330,21 +330,21 @@ class _AdjectiveDeclensionScreenState extends State<AdjectiveDeclensionScreen> {
               // 阳性
               _buildTableRow(
                 ['Maskulin\n(der)', ...GermanCase.values.map((c) {
-                  final ending = endings[c]?[number]?[GermanGender.masculine] ?? '';
+                  final ending = endings[c]?[number]?[GermanGender.der] ?? '';
                   return _adjectiveController.text + ending;
                 })],
               ),
               // 阴性
               _buildTableRow(
                 ['Feminin\n(die)', ...GermanCase.values.map((c) {
-                  final ending = endings[c]?[number]?[GermanGender.feminine] ?? '';
+                  final ending = endings[c]?[number]?[GermanGender.die] ?? '';
                   return _adjectiveController.text + ending;
                 })],
               ),
               // 中性
               _buildTableRow(
                 ['Neuter\n(das)', ...GermanCase.values.map((c) {
-                  final ending = endings[c]?[number]?[GermanGender.neuter] ?? '';
+                  final ending = endings[c]?[number]?[GermanGender.das] ?? '';
                   return _adjectiveController.text + ending;
                 })],
               ),

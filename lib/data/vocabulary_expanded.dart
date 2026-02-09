@@ -11,7 +11,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Abhandlung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '论文、专著',
     'example': 'Die Abhandlung wurde in einer Fachzeitschrift veröffentlicht.',
     'frequency': 4500,
@@ -20,7 +20,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Argumentation',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '论证、论点',
     'example': 'Seine Argumentation war sehr überzeugend.',
     'frequency': 5200,
@@ -29,7 +29,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Aussagekraft',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '说服力、可信度',
     'example': 'Die Studie hat eine hohe Aussagekraft.',
     'frequency': 5800,
@@ -74,7 +74,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Deduktion',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '演绎',
     'example': 'Die Deduktion folgt logisch aus den Prämissen.',
     'frequency': 8900,
@@ -83,7 +83,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Diskussion',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '讨论',
     'example': 'Die Diskussion führte zu neuen Erkenntnissen.',
     'frequency': 4200,
@@ -92,7 +92,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Empirie',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '经验、实证',
     'example': 'Die Studie basiert auf empirischen Daten.',
     'frequency': 9200,
@@ -128,7 +128,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Hypothese',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '假设',
     'example': 'Die Hypothese muss noch bewiesen werden.',
     'frequency': 5400,
@@ -146,7 +146,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'das Kriterium',
     'article': 'das',
-    'gender': GermanGender.neuter,
+    'gender': GermanGender.das,
     'meaning': '标准、准则',
     'example': 'Dieses Kriterium ist entscheidend.',
     'frequency': 5900,
@@ -155,7 +155,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Methode',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '方法',
     'example': 'Wir brauchen eine bessere Methode.',
     'frequency': 3500,
@@ -164,7 +164,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'dieThese',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '论点、命题',
     'example': 'Seine These ist umstritten.',
     'frequency': 7100,
@@ -200,7 +200,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Zusammenfassung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '总结、摘要',
     'example': 'Die Zusammenfassung ist prägnant.',
     'frequency': 4300,
@@ -220,7 +220,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'das Asset',
     'article': 'das',
-    'gender': GermanGender.neuter,
+    'gender': GermanGender.das,
     'meaning': '资产',
     'example': 'Das Unternehmen hat wertvolle Assets.',
     'frequency': 7200,
@@ -265,7 +265,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Dividende',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '股息、红利',
     'example': 'Die Aktionäre erhalten eine Dividende.',
     'frequency': 6500,
@@ -292,7 +292,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'das Kapital',
     'article': 'das',
-    'gender': GermanGender.neuter,
+    'gender': GermanGender.das,
     'meaning': '资本',
     'example': 'Das Unternehmen braucht mehr Kapital.',
     'frequency': 4400,
@@ -301,7 +301,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'der Kostenvoranschlag',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '预算估算',
     'example': 'Legen Sie einen Kostenvoranschlag vor.',
     'frequency': 7300,
@@ -310,7 +310,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Liquidität',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '流动性、变现能力',
     'example': 'Die Liquidität des Unternehmens ist gesichert.',
     'frequency': 8100,
@@ -355,7 +355,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Rendite',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '收益率、回报',
     'example': 'Die Rendite ist zufrieden stellend.',
     'frequency': 5200,
@@ -409,7 +409,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'der Zinssatz',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '利率',
     'example': 'Die Zinssätze sind gestiegen.',
     'frequency': 3800,
@@ -420,7 +420,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Algorithmen',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '算法',
     'example': 'Die Algorithmen werden immer komplexer.',
     'frequency': 5300,
@@ -429,7 +429,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Anwendung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '应用、程序',
     'example': 'Die Anwendung ist benutzerfreundlich.',
     'frequency': 2900,
@@ -447,7 +447,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Datenbank',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '数据库',
     'example': 'Die Datenbank enthält Millionen von Einträgen.',
     'frequency': 3700,
@@ -465,7 +465,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Innovation',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '创新',
     'example': 'Innovation ist entscheidend für den Erfolg.',
     'frequency': 3300,
@@ -483,7 +483,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'der Meilenstein',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '里程碑',
     'example': 'Das Projekt hat einen wichtigen Meilenstein erreicht.',
     'frequency': 4900,
@@ -501,7 +501,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Plattform',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '平台',
     'example': 'Die Plattform verbindet Käufer und Verkäufer.',
     'frequency': 3200,
@@ -519,7 +519,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Schnittstelle',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '接口、界面',
     'example': 'Die Schnittstelle ist intuitiv.',
     'frequency': 4500,
@@ -575,7 +575,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die.Abstractionsstrafe',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '罚金、罚款',
     'example': 'Das Unternehmen musste eine hohe Strafe zahlen.',
     'frequency': 7200,
@@ -593,7 +593,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Ambition',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '抱负、目标',
     'example': 'Seine politischen Ambitionen sind groß.',
     'frequency': 5700,
@@ -611,7 +611,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Demokratie',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '民主',
     'example': 'Die Demokratie braucht aktive Bürger.',
     'frequency': 2800,
@@ -629,7 +629,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Jurisdiktion',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '司法管辖权',
     'example': 'Dies fällt nicht in seine Jurisdiktion.',
     'frequency': 9700,
@@ -647,7 +647,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Legislaturperiode',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '立法任期',
     'example': 'Die Legislaturperiode dauert vier Jahre.',
     'frequency': 9600,
@@ -674,7 +674,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'das Parlament',
     'article': 'das',
-    'gender': GermanGender.neuter,
+    'gender': GermanGender.das,
     'meaning': '议会',
     'example': 'Das Parlament hat das Gesetz verabschiedet.',
     'frequency': 3200,
@@ -728,7 +728,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Verordnung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '法令、条例',
     'example': 'Die Verordnung tritt morgen in Kraft.',
     'frequency': 4600,
@@ -757,7 +757,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Epidemie',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '流行病',
     'example': 'Die Epidemie verbreitete sich schnell.',
     'frequency': 5800,
@@ -775,7 +775,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'das Immunsystem',
     'article': 'das',
-    'gender': GermanGender.neuter,
+    'gender': GermanGender.das,
     'meaning': '免疫系统',
     'example': 'Stress schwächt das Immunsystem.',
     'frequency': 4800,
@@ -802,7 +802,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Pathologie',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '病理学',
     'example': 'Die Pathologie erforscht Krankheiten.',
     'frequency': 9200,
@@ -811,7 +811,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Prognose',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '预后、预测',
     'example': 'Die Prognose ist günstig.',
     'frequency': 6500,
@@ -820,7 +820,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Symptomatik',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '症状学',
     'example': 'Die Symptomatik ist unspezifisch.',
     'frequency': 8700,
@@ -876,7 +876,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Biodiversität',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '生物多样性',
     'example': 'Die Biodiversität ist bedroht.',
     'frequency': 7600,
@@ -1060,7 +1060,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Ambivalenz',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '矛盾性、暧昧性',
     'example': 'Seine Gefühle waren von Ambivalenz geprägt.',
     'frequency': 8800,
@@ -1069,7 +1069,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'das Dilemma',
     'article': 'das',
-    'gender': GermanGender.neuter,
+    'gender': GermanGender.das,
     'meaning': '两难困境',
     'example': 'Wir stehen vor einem Dilemma.',
     'frequency': 5100,
@@ -1087,7 +1087,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Essenz',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '本质、精髓',
     'example': 'Die Essenz seiner Philosophie.',
     'frequency': 7100,
@@ -1132,7 +1132,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Idiosynkrasie',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '特质、癖好',
     'example': 'Jeder Mensch hat seine Idiosynkrasien.',
     'frequency': 9900,
@@ -1159,7 +1159,7 @@ final List<Map<String, dynamic>> vocabularyExtendedC2 = [
   {
     'word': 'die Kontingenz',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '偶然性、应急',
     'example': 'Die Kontingenz des Ereignisses war hoch.',
     'frequency': 9700,

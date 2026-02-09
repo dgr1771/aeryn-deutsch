@@ -71,11 +71,11 @@ class _ColorCodedTextState extends State<ColorCodedText> {
                   ),
                   decoration: BoxDecoration(
                     color: isSelected
-                        ? color.withValues(alpha: 0.3)
-                        : color.withValues(alpha: 0.15),
+                        ? color.withOpacity(0.3)
+                        : color.withOpacity(0.15),
                     borderRadius: BorderRadius.circular(4),
                     border: Border.all(
-                      color: color.withValues(alpha: 0.5),
+                      color: color.withOpacity(0.5),
                       width: 1,
                     ),
                   ),
@@ -105,7 +105,7 @@ class _ColorCodedTextState extends State<ColorCodedText> {
                       Text(
                         word,
                         style: (widget.baseStyle ?? const TextStyle()).copyWith(
-                          color: isSelected ? color : color.withValues(alpha: 0.9),
+                          color: isSelected ? color : color.withOpacity(0.9),
                           fontWeight: FontWeight.w600,
                           decoration: isSelected
                               ? TextDecoration.underline

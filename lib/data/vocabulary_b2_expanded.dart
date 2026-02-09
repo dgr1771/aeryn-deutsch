@@ -11,7 +11,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Anstellung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '雇用、职位',
     'example': 'Er hat eine neue Anstellung gefunden.',
     'frequency': 2800,
@@ -20,7 +20,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Arbeitgeber',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '雇主',
     'example': 'Die Arbeitgeber fordern mehr Flexibilität.',
     'frequency': 3100,
@@ -38,7 +38,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Beförderung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '晋升、促进',
     'example': 'Seine Beförderung war verdient.',
     'frequency': 3500,
@@ -47,7 +47,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Berater',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '顾问',
     'example': 'Der Berater gab gute Ratschläge.',
     'frequency': 2900,
@@ -74,7 +74,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Kündigung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '解约通知',
     'example': 'Er hat seine Kündigung eingereicht.',
     'frequency': 3300,
@@ -83,7 +83,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Laufbahn',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '职业道路、生涯',
     'example': 'Sie hat eine erfolgreiche Laufbahn.',
     'frequency': 4200,
@@ -101,7 +101,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Stelle',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '职位、地点',
     'example': 'Die Stelle ist noch zu besetzen.',
     'frequency': 2200,
@@ -128,7 +128,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Verhandlung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '谈判、协商',
     'example': 'Die Verhandlung war erfolgreich.',
     'frequency': 3600,
@@ -146,7 +146,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Zuständigkeit',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '权限、责任',
     'example': 'Das fällt nicht in meine Zuständigkeit.',
     'frequency': 3700,
@@ -166,7 +166,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Abschluss',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '毕业、结业',
     'example': 'Sie hat ihren Abschluss gemacht.',
     'frequency': 2600,
@@ -175,7 +175,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'das Diplom',
     'article': 'das',
-    'gender': GermanGender.neuter,
+    'gender': GermanGender.das,
     'meaning': '文凭、学位证书',
     'example': 'Das Diplom wurde verliehen.',
     'frequency': 3000,
@@ -184,7 +184,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Fortbildung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '进修、继续教育',
     'example': 'Fortbildung ist wichtig für den Beruf.',
     'frequency': 3400,
@@ -211,7 +211,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Qualifikation',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '资格、资质',
     'example': 'Sie hat die nötige Qualifikation.',
     'frequency': 3800,
@@ -247,7 +247,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Weiterbildung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '进修、继续教育',
     'example': 'Weiterbildung ist ein lebenslanger Prozess.',
     'frequency': 2800,
@@ -256,7 +256,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Lehrling',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '学徒',
     'example': 'Der Lehrling lernt das Handwerk.',
     'frequency': 4100,
@@ -265,7 +265,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Ausbildung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '培训、教育',
     'example': 'Die Ausbildung dauert drei Jahre.',
     'frequency': 2100,
@@ -274,7 +274,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Studiengang',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '专业、课程',
     'example': 'Der Studiengang ist sehr beliebt.',
     'frequency': 2700,
@@ -285,7 +285,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Anschaffung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '购置、采买',
     'example': 'Die Anschaffung eines Autos ist teuer.',
     'frequency': 5400,
@@ -303,7 +303,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Ausgabe',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '支出、开销',
     'example': 'Die Ausgaben sind gestiegen.',
     'frequency': 2800,
@@ -330,7 +330,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Ersparnis',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '储蓄、节省',
     'example': 'Die Ersparnis beträgt 100 Euro.',
     'frequency': 3300,
@@ -402,7 +402,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'das Budget',
     'article': 'das',
-    'gender': GermanGender.neuter,
+    'gender': GermanGender.das,
     'meaning': '预算',
     'example': 'Das Budget ist begrenzt.',
     'frequency': 2800,
@@ -449,7 +449,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Empathie',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '同理心',
     'example': 'Sie zeigt viel Empathie.',
     'frequency': 4900,
@@ -494,7 +494,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Zuneigung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '好感、喜爱',
     'example': 'Er fühlte große Zuneigung zu ihr.',
     'frequency': 5200,
@@ -503,7 +503,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Anziehung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '吸引、吸引力',
     'example': 'Die Anziehung war stark.',
     'frequency': 4200,
@@ -548,7 +548,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Sympathie',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '同情、好感',
     'example': 'Ich habe viel Sympathie für ihn.',
     'frequency': 3500,
@@ -577,7 +577,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Bekanntschaft',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '相识、熟人',
     'example': 'Ich habe ihre Bekanntschaft gemacht.',
     'frequency': 2900,
@@ -586,7 +586,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Umgang',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '交往、相处',
     'example': 'Der Umgang mit Kollegen ist wichtig.',
     'frequency': 2700,
@@ -631,7 +631,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Austausch',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '交换',
     'example': 'Der Austausch war fruchtbar.',
     'frequency': 2200,
@@ -703,7 +703,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Konsens',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '共识',
     'example': 'Es gab einen Konsens.',
     'frequency': 4700,
@@ -723,7 +723,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Aufenthalt',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '逗留、停留',
     'example': 'Der Aufenthalt war angenehm.',
     'frequency': 2900,
@@ -741,7 +741,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Buchung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '预订',
     'example': 'Die Buchung ist bestätigt.',
     'frequency': 2600,
@@ -759,7 +759,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Reiseroute',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '旅行路线',
     'example': 'Die Reiseroute ist interessant.',
     'frequency': 3500,
@@ -777,7 +777,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Unterkunft',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '住宿',
     'example': 'Wir brauchen eine Unterkunft.',
     'frequency': 2700,
@@ -786,7 +786,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Zielort',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '目的地',
     'example': 'Der Zielort ist noch weit.',
     'frequency': 3000,
@@ -795,7 +795,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Fahrt',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '旅程、行驶',
     'example': 'Die Fahrt dauert zwei Stunden.',
     'frequency': 1900,
@@ -804,7 +804,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Verbindung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '连接、交通',
     'example': 'Die Verbindung ist gut.',
     'frequency': 2500,
@@ -831,7 +831,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Verspätung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '延误',
     'example': 'Die Verspätung ist ärgerlich.',
     'frequency': 3200,
@@ -858,7 +858,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Reisepass',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '护照',
     'example': 'Der Reisepass ist noch gültig.',
     'frequency': 3100,
@@ -867,7 +867,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'das Gepäck',
     'article': 'das',
-    'gender': GermanGender.neuter,
+    'gender': GermanGender.das,
     'meaning': '行李',
     'example': 'Das Gepäck ist schwer.',
     'frequency': 2800,
@@ -876,7 +876,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Ausweis',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '证件、证明',
     'example': 'Bitte zeigen Sie Ihren Ausweis.',
     'frequency': 3400,
@@ -887,7 +887,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Berichterstattung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '报道',
     'example': 'Die Berichterstattung war fair.',
     'frequency': 4200,
@@ -905,7 +905,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Nachricht',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '消息、新闻',
     'example': 'Die Nachricht verbreitete sich schnell.',
     'frequency': 1600,
@@ -914,7 +914,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Sendung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '节目、广播',
     'example': 'Die Sendung war interessant.',
     'frequency': 2300,
@@ -923,7 +923,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Presse',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '新闻界、报刊',
     'example': 'Die Presse berichtet darüber.',
     'frequency': 2400,
@@ -932,7 +932,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Beitrag',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '文章、贡献',
     'example': 'Der Beitrag war sehr informativ.',
     'frequency': 2200,
@@ -941,7 +941,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Artikel',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '文章、物品',
     'example': 'Der Artikel erschien gestern.',
     'frequency': 1800,
@@ -950,7 +950,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Verlag',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '出版社',
     'example': 'Der Verlag veröffentlicht viele Bücher.',
     'frequency': 3200,
@@ -959,7 +959,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Redaktion',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '编辑部',
     'example': 'Die Redaktion entschied über den Inhalt.',
     'frequency': 3400,
@@ -968,7 +968,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Kritik',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '批评',
     'example': 'Die Kritik war vernichtend.',
     'frequency': 2800,
@@ -977,7 +977,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'das Interview',
     'article': 'das',
-    'gender': GermanGender.neuter,
+    'gender': GermanGender.das,
     'meaning': '采访',
     'example': 'Das Interview wurde geführt.',
     'frequency': 2500,
@@ -986,7 +986,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Dokumentation',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '纪录片、文档',
     'example': 'Die Dokumentation war beeindruckend.',
     'frequency': 3100,
@@ -995,7 +995,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Reportage',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '报道',
     'example': 'Die Reportage war sehr detailliert.',
     'frequency': 3800,
@@ -1006,7 +1006,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Ernährung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '营养、饮食',
     'example': 'Die Ernährung ist ausgewogen.',
     'frequency': 2600,
@@ -1015,7 +1015,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'das Training',
     'article': 'das',
-    'gender': GermanGender.neuter,
+    'gender': GermanGender.das,
     'meaning': '训练',
     'example': 'Das Training war anstrengend.',
     'frequency': 2300,
@@ -1024,7 +1024,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Bewegung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '运动、活动',
     'example': 'Bewegung ist gesund.',
     'frequency': 2100,
@@ -1042,7 +1042,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'das Wohlbefinden',
     'article': 'das',
-    'gender': GermanGender.neuter,
+    'gender': GermanGender.das,
     'meaning': '安康、舒适',
     'example': 'Das Wohlbefinden hat sich verbessert.',
     'frequency': 3800,
@@ -1078,7 +1078,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Stress',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '压力',
     'example': 'Stress macht krank.',
     'frequency': 2500,
@@ -1105,7 +1105,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Gewohnheit',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '习惯',
     'example': 'Gewohnheiten sind schwer zu ändern.',
     'frequency': 2400,
@@ -1123,7 +1123,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Routine',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '例行公事、常规',
     'example': 'Er liebt seine Routine.',
     'frequency': 3200,
@@ -1132,7 +1132,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Lebensstil',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '生活方式',
     'example': 'Der Lebensstil ist gesund.',
     'frequency': 3000,
@@ -1141,7 +1141,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Vorsorge',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '预防、照顾',
     'example': 'Vorsorge ist besser als Heilung.',
     'frequency': 3300,
@@ -1159,7 +1159,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'das Wohlbefinden',
     'article': 'das',
-    'gender': GermanGender.neuter,
+    'gender': GermanGender.das,
     'meaning': '舒适感',
     'example': 'Für sein Wohlbefinden ist gesorgt.',
     'frequency': 3600,
@@ -1170,7 +1170,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Miete',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '租金',
     'example': 'Die Miete ist gestiegen.',
     'frequency': 2400,
@@ -1188,7 +1188,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Mieter',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '房客',
     'example': 'Der Mieter zahlt pünktlich.',
     'frequency': 2600,
@@ -1197,7 +1197,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Wohnung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '公寓',
     'example': 'Die Wohnung ist geräumig.',
     'frequency': 1900,
@@ -1206,7 +1206,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Haushalt',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '家庭、家务',
     'example': 'Der Haushalt ist groß.',
     'frequency': 2000,
@@ -1233,7 +1233,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Einzug',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '入住',
     'example': 'Der Einzug war am 1. Mai.',
     'frequency': 3800,
@@ -1242,7 +1242,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Umzug',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '搬家',
     'example': 'Der Umzug war stressig.',
     'frequency': 3300,
@@ -1251,7 +1251,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Nachbarschaft',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '邻里、社区',
     'example': 'Die Nachbarschaft ist freundlich.',
     'frequency': 3500,
@@ -1278,7 +1278,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Instandhaltung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '维护、保养',
     'example': 'Die Instandhaltung kostet viel.',
     'frequency': 4700,
@@ -1287,7 +1287,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'die Ausstattung',
     'article': 'die',
-    'gender': GermanGender.feminine,
+    'gender': GermanGender.die,
     'meaning': '设备、装备',
     'example': 'Die Ausstattung ist modern.',
     'frequency': 3200,
@@ -1323,7 +1323,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'das Eigenheim',
     'article': 'das',
-    'gender': GermanGender.neuter,
+    'gender': GermanGender.das,
     'meaning': '自己的房子',
     'example': 'Viele träumen vom Eigenheim.',
     'frequency': 2500,
@@ -1332,7 +1332,7 @@ final List<Map<String, dynamic>> vocabularyB2Expanded = [
   {
     'word': 'der Mietvertrag',
     'article': 'der',
-    'gender': GermanGender.masculine,
+    'gender': GermanGender.der,
     'meaning': '租赁合同',
     'example': 'Der Mietvertrag wurde verlängert.',
     'frequency': 3300,
