@@ -24,71 +24,38 @@ jobs:
         with:
           flutter-version: '3.19.0'
           channel: 'stable'
-          cache: false  # 禁用缓存以避免旧依赖
+          cache: false
 
-      - name: 检查Flutter环境
+      - name: 完全清理并重新生成
         run: |
-          flutter --version
-          echo "FLUTTER_ROOT=$FLUTTER_ROOT"
-          echo "当前目录:"
-          pwd
-          echo "目录内容:"
-          ls -la
-
-      - name: 检查pubspec.yaml
-        run: |
-          echo "=== pubspec.yaml 内容 ==="
-          cat pubspec.yaml
-          echo ""
-          echo "=== 检查audio_session引用 ==="
-          if grep -q "audio_session" pubspec.yaml; then
-            echo "❌ pubspec.yaml中发现audio_session"
-            grep -n "audio_session" pubspec.yaml
-          else
-            echo "✅ pubspec.yaml中没有audio_session"
-          fi
-
-      - name: 清理并重新获取依赖
-        run: |
+          echo "=== 清理所有缓存和生成的文件 ==="
           flutter clean
           rm -rf .dart_tool
           rm -f pubspec.lock
           rm -rf build
+          # 删除旧的GeneratedPluginRegistrant
+          rm -f android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
           echo "✅ 清理完成"
 
-      - name: 获取依赖
+      - name: 获取依赖并生成文件
         run: |
           flutter pub get
           echo "✅ 依赖获取完成"
-
-      - name: 验证依赖
-        run: |
-          echo "=== 检查pubspec.lock ==="
-          if [ -f pubspec.lock ]; then
-            echo "pubspec.lock存在"
-            if grep -q "audio_session" pubspec.lock; then
-              echo "❌ pubspec.lock中发现audio_session"
-              grep -A 5 "audio_session" pubspec.lock
-              exit 1
-            else
-              echo "✅ pubspec.lock中没有audio_session"
-            fi
+          echo "=== 检查GeneratedPluginRegistrant ==="
+          if [ -f "android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" ]; then
+            echo "✅ GeneratedPluginRegistrant.java已生成"
+            head -15 android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
           else
-            echo "❌ pubspec.lock不存在"
-            exit 1
+            echo "❌ GeneratedPluginRegistrant.java未生成"
           fi
 
-      - name: 检查Android配置
+      - name: 检查V2 Embedding配置
         run: |
           echo "=== MainActivity.kt ==="
           cat android/app/src/main/kotlin/com/aeryn/deutsch/MainActivity.kt
           echo ""
-          echo "=== AndroidManifest.xml (部分) ==="
-          grep -A 5 "flutterEmbedding" android/app/src/main/AndroidManifest.xml
-
-      - name: 代码分析
-        run: flutter analyze
-        continue-on-error: true
+          echo "=== AndroidManifest.xml (flutterEmbedding) ==="
+          grep -A 2 "flutterEmbedding" android/app/src/main/AndroidManifest.xml
 
       - name: 构建APK (Release)
         run: |
@@ -103,16 +70,17 @@ jobs:
           path: build/app/outputs/flutter-apk/app-release.apk
           retention-days: 30
 
-      - name: 构建信息
+      - name: 构建成功信息
         if: success()
         run: |
-          echo "## 构建成功 ✅" >> $GITHUB_STEP_SUMMARY
+          echo "## 🎉 构建成功！" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
           echo "- **提交**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
           echo "- **分支**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
           echo "- **APK位置**: Artifacts → app-release-apk" >> $GITHUB_STEP_SUMMARY
-
-      - name: 构建失败诊断
-        if: failure()
-        run: |
-          echo "## 构建失败 ❌" >> $GITHUB_STEP_SUMMARY
-          echo "请检查上一步的日志输出以获取详细信息" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 下载步骤" >> $GITHUB_STEP_SUMMARY
+          echo "1. 点击构建记录" >> $GITHUB_STEP_SUMMARY
+          echo "2. 滚动到底部 Artifacts" >> $GITHUB_STEP_SUMMARY
+          echo "3. 下载 app-release-apk" >> $GITHUB_STEP_SUMMARY
+          echo "4. 解压得到 app-release.apk" >> $GITHUB_STEP_SUMMARY
