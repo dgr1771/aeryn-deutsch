@@ -2,14 +2,8 @@ name: Build Android APK
 
 on:
   push:
-    branches:
-      - main
-      - master
-  pull_request:
-    branches:
-      - main
-      - master
-  workflow_dispatch:  # 允许手动触发
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -32,61 +26,29 @@ jobs:
           channel: 'stable'
           cache: true
 
-      - name: 检查Flutter环境
-        run: |
-          flutter --version
-          flutter doctor -v
+      - name: 清理构建缓存
+        run: flutter clean
 
       - name: 获取依赖
         run: flutter pub get
 
-      - name: 代码分析（可选）
+      - name: 代码分析
         run: flutter analyze
         continue-on-error: true
 
       - name: 构建APK (Release)
         run: flutter build apk --release --target-platform android-arm,android-arm64,android-x64
 
-      - name: 构建App Bundle (Release)
-        run: flutter build appbundle --release
-
-      - name: 上传APK构建产物
+      - name: 上传APK
         uses: actions/upload-artifact@v4
         with:
           name: app-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
           retention-days: 30
 
-      - name: 上传App Bundle构建产物
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-release-aab
-          path: build/app/outputs/bundle/release/app-release.aab
-          retention-days: 30
-
-      - name: 上传分架构APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-apk-split
-          path: build/app/outputs/flutter-apk/
-          retention-days: 30
-
-      - name: 生成构建信息
+      - name: 构建信息
         run: |
-          echo "## 构建信息" >> $GITHUB_STEP_SUMMARY
+          echo "## 构建成功 ✅" >> $GITHUB_STEP_SUMMARY
           echo "- **提交**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
           echo "- **分支**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **触发者**: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **构建时间**: $(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
-
-      - name: 创建Release (仅对标签)
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            build/app/outputs/flutter-apk/app-release.apk
-            build/app/outputs/bundle/release/app-release.aab
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          echo "- **APK位置**: Artifacts → app-release-apk" >> $GITHUB_STEP_SUMMARY
