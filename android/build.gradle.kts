@@ -31,24 +31,6 @@ subprojects {
     val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
     project.layout.buildDirectory.value(newSubprojectBuildDir)
 }
-
-// 为插件项目配置 Android SDK 版本
-subprojects {
-    afterEvaluate {
-        if (project.name != "app") {
-            plugins.withId("com.android.library") {
-                configure<com.android.build.gradle.LibraryExtension> {
-                    compileSdk = 36
-                    defaultConfig {
-                        minSdk = 21
-                        targetSdk = 36
-                    }
-                }
-            }
-        }
-    }
-}
-
 subprojects {
     project.evaluationDependsOn(":app")
 }
