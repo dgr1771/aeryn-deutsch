@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'ai_conversation_service.dart' show AIServiceConfig;
+import 'quota_service.dart';
 
 /// 订阅类型
 enum SubscriptionType {
@@ -450,12 +451,12 @@ class SubscriptionService {
 
     // 基础AI（规则引擎增强版）：试用期和付费用户可用
     if (engineType == 'basic_ai') {
-      return isActive;  // 包括试用和付费
+      return _currentSubscription?.isActive ?? false;  // 包括试用和付费
     }
 
     // 高级AI（OpenAI/Claude/Gemini）：仅付费用户可用
     if (['openai', 'claude', 'gemini'].contains(engineType)) {
-      return isPaid;  // 仅付费用户
+      return _currentSubscription?.isPaid ?? false;  // 仅付费用户
     }
 
     return false;
@@ -484,7 +485,7 @@ class SubscriptionService {
 
   /// 获取推荐的AI引擎
   String getRecommendedAIEngine() {
-    if (isPaid) {
+    if (_currentSubscription?.isPaid ?? false) {
       // 付费用户优先使用配置的高级AI
       final providers = AIServiceConfig.getConfiguredProviders();
       if (providers.isNotEmpty) {

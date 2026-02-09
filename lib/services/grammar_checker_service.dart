@@ -99,7 +99,7 @@ class GermanGrammarRules {
   /// 名词后缀（用于识别名词）
   static const Set<String> nounSuffixes = {
     '-heit', '-keit', '-ung', '-schaft', '-tion', '-ment', '-ling',
-    '-nis', '-tum', '-schaft', '-ik', '-ur',
+    '-nis', '-tum', '-ik', '-ur',
   };
 
   /// 检查文本中的语法错误
@@ -409,7 +409,7 @@ class GermanGrammarRules {
   /// 验证形容词词尾
   static bool validateAdjectiveEnding({
     required String article,
-    required String case,
+    required String case_,
     required String gender,
     required String adjective,
   }) {

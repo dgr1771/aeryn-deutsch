@@ -424,3 +424,31 @@ class QuotaService {
 
 // 导入SubscriptionType
 import 'subscription_service.dart';
+/// 配额管理服务
+///
+/// 管理用户使用配额
+library;
+
+/// 配额服务存根实现
+class QuotaService {
+  static QuotaService? _instance;
+  
+  QuotaService._();
+  
+  static QuotaService get instance {
+    _instance ??= QuotaService._();
+    return _instance!;
+  }
+  
+  Future<void> initialize() async {
+    // 存根实现
+  }
+  
+  Future<void> setTrialQuota() async {
+    // 存根实现
+  }
+  
+  Future<void> setPaidQuota(String type) async {
+    // 存根实现
+  }
+}

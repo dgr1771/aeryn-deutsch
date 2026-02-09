@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/conversation.dart';
+import 'grammar_checker_service.dart';
 import 'enhanced_grammar_checker_service.dart';
 
 /// AI服务配置
