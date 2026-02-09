@@ -218,12 +218,9 @@ Aeryn-Deutsch适用于13岁以上用户。
 如果您对本隐私政策有任何疑问、意见或请求，请通过以下方式联系我们：
 
 **Aeryn-Deutsch Team**
-- **邮箱**：privacy@aeryn-deutsch.com
+- **邮箱**：6784243@qq.com
 - **网站**：https://aeryn-deutsch.com
 - **地址**：[实际地址待定]
-
-**数据保护官**：
-- **邮箱**：dpo@aeryn-deutsch.com
 
 我们会尽快回复您的请求，通常在30天内。
 

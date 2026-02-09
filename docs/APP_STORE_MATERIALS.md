@@ -143,7 +143,7 @@ C1-C2 (12-24个月)：10000+词，接近母语者水平
 
 📧 联系我们
 • 网站: aeryn-deutsch.com
-• 邮箱: support@aeryn-deutsch.com
+• 邮箱: 6784243@qq.com
 • 微信: AerynDeutsch
 
 🔗 隐私政策: aeryn-deutsch.com/privacy
@@ -540,9 +540,7 @@ Android: Everyone (所有人)
 
 **开发者名称**: Aeryn-Deutsch Team
 
-**支持邮箱**: support@aeryn-deutsch.com
-
-**商务合作**: business@aeryn-deutsch.com
+**支持邮箱**: 6784243@qq.com
 
 **官网**: https://aeryn-deutsch.com
 

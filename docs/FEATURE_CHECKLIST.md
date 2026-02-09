@@ -462,7 +462,7 @@ docs/
 ## 📞 联系信息
 
 **开发团队**: Aeryn-Deutsch Team
-**邮箱**: dev@aeryn-deutsch.com
+**邮箱**: 6784243@qq.com
 **网站**: https://aeryn-deutsch.com
 
 ---

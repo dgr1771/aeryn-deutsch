@@ -419,7 +419,7 @@ Aeryn-Deutsch发布：首个集成AI对话和番茄时钟的德语学习App
 Aeryn-Deutsch是一款专业的德语学习应用，致力于通过AI技术和科学方法，帮助学习者从A1水平达到C2水平。应用由经验丰富的德语教育专家和技术团队开发。
 
 媒体联系：
-press@aeryn-deutsch.com
+6784243@qq.com
 https://aeryn-deutsch.com
 ```
 
