@@ -720,7 +720,7 @@ class _ScenarioSelectionDialogState extends State<ScenarioSelectionDialog> {
                               ),
                             ),
                             Icon(
-                              Icons.arrow_forward_ios,
+                              Icons.arrow_forward,
                               size: 16,
                               color: Colors.grey.shade400,
                             ),

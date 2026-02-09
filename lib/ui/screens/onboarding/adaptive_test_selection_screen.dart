@@ -258,7 +258,7 @@ class AdaptiveTestSelectionScreen extends StatelessWidget {
 
             // 箭头
             Icon(
-              Icons.arrow_forward_ios,
+              Icons.arrow_forward,
               size: 16,
               color: color,
             ),

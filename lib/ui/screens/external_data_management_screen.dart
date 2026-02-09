@@ -248,7 +248,7 @@ class _ExternalDataManagementScreenState extends State<ExternalDataManagementScr
                   ],
                 ),
               ),
-              Icon(Icons.arrow_forward_ios, color: Colors.grey.shade400, size: 20),
+              Icon(Icons.arrow_forward, color: Colors.grey.shade400, size: 20),
             ],
           ),
         ),
