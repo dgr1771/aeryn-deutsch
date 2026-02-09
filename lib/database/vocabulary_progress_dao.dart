@@ -4,6 +4,7 @@
 library;
 
 import 'database_helper.dart';
+import 'user_progress_dao.dart' show VocabularyProgressEntity;
 
 /// 词汇进度DAO
 class VocabularyProgressDAO {

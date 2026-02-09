@@ -1049,20 +1049,10 @@ List<Map<String, dynamic>> getSentenceStructureExercises(String level) {
   }
 }
 
-/// 导出函数：获取指定等级和题型的练习题
-List<Map<String, dynamic>> getKasusExercises(String level) {
-  switch (level) {
-    case 'A2':
-      return [...kasusExercisesA2];
-    case 'B1':
-      return [...kasusExercisesB1];
-    case 'B2':
-      return [...kasusExercisesB2];
-    case 'C1':
-      return [...kasusExercisesC1];
-    default:
-      return [...kasusExercisesA2];
-  }
+/// 获取扩展练习题（未完成功能，暂时返回空列表）
+List<Map<String, dynamic>>? getExtendedExercises(String topic, String level) {
+  // TODO: 实现扩展练习题功能
+  return [];
 }
 
 /// 获取包含扩展题的总题量
