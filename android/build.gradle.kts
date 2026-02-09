@@ -31,6 +31,24 @@ subprojects {
     val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
     project.layout.buildDirectory.value(newSubprojectBuildDir)
 }
+
+// 强制所有插件项目使用 SDK 36
+subprojects {
+    afterEvaluate {
+        if (project.name != "app") {
+            plugins.withPlugin("com.android.library") {
+                configure<com.android.build.gradle.LibraryExtension> {
+                    compileSdk = 36
+                    defaultConfig {
+                        minSdk = 21
+                        targetSdk = 36
+                    }
+                }
+            }
+        }
+    }
+}
+
 subprojects {
     project.evaluationDependsOn(":app")
 }
