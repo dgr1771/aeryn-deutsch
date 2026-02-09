@@ -27,10 +27,20 @@ jobs:
           cache: true
 
       - name: 清理构建缓存
-        run: flutter clean
+        run: |
+          flutter clean
+          rm -f pubspec.lock
+          flutter pub get
 
-      - name: 获取依赖
-        run: flutter pub get
+      - name: 验证依赖
+        run: |
+          echo "检查audio_session是否在依赖中..."
+          if grep -q "audio_session" pubspec.lock; then
+            echo "❌ audio_session仍在依赖中"
+            exit 1
+          else
+            echo "✅ audio_session已移除"
+          fi
 
       - name: 代码分析
         run: flutter analyze
