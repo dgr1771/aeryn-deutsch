@@ -25,7 +25,8 @@ if ($remote) {
 } else {
     Write-Host "⚠️  未配置远程仓库" -ForegroundColor Yellow
     Write-Host "正在添加远程仓库..." -ForegroundColor White
-    git remote add origin https://github.com/aeryn-deutsch/aeryn-deutsch.git
+    $token = Read-Host "请输入GitHub Personal Access Token"
+    git remote add origin "https://${token}@github.com/dgr1771/aeryn-deutsch.git"
     Write-Host "✅ 远程仓库已添加" -ForegroundColor Green
     Write-Host ""
 }
@@ -57,15 +58,6 @@ Write-Host "==================================" -ForegroundColor Cyan
 Write-Host "开始推送到GitHub..." -ForegroundColor Cyan
 Write-Host "==================================" -ForegroundColor Cyan
 Write-Host ""
-Write-Host "🔑 身份验证提示：" -ForegroundColor Yellow
-Write-Host "   - 用户名: 输入您的GitHub用户名" -ForegroundColor White
-Write-Host "   - 密码: 输入您的Personal Access Token (不是GitHub密码)" -ForegroundColor White
-Write-Host ""
-Write-Host "💡 如果没有Token，访问: https://github.com/settings/tokens" -ForegroundColor Cyan
-Write-Host "   权限勾选 'repo'，生成后复制token" -ForegroundColor Cyan
-Write-Host ""
-Write-Host "==================================" -ForegroundColor Cyan
-Write-Host ""
 
 # 执行推送
 $result = git push -u origin main 2>&1
@@ -78,7 +70,7 @@ if ($exitCode -eq 0) {
     Write-Host "✅ 推送成功！" -ForegroundColor Green
     Write-Host "==================================" -ForegroundColor Green
     Write-Host ""
-    Write-Host "🌉 访问仓库: https://github.com/aeryn-deutsch/aeryn-deutsch" -ForegroundColor Cyan
+    Write-Host "🌉 访问仓库: https://github.com/dgr1771/aeryn-deutsch" -ForegroundColor Cyan
     Write-Host ""
     Write-Host "📱 下一步：构建APK" -ForegroundColor Yellow
     Write-Host "   1. 打开Android Studio" -ForegroundColor White
