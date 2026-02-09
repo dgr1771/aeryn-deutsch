@@ -14,7 +14,19 @@ allprojects {
     }
 }
 
-// 为所有子项目提供 Flutter 版本信息
+// 为所有子项目提供 Flutter 扩展对象
+gradle.beforeProject {
+    // 创建 flutter 扩展，供插件使用
+    project.extensions.create("flutter", FlutterExtension::class.java)
+}
+
+// Flutter 扩展类定义
+open class FlutterExtension {
+    val compileSdkVersion: Int = 36
+    val minSdkVersion: Int = 21
+    val targetSdkVersion: Int = 36
+}
+
 subprojects {
     afterEvaluate {
         if (project.hasProperty("android")) {
