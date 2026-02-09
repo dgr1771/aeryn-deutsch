@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.aeryn.deutsch"
-    compileSdk = 34
+    compileSdk = 36
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -20,8 +20,8 @@ android {
 
     defaultConfig {
         applicationId = "com.aeryn.deutsch"
-        minSdk = 21
-        targetSdk = 34
+        minSdk = flutter.minSdkVersion
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0.0"
     }

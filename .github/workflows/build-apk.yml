@@ -30,28 +30,27 @@ jobs:
         run: |
           echo "=== 清理所有缓存和生成的文件 ==="
           flutter clean
+          cd android
+          ./gradlew clean
+          cd ..
           rm -rf .dart_tool
           rm -f pubspec.lock
           rm -rf build
-          # 删除旧的GeneratedPluginRegistrant
-          rm -f android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
           echo "✅ 清理完成"
 
       - name: 获取依赖并生成文件
         run: |
           flutter pub get
           echo "✅ 依赖获取完成"
+          # 预构建以生成GeneratedPluginRegistrant.java
+          flutter build apk --debug --target-platform android-arm64
+          echo "✅ 预构建完成，GeneratedPluginRegistrant.java已生成"
           echo "=== 检查GeneratedPluginRegistrant ==="
-          if [ -f "android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" ]; then
-            echo "✅ GeneratedPluginRegistrant.java已生成"
-            head -15 android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
-          else
-            echo "❌ GeneratedPluginRegistrant.java未生成"
-          fi
+          head -20 android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
 
       - name: 检查V2 Embedding配置
         run: |
-          echo "=== MainActivity.kt ==="
+          echo "=== MainActivity.kt (V2 Embedding) ==="
           cat android/app/src/main/kotlin/com/aeryn/deutsch/MainActivity.kt
           echo ""
           echo "=== AndroidManifest.xml (flutterEmbedding) ==="

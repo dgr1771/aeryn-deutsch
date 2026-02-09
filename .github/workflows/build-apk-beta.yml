@@ -16,7 +16,7 @@ jobs:
         with:
           flutter-version: '3.19.0'
           channel: 'stable'
-          cache: true
+          cache: false
 
       - name: 获取依赖
         run: flutter pub get
