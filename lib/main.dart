@@ -93,7 +93,7 @@ class AerynDeutschApp extends StatelessWidget {
         backgroundColor: Colors.grey[900],
         foregroundColor: Colors.white,
       ),
-      cardTheme: const CardThemeData(
+      cardTheme: CardThemeData(
         elevation: 2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(16)),

@@ -8,6 +8,7 @@ import '../services/learning_path_service.dart';
 import '../database/repository.dart';
 import '../database/user_progress_dao.dart';
 import '../data/german_skill_tree.dart';
+import '../core/grammar_engine.dart';
 
 /// 学习管理器
 class LearningManager {

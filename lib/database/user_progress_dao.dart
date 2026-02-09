@@ -3,6 +3,7 @@
 /// 管理用户学习进度的数据库操作
 library;
 
+import 'package:sqflite/sqflite.dart';
 import '../models/word.dart';
 import '../core/learning_path/skill_tree.dart';
 import '../core/grammar_engine.dart';
@@ -166,6 +167,7 @@ class StudySessionEntity {
       'created_at': createdAt.toIso8601String(),
     };
   }
+}
 
 /// 词汇进度实体
 class VocabularyProgressEntity {

@@ -3,6 +3,7 @@
 /// 管理词汇学习和复习进度的数据库操作
 library;
 
+import 'package:sqflite/sqflite.dart';
 import 'database_helper.dart';
 import 'user_progress_dao.dart' show VocabularyProgressEntity;
 

@@ -1,6 +1,8 @@
 /// AI对话系统数据模型
 library;
 
+import 'package:flutter/material.dart';
+
 /// 对话消息
 class ChatMessage {
   final String id;
@@ -153,9 +155,6 @@ class DialoguePrompt {
     );
   }
 }
-
-// IconData import
-import 'package:flutter/material.dart';
 
 /// 对话会话
 class ConversationSession {

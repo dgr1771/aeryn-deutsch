@@ -48,6 +48,7 @@ class GrammarError {
     required this.endPosition,
     this.suggestions,
   });
+}
 
 /// 语法检查结果
 class GrammarCheckResult {

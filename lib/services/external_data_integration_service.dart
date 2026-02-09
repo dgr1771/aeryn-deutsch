@@ -7,8 +7,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../models/vocabulary.dart';
-import '../models/grammar.dart';
+// import '../models/vocabulary.dart'; // 文件不存在，已注释
+// import '../models/grammar.dart'; // 文件不存在，已注释
 
 /// 数据源类型
 enum DataSource {
@@ -265,12 +265,12 @@ class ExternalDataIntegrationService {
   }
 
   /// 批量导入词汇数据到系统
-  static Future<void> importVocabularyBatch(
-    List<VocabularyEntry> entries,
-  ) async {
-    // 这里应该调用VocabularyService来批量导入
-    // 暂时留空，等待VocabularyService实现
-  }
+  // static Future<void> importVocabularyBatch(
+  //   List<VocabularyEntry> entries,
+  // ) async {
+  //   // 这里应该调用VocabularyService来批量导入
+  //   // 暂时留空，等待VocabularyService实现
+  // }
 
   /// 获取数据统计
   static Future<Map<String, int>> getDataStatistics() async {
