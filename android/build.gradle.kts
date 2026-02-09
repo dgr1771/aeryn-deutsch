@@ -32,13 +32,13 @@ subprojects {
     project.layout.buildDirectory.value(newSubprojectBuildDir)
 }
 
-// 强制所有插件项目使用 SDK 36
+// 强制所有插件项目使用 SDK 34
 subprojects {
     afterEvaluate {
         if (project.name != "app") {
             plugins.withId("com.android.library") {
                 configure<com.android.build.gradle.LibraryExtension> {
-                    compileSdk = 36
+                    compileSdk = 34
                     defaultConfig {
                         minSdk = 21
                     }
