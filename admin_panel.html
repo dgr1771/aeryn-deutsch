@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aeryn-Deutsch 后台管理系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667EEA;
+            --secondary: #764BA2;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --background: #F3F4F6;
+            --surface: #FFFFFF;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --border: #E5E7EB;
+            --sidebar-width: 260px;
+            --header-height: 64px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* 侧边栏 */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar-nav {
+            padding: 16px 0;
+        }
+
+        .nav-group {
+            margin-bottom: 8px;
+        }
+
+        .nav-group-title {
+            padding: 12px 24px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .nav-item {
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.15);
+            border-left: 3px solid white;
+        }
+
+        /* 主内容区 */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 顶部栏 */
+        .header {
+            height: var(--header-height);
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* 内容区域 */
+        .content {
+            padding: 32px;
+            flex: 1;
+        }
+
+        /* 统计卡片 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .stat-icon.blue { background: #DBEAFE; color: #3B82F6; }
+        .stat-icon.green { background: #D1FAE5; color: #10B981; }
+        .stat-icon.purple { background: #EDE9FE; color: #8B5CF6; }
+        .stat-icon.orange { background: #FED7AA; color: #F59E0B; }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .stat-change {
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .stat-change.positive { color: var(--success); }
+        .stat-change.negative { color: var(--error); }
+
+        /* 数据表格 */
+        .data-table {
+            background: var(--surface);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 24px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border);
+            background: var(--background);
+        }
+
+        td {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: var(--background);
+        }
+
+        /* 状态标签 */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-active { background: #D1FAE5; color: #065F46; }
+        .status-inactive { background: #FEE2E2; color: #991B1B; }
+        .status-pending { background: #FEF3C7; color: #92400E; }
+
+        /* 表单 */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 10px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* 模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--surface);
+            border-radius: 16px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .modal-footer {
+            padding: 16px 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        /* 页面切换 */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* 知识库编辑器 */
+        .editor-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 24px;
+            height: calc(100vh - 200px);
+        }
+
+        .editor-sidebar {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 16px;
+            overflow-y: auto;
+        }
+
+        .editor-main {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .category-item {
+            padding: 10px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 4px;
+        }
+
+        .category-item:hover {
+            background: var(--background);
+        }
+
+        .category-item.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* 模块管理 */
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .module-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+        }
+
+        .module-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 16px;
+        }
+
+        .module-icon {
+            font-size: 32px;
+        }
+
+        .module-toggle {
+            position: relative;
+            width: 48px;
+            height: 24px;
+            background: var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .module-toggle.active {
+            background: var(--success);
+        }
+
+        .module-toggle::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: all 0.2s;
+        }
+
+        .module-toggle.active::after {
+            left: 26px;
+        }
+
+        .module-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .module-description {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .module-stats {
+            display: flex;
+            gap: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .module-stat {
+            text-align: center;
+        }
+
+        .module-stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .module-stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* AI配置 */
+        .ai-config-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .ai-provider-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .provider-card {
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .provider-card:hover {
+            border-color: var(--primary);
+        }
+
+        .provider-card.selected {
+            border-color: var(--primary);
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .provider-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .provider-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .provider-status {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* 搜索框 */
+        .search-box {
+            position: relative;
+            width: 300px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 16px 10px 40px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        /* 响应式 */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 80px;
+            }
+
+            .sidebar-header {
+                padding: 16px 12px;
+                text-align: center;
+            }
+
+            .sidebar-logo span {
+                display: none;
+            }
+
+            .nav-group-title,
+            .nav-item span {
+                display: none;
+            }
+
+            .nav-item {
+                justify-content: center;
+                padding: 12px;
+            }
+
+            .main-content {
+                margin-left: 80px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        /* Toast通知 */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--text-primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success { background: var(--success); }
+        .toast.error { background: var(--error); }
+    </style>
+</head>
+<body>
+    <!-- 侧边栏 -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                🎓 <span>Aeryn-Deutsch</span>
+            </div>
+        </div>
+
+        <div class="sidebar-nav">
+            <div class="nav-group">
+                <div class="nav-group-title">概览</div>
+                <div class="nav-item active" onclick="showPage('dashboard')">
+                    <span>📊</span>
+                    <span>仪表盘</span>
+                </div>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-group-title">知识库管理</div>
+                <div class="nav-item" onclick="showPage('vocabulary')">
+                    <span>📚</span>
+                    <span>词汇管理</span>
+                </div>
+                <div class="nav-item" onclick="showPage('grammar')">
+                    <span>📝</span>
+                    <span>语法管理</span>
+                </div>
+                <div class="nav-item" onclick="showPage('speeches')">
+                    <span>🎙️</span>
+                    <span>演讲管理</span>
+                </div>
+                <div class="nav-item" onclick="showPage('scenarios')">
+                    <span>💬</span>
+                    <span>对话场景</span>
+                </div>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-group-title">用户管理</div>
+                <div class="nav-item" onclick="showPage('users')">
+                    <span>👥</span>
+                    <span>用户列表</span>
+                </div>
+                <div class="nav-item" onclick="showPage('subscriptions')">
+                    <span>💳</span>
+                    <span>订阅管理</span>
+                </div>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-group-title">系统配置</div>
+                <div class="nav-item" onclick="showPage('ai-config')">
+                    <span>🤖</span>
+                    <span>AI配置</span>
+                </div>
+                <div class="nav-item" onclick="showPage('modules')">
+                    <span>🧩</span>
+                    <span>功能模块</span>
+                </div>
+                <div class="nav-item" onclick="showPage('settings')">
+                    <span>⚙️</span>
+                    <span>系统设置</span>
+                </div>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-group-title">分析</div>
+                <div class="nav-item" onclick="showPage('analytics')">
+                    <span>📈</span>
+                    <span>数据分析</span>
+                </div>
+                <div class="nav-item" onclick="showPage('logs')">
+                    <span>📋</span>
+                    <span>系统日志</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content">
+        <!-- 顶部栏 -->
+        <div class="header">
+            <div class="header-title" id="pageTitle">仪表盘</div>
+            <div class="header-actions">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" placeholder="搜索...">
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar">A</div>
+                    <span>Admin</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="content">
+            <!-- 仪表盘页面 -->
+            <div id="dashboard-page" class="page active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-value">12,458</div>
+                                <div class="stat-label">总用户数</div>
+                                <div class="stat-change positive">↑ 12.5% 较上周</div>
+                            </div>
+                            <div class="stat-icon blue">👥</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-value">2,847</div>
+                                <div class="stat-label">活跃用户</div>
+                                <div class="stat-change positive">↑ 8.3% 较上周</div>
+                            </div>
+                            <div class="stat-icon green">📈</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-value">847</div>
+                                <div class="stat-label">付费用户</div>
+                                <div class="stat-change positive">↑ 23.1% 较上周</div>
+                            </div>
+                            <div class="stat-icon purple">💳</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-value">€24,580</div>
+                                <div class="stat-label">本月收入</div>
+                                <div class="stat-change positive">↑ 31.2% 较上月</div>
+                            </div>
+                            <div class="stat-icon orange">💰</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-table">
+                    <div class="table-header">
+                        <div class="table-title">最近活动</div>
+                        <div class="table-actions">
+                            <button class="btn btn-secondary btn-sm">导出</button>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>用户</th>
+                                <th>操作</th>
+                                <th>时间</th>
+                                <th>状态</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>user@example.com</td>
+                                <td>订阅年度方案</td>
+                                <td>2分钟前</td>
+                                <td><span class="status-badge status-active">成功</span></td>
+                            </tr>
+                            <tr>
+                                <td>test@example.com</td>
+                                <td>开始试用</td>
+                                <td>5分钟前</td>
+                                <td><span class="status-badge status-active">成功</span></td>
+                            </tr>
+                            <tr>
+                                <td>learner@example.com</td>
+                                <td>完成词汇练习</td>
+                                <td>12分钟前</td>
+                                <td><span class="status-badge status-active">完成</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 词汇管理页面 -->
+            <div id="vocabulary-page" class="page">
+                <div class="data-table">
+                    <div class="table-header">
+                        <div class="table-title">词汇库管理</div>
+                        <div class="table-actions">
+                            <button class="btn btn-secondary btn-sm">导入</button>
+                            <button class="btn btn-primary btn-sm" onclick="showModal('addWord')">+ 添加词汇</button>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>单词</th>
+                                <th>释义</th>
+                                <th>性别</th>
+                                <th>级别</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>das Buch</strong></td>
+                                <td>书</td>
+                                <td><span style="color: #10B981; font-weight: 600;">das (中性)</span></td>
+                                <td>A1</td>
+                                <td>
+                                    <button class="btn btn-secondary btn-sm">编辑</button>
+                                    <button class="btn btn-secondary btn-sm" style="color: var(--error);">删除</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>die Katze</strong></td>
+                                <td>猫</td>
+                                <td><span style="color: #EC4899; font-weight: 600;">die (阴性)</span></td>
+                                <td>A1</td>
+                                <td>
+                                    <button class="btn btn-secondary btn-sm">编辑</button>
+                                    <button class="btn btn-secondary btn-sm" style="color: var(--error);">删除</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>der Hund</strong></td>
+                                <td>狗</td>
+                                <td><span style="color: #3B82F6; font-weight: 600;">der (阳性)</span></td>
+                                <td>A1</td>
+                                <td>
+                                    <button class="btn btn-secondary btn-sm">编辑</button>
+                                    <button class="btn btn-secondary btn-sm" style="color: var(--error);">删除</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 语法管理页面 -->
+            <div id="grammar-page" class="page">
+                <div class="data-table">
+                    <div class="table-header">
+                        <div class="table-title">语法规则管理</div>
+                        <div class="table-actions">
+                            <button class="btn btn-primary btn-sm">+ 添加规则</button>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>规则名称</th>
+                                <th>类别</th>
+                                <th>级别</th>
+                                <th>例句数</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>动词变位 - sein</td>
+                                <td>动词</td>
+                                <td>A1</td>
+                                <td>15</td>
+                                <td>
+                                    <button class="btn btn-secondary btn-sm">编辑</button>
+                                    <button class="btn btn-secondary btn-sm" style="color: var(--error);">删除</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>名词格变</td>
+                                <td>名词</td>
+                                <td>A2</td>
+                                <td>28</td>
+                                <td>
+                                    <button class="btn btn-secondary btn-sm">编辑</button>
+                                    <button class="btn btn-secondary btn-sm" style="color: var(--error);">删除</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>形容词变格</td>
+                                <td>形容词</td>
+                                <td>B1</td>
+                                <td>32</td>
+                                <td>
+                                    <button class="btn btn-secondary btn-sm">编辑</button>
+                                    <button class="btn btn-secondary btn-sm" style="color: var(--error);">删除</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- AI配置页面 -->
+            <div id="ai-config-page" class="page">
+                <div class="ai-config-card">
+                    <h3 style="margin-bottom: 16px;">🤖 AI服务配置</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 24px;">配置AI服务提供商，支持混合AI引擎架构</p>
+
+                    <div style="margin-bottom: 24px;">
+                        <h4 style="margin-bottom: 12px;">免费引擎（默认）</h4>
+                        <div class="provider-card selected">
+                            <div class="provider-icon">⚙️</div>
+                            <div class="provider-name">规则引擎</div>
+                            <div class="provider-status">✓ 已启用 - 基于NLP语法分析</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 24px;">
+                        <h4 style="margin-bottom: 12px;">付费AI引擎（高级用户）</h4>
+                        <div class="ai-provider-grid">
+                            <div class="provider-card">
+                                <div class="provider-icon">🧠</div>
+                                <div class="provider-name">OpenAI GPT-4</div>
+                                <div class="provider-status">需配置API Key</div>
+                            </div>
+                            <div class="provider-card">
+                                <div class="provider-icon">🤖</div>
+                                <div class="provider-name">Anthropic Claude</div>
+                                <div class="provider-status">需配置API Key</div>
+                            </div>
+                            <div class="provider-card">
+                                <div class="provider-icon">💬</div>
+                                <div class="provider-name">Google Gemini</div>
+                                <div class="provider-status">需配置API Key</div>
+                            </div>
+                            <div class="provider-card selected">
+                                <div class="provider-icon">🔮</div>
+                                <div class="provider-name">DeepSeek</div>
+                                <div class="provider-status">✓ 已配置</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">DeepSeek API Key</label>
+                        <input type="password" class="form-input" value="sk-4be149fac2504a6bb4caefcfa5ec775f" readonly>
+                        <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">已安全配置，密钥已加密存储</div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="showToast('AI配置已保存', 'success')">保存配置</button>
+                </div>
+
+                <div class="ai-config-card">
+                    <h3 style="margin-bottom: 16px;">⚙️ AI参数设置</h3>
+
+                    <div class="form-group">
+                        <label class="form-label">默认AI引擎</label>
+                        <select class="form-select">
+                            <option>规则引擎（免费）</option>
+                            <option>DeepSeek（推荐）</option>
+                            <option>OpenAI GPT-4</option>
+                            <option>Anthropic Claude</option>
+                            <option>Google Gemini</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">温度 (Temperature)</label>
+                        <input type="range" min="0" max="100" value="70" style="width: 100%;">
+                        <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">控制回复的创造性 (0.7)</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">最大Token数</label>
+                        <input type="number" class="form-input" value="2000">
+                    </div>
+
+                    <button class="btn btn-primary" onclick="showToast('AI参数已更新', 'success')">更新参数</button>
+                </div>
+            </div>
+
+            <!-- 功能模块页面 -->
+            <div id="modules-page" class="page">
+                <h3 style="margin-bottom: 24px;">🧩 功能模块管理</h3>
+
+                <div class="module-grid">
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-icon">📚</div>
+                            <div class="module-toggle active" onclick="this.classList.toggle('active'); showToast('词汇学习模块状态已更新')"></div>
+                        </div>
+                        <div class="module-title">词汇学习</div>
+                        <div class="module-description">Flashcard翻转学习，FSRS算法智能复习</div>
+                        <div class="module-stats">
+                            <div class="module-stat">
+                                <div class="module-stat-value">100K+</div>
+                                <div class="module-stat-label">词汇</div>
+                            </div>
+                            <div class="module-stat">
+                                <div class="module-stat-value">A1-C2</div>
+                                <div class="module-stat-label">级别</div>
+                            </div>
+                            <div class="module-stat">
+                                <div class="module-stat-value">12.4K</div>
+                                <div class="module-stat-label">日活</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-icon">📖</div>
+                            <div class="module-toggle active" onclick="this.classList.toggle('active'); showToast('语法学习模块状态已更新')"></div>
+                        </div>
+                        <div class="module-title">语法学习</div>
+                        <div class="module-description">动词变位、名词格变、形容词变格表</div>
+                        <div class="module-stats">
+                            <div class="module-stat">
+                                <div class="module-stat-value">100+</div>
+                                <div class="module-stat-label">动词</div>
+                            </div>
+                            <div class="module-stat">
+                                <div class="module-stat-value">50+</div>
+                                <div class="module-stat-label">规则</div>
+                            </div>
+                            <div class="module-stat">
+                                <div class="module-stat-value">8.9K</div>
+                                <div class="module-stat-label">日活</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-icon">🤖</div>
+                            <div class="module-toggle active" onclick="this.classList.toggle('active'); showToast('AI对话模块状态已更新')"></div>
+                        </div>
+                        <div class="module-title">AI对话</div>
+                        <div class="module-description">混合AI引擎，50+真实场景，实时语法纠错</div>
+                        <div class="module-stats">
+                            <div class="module-stat">
+                                <div class="module-stat-value">50+</div>
+                                <div class="module-stat-label">场景</div>
+                            </div>
+                            <div class="module-stat">
+                                <div class="module-stat-value">4</div>
+                                <div class="module-stat-label">AI引擎</div>
+                            </div>
+                            <div class="module-stat">
+                                <div class="module-stat-value">3.2K</div>
+                                <div class="module-stat-label">日活</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-icon">🍅</div>
+                            <div class="module-toggle active" onclick="this.classList.toggle('active'); showToast('番茄时钟模块状态已更新')"></div>
+                        </div>
+                        <div class="module-title">番茄时钟</div>
+                        <div class="module-description">25分钟学习+5分钟休息，科学时间管理</div>
+                        <div class="module-stats">
+                            <div class="module-stat">
+                                <div class="module-stat-value">87K</div>
+                                <div class="module-stat-label">总番茄</div>
+                            </div>
+                            <div class="module-stat">
+                                <div class="module-stat-value">25+5</div>
+                                <div class="module-stat-label">分钟</div>
+                            </div>
+                            <div class="module-stat">
+                                <div class="module-stat-value">5.6K</div>
+                                <div class="module-stat-label">日活</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-icon">🎙️</div>
+                            <div class="module-toggle active" onclick="this.classList.toggle('active'); showToast('演讲学习模块状态已更新')"></div>
+                        </div>
+                        <div class="module-title">演讲学习</div>
+                        <div class="module-description">25位德国演讲者，真实德语素材</div>
+                        <div class="module-stats">
+                            <div class="module-stat">
+                                <div class="module-stat-value">25</div>
+                                <div class="module-stat-label">演讲者</div>
+                            </div>
+                            <div class="module-stat">
+                                <div class="module-stat-value">A1-C2</div>
+                                <div class="module-stat-label">级别</div>
+                            </div>
+                            <div class="module-stat">
+                                <div class="module-stat-value">2.1K</div>
+                                <div class="module-stat-label">日活</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-icon">💳</div>
+                            <div class="module-toggle active" onclick="this.classList.toggle('active'); showToast('订阅系统模块状态已更新')"></div>
+                        </div>
+                        <div class="module-title">订阅系统</div>
+                        <div class="module-description">5种订阅方案，7天免费试用</div>
+                        <div class="module-stats">
+                            <div class="module-stat">
+                                <div class="module-stat-value">847</div>
+                                <div class="module-stat-label">付费</div>
+                            </div>
+                            <div class="module-stat">
+                                <div class="module-stat-value">5</div>
+                                <div class="module-stat-label">方案</div>
+                            </div>
+                            <div class="module-stat">
+                                <div class="module-stat-value">€24.5K</div>
+                                <div class="module-stat-label">月收</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 其他页面占位 -->
+            <div id="speeches-page" class="page">
+                <div class="data-table">
+                    <div class="table-header">
+                        <div class="table-title">演讲素材管理</div>
+                        <button class="btn btn-primary btn-sm">+ 添加演讲</button>
+                    </div>
+                    <div style="padding: 40px; text-align: center; color: var(--text-secondary);">
+                        演讲素材管理功能 - 管理德国演讲者的演讲内容、转录文本和重点词汇
+                    </div>
+                </div>
+            </div>
+
+            <div id="scenarios-page" class="page">
+                <div class="data-table">
+                    <div class="table-header">
+                        <div class="table-title">对话场景管理</div>
+                        <button class="btn btn-primary btn-sm">+ 添加场景</button>
+                    </div>
+                    <div style="padding: 40px; text-align: center; color: var(--text-secondary);">
+                        AI对话场景管理 - 配置50+对话场景的内容和提示
+                    </div>
+                </div>
+            </div>
+
+            <div id="users-page" class="page">
+                <div class="data-table">
+                    <div class="table-header">
+                        <div class="table-title">用户管理</div>
+                        <div class="table-actions">
+                            <button class="btn btn-secondary btn-sm">导出</button>
+                            <button class="btn btn-primary btn-sm">+ 添加用户</button>
+                        </div>
+                    </div>
+                    <div style="padding: 40px; text-align: center; color: var(--text-secondary);">
+                        用户管理功能 - 查看、编辑、删除用户账户
+                    </div>
+                </div>
+            </div>
+
+            <div id="subscriptions-page" class="page">
+                <div class="data-table">
+                    <div class="table-header">
+                        <div class="table-title">订阅管理</div>
+                        <button class="btn btn-primary btn-sm">导出报告</button>
+                    </div>
+                    <div style="padding: 40px; text-align: center; color: var(--text-secondary);">
+                        订阅管理功能 - 查看和管理用户订阅、试用、续费
+                    </div>
+                </div>
+            </div>
+
+            <div id="settings-page" class="page">
+                <div class="ai-config-card">
+                    <h3 style="margin-bottom: 16px;">⚙️ 系统设置</h3>
+                    <div class="form-group">
+                        <label class="form-label">应用名称</label>
+                        <input type="text" class="form-input" value="Aeryn-Deutsch">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">支持邮箱</label>
+                        <input type="email" class="form-input" value="support@aeryn-deutsch.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">默认语言</label>
+                        <select class="form-select">
+                            <option>中文</option>
+                            <option>English</option>
+                            <option>Deutsch</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" onclick="showToast('设置已保存', 'success')">保存设置</button>
+                </div>
+            </div>
+
+            <div id="analytics-page" class="page">
+                <!-- 时间范围选择 -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                    <h2 style="font-size: 24px; font-weight: 600;">📊 数据分析中心</h2>
+                    <div style="display: flex; gap: 12px;">
+                        <select class="form-select" style="width: 150px;">
+                            <option>最近7天</option>
+                            <option selected>最近30天</option>
+                            <option>最近90天</option>
+                            <option>自定义范围</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="showToast('数据已导出', 'success')">📥 导出报告</button>
+                    </div>
+                </div>
+
+                <!-- 下载量分析 -->
+                <div class="ai-config-card">
+                    <h3 style="margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+                        📥 下载量分析
+                    </h3>
+
+                    <div class="stats-grid" style="margin-bottom: 24px;">
+                        <div class="stat-card">
+                            <div class="stat-value">45,678</div>
+                            <div class="stat-label">总下载量</div>
+                            <div class="stat-change positive">↑ 23.5% 较上月</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">12,458</div>
+                            <div class="stat-label">本月下载</div>
+                            <div class="stat-change positive">↑ 18.2% 较上月</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">418</div>
+                            <div class="stat-label">日均下载</div>
+                            <div class="stat-change positive">↑ 12.1% 较上月</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">68.5%</div>
+                            <div class="stat-label">留存率</div>
+                            <div class="stat-change positive">↑ 5.3% 较上月</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 16px;">
+                        <h4 style="margin-bottom: 12px; font-size: 14px; color: var(--text-secondary);">平台分布</h4>
+                        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 200px; padding: 16px; background: var(--background); border-radius: 8px;">
+                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                                    <span style="font-size: 24px;">🤖</span>
+                                    <div>
+                                        <div style="font-weight: 600;">Android</div>
+                                        <div style="font-size: 12px; color: var(--text-secondary);">28,456 下载</div>
+                                    </div>
+                                </div>
+                                <div style="background: var(--border); height: 8px; border-radius: 4px; overflow: hidden;">
+                                    <div style="background: #3DDC84; height: 100%; width: 62.3%;"></div>
+                                </div>
+                                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">62.3%</div>
+                            </div>
+                            <div style="flex: 1; min-width: 200px; padding: 16px; background: var(--background); border-radius: 8px;">
+                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                                    <span style="font-size: 24px;">🍎</span>
+                                    <div>
+                                        <div style="font-weight: 600;">iOS</div>
+                                        <div style="font-size: 12px; color: var(--text-secondary);">17,222 下载</div>
+                                    </div>
+                                </div>
+                                <div style="background: var(--border); height: 8px; border-radius: 4px; overflow: hidden;">
+                                    <div style="background: #007AFF; height: 100%; width: 37.7%;"></div>
+                                </div>
+                                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">37.7%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 style="margin-bottom: 12px; font-size: 14px; color: var(--text-secondary);">下载趋势（近30天）</h4>
+                        <div style="height: 200px; background: var(--background); border-radius: 8px; display: flex; align-items: flex-end; justify-content: space-around; padding: 20px;">
+                            <!-- 简化的柱状图 -->
+                            <div style="text-align: center;">
+                                <div style="width: 30px; height: 120px; background: var(--primary); border-radius: 4px 4px 0 0; margin: 0 auto;"></div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top: 8px;">第1周</div>
+                                <div style="font-size: 12px; font-weight: 600;">2,847</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="width: 30px; height: 145px; background: var(--primary); border-radius: 4px 4px 0 0; margin: 0 auto;"></div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top: 8px;">第2周</div>
+                                <div style="font-size: 12px; font-weight: 600;">3,156</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="width: 30px; height: 162px; background: var(--primary); border-radius: 4px 4px 0 0; margin: 0 auto;"></div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top: 8px;">第3周</div>
+                                <div style="font-size: 12px; font-weight: 600;">3,528</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="width: 30px; height: 180px; background: var(--secondary); border-radius: 4px 4px 0 0; margin: 0 auto;"></div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top: 8px;">第4周</div>
+                                <div style="font-size: 12px; font-weight: 600;">3,927</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 试用数据分析 -->
+                <div class="ai-config-card">
+                    <h3 style="margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+                        🎁 试用数据分析
+                    </h3>
+
+                    <div class="stats-grid" style="margin-bottom: 24px;">
+                        <div class="stat-card">
+                            <div class="stat-value">8,564</div>
+                            <div class="stat-label">试用总用户</div>
+                            <div class="stat-change positive">↑ 15.8% 较上月</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">2,145</div>
+                            <div class="stat-label">本月新增试用</div>
+                            <div class="stat-change positive">↑ 22.3% 较上月</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">28.7%</div>
+                            <div class="stat-label">试用转付费率</div>
+                            <div class="stat-change positive">↑ 3.2% 较上月</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">4.2天</div>
+                            <div class="stat-label">平均试用天数</div>
+                            <div class="stat-change positive">↑ 0.6天 较上月</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 16px;">
+                        <h4 style="margin-bottom: 12px; font-size: 14px; color: var(--text-secondary);">试用转化漏斗</h4>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="width: 120px; font-size: 13px;">下载应用</div>
+                                <div style="flex: 1; background: var(--border); height: 32px; border-radius: 4px; position: relative;">
+                                    <div style="background: var(--primary); height: 100%; width: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">45,678</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="width: 120px; font-size: 13px;">注册账户</div>
+                                <div style="flex: 1; background: var(--border); height: 32px; border-radius: 4px; position: relative;">
+                                    <div style="background: var(--primary); height: 100%; width: 62.3%; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">28,456 (62.3%)</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="width: 120px; font-size: 13px;">开始试用</div>
+                                <div style="flex: 1; background: var(--border); height: 32px; border-radius: 4px; position: relative;">
+                                    <div style="background: var(--secondary); height: 100%; width: 30.1%; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">13,756 (30.1%)</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="width: 120px; font-size: 13px;">试用完成</div>
+                                <div style="flex: 1; background: var(--border); height: 32px; border-radius: 4px; position: relative;">
+                                    <div style="background: var(--success); height: 100%; width: 18.8%; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">8,564 (18.8%)</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="width: 120px; font-size: 13px;">转为付费</div>
+                                <div style="flex: 1; background: var(--border); height: 32px; border-radius: 4px; position: relative;">
+                                    <div style="background: var(--success); height: 100%; width: 5.4%; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">2,458 (5.4%)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                        <div style="padding: 16px; background: var(--background); border-radius: 8px; text-align: center;">
+                            <div style="font-size: 24px; font-weight: bold; color: var(--warning);">3,245</div>
+                            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">试用中</div>
+                            <div style="font-size: 11px; color: var(--text-secondary);">37.9%</div>
+                        </div>
+                        <div style="padding: 16px; background: var(--background); border-radius: 8px; text-align: center;">
+                            <div style="font-size: 24px; font-weight: bold; color: var(--success);">2,458</div>
+                            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">已转为付费</div>
+                            <div style="font-size: 11px; color: var(--text-secondary);">28.7%</div>
+                        </div>
+                        <div style="padding: 16px; background: var(--background); border-radius: 8px; text-align: center;">
+                            <div style="font-size: 24px; font-weight: bold; color: var(--error);">2,861</div>
+                            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">试用流失</div>
+                            <div style="font-size: 11px; color: var(--text-secondary);">33.4%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 订阅数据分析 -->
+                <div class="ai-config-card">
+                    <h3 style="margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+                        💳 订阅数据分析
+                    </h3>
+
+                    <div class="stats-grid" style="margin-bottom: 24px;">
+                        <div class="stat-card">
+                            <div class="stat-value">€24,580</div>
+                            <div class="stat-label">本月MRR</div>
+                            <div class="stat-change positive">↑ 31.2% 较上月</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">847</div>
+                            <div class="stat-label">付费用户</div>
+                            <div class="stat-change positive">↑ 23.1% 较上月</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">€29.02</div>
+                            <div class="stat-label">ARPU</div>
+                            <div class="stat-change positive">↑ 6.5% 较上月</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">92.3%</div>
+                            <div class="stat-label">续费率</div>
+                            <div class="stat-change positive">↑ 2.1% 较上月</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 24px;">
+                        <h4 style="margin-bottom: 12px; font-size: 14px; color: var(--text-secondary);">订阅方案分布</h4>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                            <div style="padding: 16px; background: var(--background); border-radius: 8px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <span style="font-weight: 600;">📅 月度订阅</span>
+                                    <span style="color: var(--primary); font-weight: bold;">€10/月</span>
+                                </div>
+                                <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;">234 用户 (27.6%)</div>
+                                <div style="background: var(--border); height: 6px; border-radius: 3px; overflow: hidden;">
+                                    <div style="background: #3B82F6; height: 100%; width: 27.6%;"></div>
+                                </div>
+                            </div>
+                            <div style="padding: 16px; background: var(--background); border-radius: 8px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <span style="font-weight: 600;">📆 季度订阅</span>
+                                    <span style="color: var(--primary); font-weight: bold;">€20/季</span>
+                                </div>
+                                <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;">189 用户 (22.3%)</div>
+                                <div style="background: var(--border); height: 6px; border-radius: 3px; overflow: hidden;">
+                                    <div style="background: #10B981; height: 100%; width: 22.3%;"></div>
+                                </div>
+                            </div>
+                            <div style="padding: 16px; background: var(--background); border-radius: 8px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <span style="font-weight: 600;">📅 年度订阅 ⭐</span>
+                                    <span style="color: var(--primary); font-weight: bold;">€70/年</span>
+                                </div>
+                                <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;">356 用户 (42.0%)</div>
+                                <div style="background: var(--border); height: 6px; border-radius: 3px; overflow: hidden;">
+                                    <div style="background: #8B5CF6; height: 100%; width: 42.0%;"></div>
+                                </div>
+                            </div>
+                            <div style="padding: 16px; background: var(--background); border-radius: 8px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <span style="font-weight: 600;">👨‍👩‍👧‍👦 家庭组</span>
+                                    <span style="color: var(--primary); font-weight: bold;">€150/年</span>
+                                </div>
+                                <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;">68 用户 (8.0%)</div>
+                                <div style="background: var(--border); height: 6px; border-radius: 3px; overflow: hidden;">
+                                    <div style="background: #F59E0B; height: 100%; width: 8.0%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 style="margin-bottom: 12px; font-size: 14px; color: var(--text-secondary);">收入趋势（近6个月）</h4>
+                        <div style="height: 180px; background: var(--background); border-radius: 8px; display: flex; align-items: flex-end; justify-content: space-around; padding: 20px;">
+                            <div style="text-align: center;">
+                                <div style="width: 40px; height: 80px; background: var(--primary); border-radius: 4px 4px 0 0; margin: 0 auto; opacity: 0.5;"></div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top: 8px;">9月</div>
+                                <div style="font-size: 12px; font-weight: 600;">€12.4K</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="width: 40px; height: 95px; background: var(--primary); border-radius: 4px 4px 0 0; margin: 0 auto; opacity: 0.6;"></div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top: 8px;">10月</div>
+                                <div style="font-size: 12px; font-weight: 600;">€15.8K</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="width: 40px; height: 110px; background: var(--primary); border-radius: 4px 4px 0 0; margin: 0 auto; opacity: 0.7;"></div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top: 8px;">11月</div>
+                                <div style="font-size: 12px; font-weight: 600;">€18.2K</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="width: 40px; height: 125px; background: var(--primary); border-radius: 4px 4px 0 0; margin: 0 auto; opacity: 0.8;"></div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top: 8px;">12月</div>
+                                <div style="font-size: 12px; font-weight: 600;">€20.7K</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="width: 40px; height: 140px; background: var(--primary); border-radius: 4px 4px 0 0; margin: 0 auto; opacity: 0.9;"></div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top: 8px;">1月</div>
+                                <div style="font-size: 12px; font-weight: 600;">€22.5K</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="width: 40px; height: 160px; background: var(--secondary); border-radius: 4px 4px 0 0; margin: 0 auto;"></div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top: 8px;">2月</div>
+                                <div style="font-size: 12px; font-weight: 600;">€24.6K</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 在线学习用户分析 -->
+                <div class="ai-config-card">
+                    <h3 style="margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+                        📱 在线学习用户分析
+                    </h3>
+
+                    <div class="stats-grid" style="margin-bottom: 24px;">
+                        <div class="stat-card">
+                            <div class="stat-value">2,847</div>
+                            <div class="stat-label">当前在线</div>
+                            <div class="stat-change positive">↑ 8.3% 较昨日</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">45.6分钟</div>
+                            <div class="stat-label">平均学习时长</div>
+                            <div class="stat-change positive">↑ 3.2% 较上周</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">89.2%</div>
+                            <div class="stat-label">任务完成率</div>
+                            <div class="stat-change positive">↑ 1.5% 较上周</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">4.8</div>
+                            <div class="stat-label">日均番茄数</div>
+                            <div class="stat-change positive">↑ 0.6 较上周</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 24px;">
+                        <h4 style="margin-bottom: 12px; font-size: 14px; color: var(--text-secondary);">24小时学习活跃度</h4>
+                        <div style="height: 150px; background: var(--background); border-radius: 8px; display: flex; align-items: center; padding: 0 40px; gap: 4px;">
+                            <!-- 热力图模拟 -->
+                            <div style="flex: 1; height: 20px; background: rgba(102, 126, 234, 0.1); border-radius: 2px;" title="0:00 - 120人"></div>
+                            <div style="flex: 1; height: 25px; background: rgba(102, 126, 234, 0.15); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 18px; background: rgba(102, 126, 234, 0.08); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 22px; background: rgba(102, 126, 234, 0.12); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 35px; background: rgba(102, 126, 234, 0.25); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 28px; background: rgba(102, 126, 234, 0.18); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 45px; background: rgba(102, 126, 234, 0.35); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 85px; background: rgba(102, 126, 234, 0.75); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 120px; background: var(--primary); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 110px; background: rgba(102, 126, 234, 0.85); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 95px; background: rgba(102, 126, 234, 0.70); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 125px; background: var(--secondary); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 105px; background: rgba(102, 126, 234, 0.80); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 90px; background: rgba(102, 126, 234, 0.65); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 75px; background: rgba(102, 126, 234, 0.55); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 65px; background: rgba(102, 126, 234, 0.45); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 85px; background: rgba(102, 126, 234, 0.60); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 95px; background: rgba(102, 126, 234, 0.70); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 88px; background: rgba(102, 126, 234, 0.62); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 70px; background: rgba(102, 126, 234, 0.50); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 55px; background: rgba(102, 126, 234, 0.40); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 45px; background: rgba(102, 126, 234, 0.32); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 38px; background: rgba(102, 126, 234, 0.25); border-radius: 2px;"></div>
+                            <div style="flex: 1; height: 30px; background: rgba(102, 126, 234, 0.20); border-radius: 2px;"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-secondary); margin-top: 8px; padding: 0 40px;">
+                            <span>0:00</span>
+                            <span>6:00</span>
+                            <span>12:00</span>
+                            <span>18:00</span>
+                            <span>23:59</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 24px;">
+                        <h4 style="margin-bottom: 12px; font-size: 14px; color: var(--text-secondary);">功能使用分布</h4>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                            <div style="padding: 16px; background: var(--background); border-radius: 8px; text-align: center;">
+                                <div style="font-size: 32px; margin-bottom: 8px;">📚</div>
+                                <div style="font-weight: 600; margin-bottom: 4px;">词汇学习</div>
+                                <div style="font-size: 24px; font-weight: bold; color: var(--primary);">42.3%</div>
+                                <div style="font-size: 12px; color: var(--text-secondary);">1,204 今日学习</div>
+                            </div>
+                            <div style="padding: 16px; background: var(--background); border-radius: 8px; text-align: center;">
+                                <div style="font-size: 32px; margin-bottom: 8px;">🤖</div>
+                                <div style="font-weight: 600; margin-bottom: 4px;">AI对话</div>
+                                <div style="font-size: 24px; font-weight: bold; color: var(--secondary);">28.7%</div>
+                                <div style="font-size: 12px; color: var(--text-secondary);">817 今日对话</div>
+                            </div>
+                            <div style="padding: 16px; background: var(--background); border-radius: 8px; text-align: center;">
+                                <div style="font-size: 32px; margin-bottom: 8px;">🍅</div>
+                                <div style="font-weight: 600; margin-bottom: 4px;">番茄时钟</div>
+                                <div style="font-size: 24px; font-weight: bold; color: var(--success);">18.5%</div>
+                                <div style="font-size: 12px; color: var(--text-secondary);">527 今日完成</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 style="margin-bottom: 12px; font-size: 14px; color: var(--text-secondary);">学习级别分布</h4>
+                        <table style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: left;">级别</th>
+                                    <th style="text-align: center;">用户数</th>
+                                    <th style="text-align: center;">占比</th>
+                                    <th style="text-align: left;">活跃度</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span style="display: inline-block; width: 12px; height: 12px; background: #10B981; border-radius: 50%; margin-right: 8px;"></span>A1 (初学者)</td>
+                                    <td style="text-align: center; font-weight: 600;">8,456</td>
+                                    <td style="text-align: center;">29.7%</td>
+                                    <td><div style="width: 100px; height: 8px; background: var(--border); border-radius: 4px;"><div style="width: 75%; height: 100%; background: #10B981; border-radius: 4px;"></div></div></td>
+                                </tr>
+                                <tr>
+                                    <td><span style="display: inline-block; width: 12px; height: 12px; background: #3B82F6; border-radius: 50%; margin-right: 8px;"></span>A2 (初级)</td>
+                                    <td style="text-align: center; font-weight: 600;">7,234</td>
+                                    <td style="text-align: center;">25.4%</td>
+                                    <td><div style="width: 100px; height: 8px; background: var(--border); border-radius: 4px;"><div style="width: 82%; height: 100%; background: #3B82F6; border-radius: 4px;"></div></div></td>
+                                </tr>
+                                <tr>
+                                    <td><span style="display: inline-block; width: 12px; height: 12px; background: #F59E0B; border-radius: 50%; margin-right: 8px;"></span>B1 (中级)</td>
+                                    <td style="text-align: center; font-weight: 600;">6,567</td>
+                                    <td style="text-align: center;">23.1%</td>
+                                    <td><div style="width: 100px; height: 8px; background: var(--border); border-radius: 4px;"><div style="width: 88%; height: 100%; background: #F59E0B; border-radius: 4px;"></div></div></td>
+                                </tr>
+                                <tr>
+                                    <td><span style="display: inline-block; width: 12px; height: 12px; background: #8B5CF6; border-radius: 50%; margin-right: 8px;"></span>B2 (中高级)</td>
+                                    <td style="text-align: center; font-weight: 600;">3,845</td>
+                                    <td style="text-align: center;">13.5%</td>
+                                    <td><div style="width: 100px; height: 8px; background: var(--border); border-radius: 4px;"><div style="width: 91%; height: 100%; background: #8B5CF6; border-radius: 4px;"></div></div></td>
+                                </tr>
+                                <tr>
+                                    <td><span style="display: inline-block; width: 12px; height: 12px; background: #EC4899; border-radius: 50%; margin-right: 8px;"></span>C1 (高级)</td>
+                                    <td style="text-align: center; font-weight: 600;">1,654</td>
+                                    <td style="text-align: center;">5.8%</td>
+                                    <td><div style="width: 100px; height: 8px; background: var(--border); border-radius: 4px;"><div style="width: 94%; height: 100%; background: #EC4899; border-radius: 4px;"></div></div></td>
+                                </tr>
+                                <tr>
+                                    <td><span style="display: inline-block; width: 12px; height: 12px; background: #EF4444; border-radius: 50%; margin-right: 8px;"></span>C2 (精通)</td>
+                                    <td style="text-align: center; font-weight: 600;">678</td>
+                                    <td style="text-align: center;">2.4%</td>
+                                    <td><div style="width: 100px; height: 8px; background: var(--border); border-radius: 4px;"><div style="width: 96%; height: 100%; background: #EF4444; border-radius: 4px;"></div></div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="logs-page" class="page">
+                <div class="data-table">
+                    <div class="table-header">
+                        <div class="table-title">系统日志</div>
+                        <div class="table-actions">
+                            <button class="btn btn-secondary btn-sm">下载日志</button>
+                            <button class="btn btn-secondary btn-sm">清除日志</button>
+                        </div>
+                    </div>
+                    <div style="padding: 40px; text-align: center; color: var(--text-secondary);">
+                        系统日志查看 - 错误日志、访问日志、性能日志
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加词汇模态框 -->
+    <div class="modal" id="addWord">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">添加词汇</div>
+                <button class="modal-close" onclick="hideModal('addWord')">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">德语单词</label>
+                    <input type="text" class="form-input" placeholder="例如: das Buch">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">中文释义</label>
+                    <input type="text" class="form-input" placeholder="例如: 书">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">名词性别</label>
+                    <select class="form-select">
+                        <option>der (阳性)</option>
+                        <option>die (阴性)</option>
+                        <option>das (中性)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">CEFR级别</label>
+                    <select class="form-select">
+                        <option>A1</option>
+                        <option>A2</option>
+                        <option>B1</option>
+                        <option>B2</option>
+                        <option>C1</option>
+                        <option>C2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">例句</label>
+                    <textarea class="form-textarea" placeholder="例如: Ich lese ein Buch."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="hideModal('addWord')">取消</button>
+                <button class="btn btn-primary" onclick="hideModal('addWord'); showToast('词汇添加成功', 'success')">添加</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast通知 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // 页面切换
+        function showPage(pageName) {
+            // 隐藏所有页面
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // 显示目标页面
+            const targetPage = document.getElementById(pageName + '-page');
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+
+            // 更新导航状态
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.closest('.nav-item').classList.add('active');
+
+            // 更新标题
+            const titles = {
+                'dashboard': '仪表盘',
+                'vocabulary': '词汇管理',
+                'grammar': '语法管理',
+                'speeches': '演讲管理',
+                'scenarios': '对话场景管理',
+                'users': '用户管理',
+                'subscriptions': '订阅管理',
+                'ai-config': 'AI配置',
+                'modules': '功能模块',
+                'settings': '系统设置',
+                'analytics': '数据分析',
+                'logs': '系统日志'
+            };
+            document.getElementById('pageTitle').textContent = titles[pageName] || '仪表盘';
+        }
+
+        // 模态框
+        function showModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function hideModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Toast通知
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast show ' + type;
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // 初始化导航点击
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

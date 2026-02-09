@@ -1,0 +1,73 @@
+word,article,plural,genitive,meaning,cefr_level,frequency_rank
+der Tisch,der,Tische,des Tisches,桌子,A1,234
+die Stuhl,die,Stühle,des Stuhles,椅子,A1,456
+das Haus,das,Häuser,des Hauses,房子,A1,123
+die Zeit,die,Zeiten,der Zeit,时间,A1,89
+der Mann,der,Männer,des Mannes,男人,A1,67
+die Frau,die,Frauen,der Frau,女人,A1,54
+das Kind,das,Kinder,des Kindes,孩子,A1,45
+das Buch,das,Bücher,des Buches,书,A1,78
+der Computer,der,Computer,des Computers,电脑,A2,1567
+das Problem,das,Probleme,des Problems,问题,A2,890
+die Lösung,die,Lösungen,der Lösung,解决方案,A2,1234
+die Antwort,die,Antworten,der Antwort,回答,A2,987
+der Tag,der,Tage,des Tages,天,A1,34
+die Nacht,die,Nächte,der Nacht,夜晚,A1,145
+die Woche,die,Wochen,der Woche,周,A1,234
+der Monat,der,Monate,des Monats,月,A1,345
+das Jahr,das,Jahre,des Jahres,年,A1,567
+die Stadt,die,Städte,der Stadt,城市,A1,678
+das Land,das,Länder,des Landes,国家,A1,789
+die Sprache,die,Sprachen,der Sprache,语言,A1,890
+der Freund,der,Freunde,des Freundes,朋友,A1,123
+die Freundin,die,Freundinnen,der Freundin,女朋友,A1,234
+das Wasser,das,Wasser,des Wassers,水,A1,45
+das Brot,das,Brote,des Brotes,面包,A1,67
+die Milch,die,Milch,der Milch,牛奶,A1,89
+der Apfel,der,Äpfel,des Apfels,苹果,A1,123
+die Banane,die,Bananen,der Banane,香蕉,A1,145
+der Hund,der,Hunde,des Hundes,狗,A1,167
+die Katze,die,Katzen,der Katze,猫,A1,189
+das Auto,das,Autos,des Autos,汽车,A1,210
+der Bus,der,Busse,des Busses,公交车,A1,234
+der Zug,der,Züge,des Zuges,火车,A1,256
+das Flugzeug,das,Flugzeuge,des Flugzeugs,飞机,A2,567
+das Geld,das,Geld,des Geldes,钱,A1,345
+die Musik,die,Musik,der Musik,音乐,A1,456
+der Film,der,Filme,des Films,电影,A1,467
+das Lied,das,Lieder,des Liedes,歌曲,A1,478
+die Farbe,die,Farben,der Farbe,颜色,A1,489
+rot,rot,rote,rot,红色,A1,500
+blau,blau,blaue,blau,蓝色,A1,510
+grün,grün,grüne,grün,绿色,A1,520
+gelb,gelb,gelbe,gelb,黄色,A1,530
+schwarz,schwarz,schwarze,schwarz,黑色,A1,540
+weiß,weiß,weiße,weiß,白色,A1,550
+das Glück,das,Glück,des Glücks,幸福,A2,678
+die Liebe,die,Liebe,der Liebe,爱,A1,690
+die Hoffnung,die,Hoffnungen,der Hoffnung,希望,A2,789
+der Traum,der,Träume,des Traums,梦想,A2,890
+der Beruf,der,Berufe,des Berufs,职业,A1,900
+die Arbeit,die,Arbeiten,der Arbeit,工作,A1,910
+die Schule,die,Schulen,der Schule,学校,A1,920
+die Universität,die,Universitäten,der Universität,大学,A2,930
+der Student,der,Studenten,des Studenten,大学生,A2,940
+die Studentin,die,Studentinnen,der Studentin,女大学生,A2,950
+der Lehrer,der,Lehrer,des Lehrers,老师,A1,960
+die Lehrerin,die,Lehrerinnen,der Lehrerin,女老师,A1,970
+der Arzt,der,Ärzte,des Arztes,医生,A2,980
+die Ärztin,die,Ärztinnen,der Ärztin,女医生,A2,990
+das Krankenhaus,das,Krankenhäuser,des Krankenhauses,医院,A2,1000
+die Straße,die,Straßen,der Straße,街道,A1,1010
+das Haus,das,Häuser,des Hauses,房子,A1,1020
+das Zimmer,das,Zimmer,des Zimmers,房间,A1,1030
+die Tür,die,Türen,der Tür,门,A1,1040
+das Fenster,das,Fenster,des Fensters,窗户,A1,1050
+der Tisch,der,Tische,des Tisches,桌子,A1,1060
+der Stuhl,der,Stühle,des Stuhles,椅子,A1,1070
+das Bett,das,Betten,des Bettes,床,A1,1080
+die Lampe,die,Lampen,der Lampe,灯,A1,1090
+das Bild,das,Bilder,des Bildes,画,A1,1100
+die Wand,die,Wände,der Wand,墙,A1,1110
+der Boden,der,Böden,des Bodens,地板,A2,1120
+die Decke,die,Decken,der Decke,天花板,A2,1130

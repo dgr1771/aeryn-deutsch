@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Aeryn-Deutsch - 专业德语学习App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .app-container {
+            max-width: 768px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        /* Progress Overview */
+        .progress-overview {
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .progress-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #2d3748;
+        }
+
+        .progress-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .progress-item {
+            text-align: center;
+            padding: 12px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .progress-percentage {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .progress-label {
+            font-size: 12px;
+            color: #718096;
+            margin-top: 4px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-bottom: 2px solid #e2e8f0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-tab {
+            flex: 1;
+            min-width: 80px;
+            padding: 15px 10px;
+            text-align: center;
+            background: none;
+            border: none;
+            color: #718096;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-tab.active {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .nav-tab:active {
+            background: #f7fafc;
+        }
+
+        /* Content */
+        .content {
+            padding: 20px;
+            min-height: 400px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Feature Cards */
+        .feature-section {
+            margin-bottom: 30px;
+        }
+
+        .feature-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-card h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #2d3748;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: #718096;
+            line-height: 1.6;
+        }
+
+        .feature-stats {
+            display: flex;
+            gap: 16px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 13px;
+            color: #667eea;
+        }
+
+        /* Button */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            box-shadow: none;
+        }
+
+        /* Data Display */
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .data-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .data-item .label {
+            font-size: 12px;
+            color: #718096;
+            margin-bottom: 4px;
+        }
+
+        .data-item .value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        /* Table */
+        .grammar-table {
+            overflow-x: auto;
+            margin-top: 12px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .grammar-table table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 400px;
+        }
+
+        .grammar-table th,
+        .grammar-table td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            font-size: 13px;
+        }
+
+        .grammar-table th {
+            background: #667eea;
+            color: white;
+            font-weight: 500;
+        }
+
+        .grammar-table td {
+            background: white;
+        }
+
+        /* List */
+        .item-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .list-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .list-item .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: #f7fafc;
+        }
+
+        .list-item .content {
+            flex: 1;
+        }
+
+        .list-item .title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .list-item .subtitle {
+            font-size: 12px;
+            color: #718096;
+            margin-top: 2px;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .highlight-box h4 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #2d3748;
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-box li {
+            padding: 6px 0;
+            font-size: 14px;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .highlight-box li::before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        /* Speech Section */
+        .speaker-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            gap: 12px;
+        }
+
+        .speaker-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .speaker-info {
+            flex: 1;
+        }
+
+        .speaker-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 4px;
+        }
+
+        .speaker-title {
+            font-size: 13px;
+            color: #718096;
+            margin-bottom: 8px;
+        }
+
+        .speaker-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            background: #f7fafc;
+            color: #4a5568;
+        }
+
+        /* Footer */
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .footer p {
+            font-size: 13px;
+            color: #718096;
+            margin-bottom: 8px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .footer-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .progress-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-stats {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎓 Aeryn-Deutsch</h1>
+            <p>专业德语学习App · 从A1到C2 · AI对话练习</p>
+            <div class="version-badge">v2.8.0 · 96%完成 · Beta测试准备中</div>
+        </div>
+
+        <!-- Progress Overview -->
+        <div class="progress-overview">
+            <div class="progress-title">📊 开发进度</div>
+            <div class="progress-grid">
+                <div class="progress-item">
+                    <div class="progress-percentage">100%</div>
+                    <div class="progress-label">核心功能</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-percentage">100%</div>
+                    <div class="progress-label">AI对话系统</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-percentage">95%</div>
+                    <div class="progress-label">测试发布</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 95%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('overview')">总览</button>
+            <button class="nav-tab" onclick="showTab('ai-chat')">AI对话</button>
+            <button class="nav-tab" onclick="showTab('subscription')">订阅</button>
+            <button class="nav-tab" onclick="showTab('c2-path')">C2路径</button>
+            <button class="nav-tab" onclick="showTab('pomodoro')">番茄钟</button>
+            <button class="nav-tab" onclick="showTab('grammar')">语法</button>
+            <button class="nav-tab" onclick="showTab('vocabulary')">词汇</button>
+            <button class="nav-tab" onclick="showTab('speech')">演讲</button>
+            <button class="nav-tab" onclick="showTab('testing')">测试</button>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Overview Tab -->
+            <div id="overview" class="tab-content active">
+                <div class="feature-section">
+                    <div class="feature-title">🎯 核心功能</div>
+                    <div class="feature-card">
+                        <h3>🤖 AI对话系统 (100%)</h3>
+                        <p>混合AI引擎：免费规则引擎 + 付费高级AI，支持A1-C2全级别对话练习</p>
+                        <div class="feature-stats">
+                            <div class="stat-item">💬 场景对话</div>
+                            <div class="stat-item">✨ 语法纠错</div>
+                            <div class="stat-item">🎯 智能评分</div>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <h3>📚 完整学习系统 (100%)</h3>
+                        <p>动词变位表、格变表、词族系统、形容词变格、语音识别、考试备考</p>
+                        <div class="feature-stats">
+                            <div class="stat-item">📊 85+个文件</div>
+                            <div class="stat-item">💾 ~32,500行代码</div>
+                            <div class="stat-item">🎓 19+个功能</div>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <h3>💎 高级功能 (100%)</h3>
+                        <p>听力训练、写作批改、数据可视化、个性化学习、25位德国演讲者</p>
+                        <div class="feature-stats">
+                            <div class="stat-item">🎙️ 25位演讲者</div>
+                            <div class="stat-item">📝 智能批改</div>
+                            <div class="stat-item">📊 数据分析</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">💎 数据规模</div>
+                    <div class="data-grid">
+                        <div class="data-item">
+                            <div class="label">词汇量</div>
+                            <div class="value">100K+</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="label">动词</div>
+                            <div class="value">100+ 个</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="label">名词</div>
+                            <div class="value">80+ 个</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="label">形容词</div>
+                            <div class="value">100+ 个</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="label">演讲者</div>
+                            <div class="value">25 位</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="label">场景对话</div>
+                            <div class="value">50+ 个</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>🌟 应用特色</h4>
+                    <ul>
+                        <li>订阅制付费，无广告干扰</li>
+                        <li>混合AI引擎：免费+付费可选</li>
+                        <li>7天免费试用所有功能</li>
+                        <li>从A1到C2完整学习路径</li>
+                        <li>25位德国演讲者真实素材</li>
+                        <li>FSRS科学复习算法</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- AI Chat Tab -->
+            <div id="ai-chat" class="tab-content">
+                <div class="feature-section">
+                    <div class="feature-title">🤖 混合AI对话引擎</div>
+                    <div class="feature-card">
+                        <h3>🆓 免费规则引擎 (无需API)</h3>
+                        <p>基于本地NLP规则引擎，零成本使用，快速响应</p>
+                        <div class="feature-stats">
+                            <div class="stat-item">⚡ < 500ms响应</div>
+                            <div class="stat-item">💬 20条/天免费</div>
+                            <div class="stat-item">🎯 意图识别</div>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <h3>⭐ 高级AI引擎 (付费)</h3>
+                        <p>支持OpenAI、Claude、Gemini等主流AI API，智能对话体验</p>
+                        <div class="feature-stats">
+                            <div class="stat-item">🧠 智能理解</div>
+                            <div class="stat-item">💬 100-500条/月</div>
+                            <div class="stat-item">🎭 自然对话</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">💬 对话场景</div>
+                    <div class="data-grid">
+                        <div class="data-item">
+                            <div class="label">A1级场景</div>
+                            <div class="value">8 个</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="label">A2级场景</div>
+                            <div class="value">8 个</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="label">B1级场景</div>
+                            <div class="value">10 个</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="label">B2级场景</div>
+                            <div class="value">10 个</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="label">C1级场景</div>
+                            <div class="value">8 个</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="label">C2级场景</div>
+                            <div class="value">8 个</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">✨ 核心功能</div>
+                    <div class="item-list">
+                        <div class="list-item">
+                            <div class="icon">🔍</div>
+                            <div class="content">
+                                <div class="title">实时语法纠错</div>
+                                <div class="subtitle">自动检测语法错误，提供正确用法</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">📊</div>
+                            <div class="content">
+                                <div class="title">对话质量评分</div>
+                                <div class="subtitle">语法、词汇、流畅度多维度评分</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">💡</div>
+                            <div class="content">
+                                <div class="title">智能建议</div>
+                                <div class="subtitle">提供更地道的表达方式</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">🎯</div>
+                            <div class="content">
+                                <div class="title">配额管理</div>
+                                <div class="subtitle">免费/试用/付费不同配额</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>🎁 7天免费试用</h4>
+                    <ul>
+                        <li>试用期间可使用基础AI功能</li>
+                        <li>50条消息/天配额</li>
+                        <li>30次AI调用总额度</li>
+                        <li>试用期结束后可选择订阅</li>
+                        <li>免费用户仍可使用规则引擎</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Subscription Tab -->
+            <div id="subscription" class="tab-content">
+                <div class="feature-section">
+                    <div class="feature-title">💳 订阅方案</div>
+
+                    <div class="feature-card">
+                        <h3>🆓 免费版 (€0/月)</h3>
+                        <p>基础功能，永久免费，无广告</p>
+                        <div class="feature-stats">
+                            <div class="stat-item">💬 20条消息/天</div>
+                            <div class="stat-item">🤖 规则引擎</div>
+                            <div class="stat-item">📚 核心学习功能</div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>📅 月度订阅 (€10/月)</h3>
+                        <p>适合短期学习者，灵活订阅</p>
+                        <div class="feature-stats">
+                            <div class="stat-item">💬 无限消息</div>
+                            <div class="stat-item">🤖 100次AI调用/月</div>
+                            <div class="stat-item">⭐ 高级功能解锁</div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>📆 季度订阅 (€20/季)</h3>
+                        <p>季度计划，更优价格</p>
+                        <div class="feature-stats">
+                            <div class="stat-item">💬 无限消息</div>
+                            <div class="stat-item">🤖 200次AI调用/季</div>
+                            <div class="stat-item">💰 €6.67/月</div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>📅 年度订阅 (€70/年)</h3>
+                        <p>年度计划，节省42%</p>
+                        <div class="feature-stats">
+                            <div class="stat-item">💬 无限消息</div>
+                            <div class="stat-item">🤖 500次AI调用/年</div>
+                            <div class="stat-item">💰 €5.83/月</div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>👨‍👩‍👧‍👦 家庭组 (€150/年)</h3>
+                        <p>5人共享，每人仅€2.50/月</p>
+                        <div class="feature-stats">
+                            <div class="stat-item">👥 5人共享</div>
+                            <div class="stat-item">🤖 500次AI调用/年</div>
+                            <div class="stat-item">💰 超值选择</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">✨ 所有订阅包含</div>
+                    <div class="item-list">
+                        <div class="list-item">
+                            <div class="icon">✅</div>
+                            <div class="content">
+                                <div class="title">无限对话</div>
+                                <div class="subtitle">每日消息数量无限制</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">🤖</div>
+                            <div class="content">
+                                <div class="title">高级AI访问</div>
+                                <div class="subtitle">OpenAI/Claude/Gemini可选</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">🚫</div>
+                            <div class="content">
+                                <div class="title">完全无广告</div>
+                                <div class="subtitle">纯净学习环境</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">📊</div>
+                            <div class="content">
+                                <div class="title">高级数据分析</div>
+                                <div class="subtitle">详细学习进度追踪</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">📝</div>
+                            <div class="content">
+                                <div class="title">写作批改</div>
+                                <div class="subtitle">AI自动批改作文</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">🎙️</div>
+                            <div class="content">
+                                <div class="title">演讲学习</div>
+                                <div class="subtitle">25位德国演讲者素材</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- C2 Path Tab -->
+            <div id="c2-path" class="tab-content">
+                <div class="feature-section">
+                    <div class="feature-title">🎯 从零到C2学习路径</div>
+                    <div class="feature-card">
+                        <h3>📈 2-4年完整学习规划</h3>
+                        <p>科学的学习路径，帮助您从零基础达到接近母语者水平</p>
+                        <div class="data-grid">
+                            <div class="data-item">
+                                <div class="label">A1-A2</div>
+                                <div class="value">6-9月</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">B1-B2</div>
+                                <div class="value">9-15月</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">C1-C2</div>
+                                <div class="value">12-24月</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">📚 词汇量目标</div>
+                    <div class="item-list">
+                        <div class="list-item">
+                            <div class="icon">🌱</div>
+                            <div class="content">
+                                <div class="title">A1: 1000词</div>
+                                <div class="subtitle">覆盖日常交流80%</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">📿</div>
+                            <div class="content">
+                                <div class="title">A2: 2000词</div>
+                                <div class="subtitle">覆盖日常交流95%</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">🎯</div>
+                            <div class="content">
+                                <div class="title">B1: 4000词</div>
+                                <div class="subtitle">覆盖学术/商务基础</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">⭐</div>
+                            <div class="content">
+                                <div class="title">B2: 8000词</div>
+                                <div class="subtitle">接近educated native</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">🏆</div>
+                            <div class="content">
+                                <div class="title">C1: 10000词</div>
+                                <div class="subtitle">educated native水平</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">👑</div>
+                            <div class="content">
+                                <div class="title">C2: 10000+词</div>
+                                <div class="subtitle">精通+专业领域</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">🎓 核心学习策略</div>
+                    <div class="feature-card">
+                        <h3>1️⃣ 输入最大化</h3>
+                        <p>每日30-90分钟听力、阅读、AI对话输入</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>2️⃣ 输出系统化</h3>
+                        <p>每日AI口语练习，每周写作任务</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>3️⃣ 词汇深度学习</h3>
+                        <p>FSRS算法智能复习，上下文学习</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>4️⃣ 语法内化</h3>
+                        <p>从输入中总结规律，在输出中巩固</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>🎯 C2水平能力</h4>
+                    <ul>
+                        <li>毫不费力地理解几乎所有内容</li>
+                        <li>自发、流利、灵活地表达</li>
+                        <li>使用地道的习语和表达</li>
+                        <li>在所有社交/学术/职业场合有效沟通</li>
+                        <li>深入理解德国文化</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Pomodoro Tab -->
+            <div id="pomodoro" class="tab-content">
+                <div class="feature-section">
+                    <div class="feature-title">🍅 番茄时钟功能</div>
+                    <div class="feature-card">
+                        <h3>⏱️ 科学时间管理</h3>
+                        <p>采用番茄工作法（Pomodoro Technique），提高学习专注度和效率</p>
+                        <div class="feature-stats">
+                            <div class="stat-item">🎯 25分钟学习</div>
+                            <div class="stat-item">☕ 5分钟短休息</div>
+                            <div class="stat-item">🌴 15分钟长休息</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">📊 核心功能</div>
+                    <div class="item-list">
+                        <div class="list-item">
+                            <div class="icon">⏰</div>
+                            <div class="content">
+                                <div class="title">倒计时显示</div>
+                                <div class="subtitle">圆形进度条，实时显示剩余时间</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">🎮</div>
+                            <div class="content">
+                                <div class="title">灵活控制</div>
+                                <div class="subtitle">开始、暂停、继续、停止、跳过</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">🔔</div>
+                            <div class="content">
+                                <div class="title">智能提醒</div>
+                                <div class="subtitle">完成时播放通知声音和震动</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">📈</div>
+                            <div class="content">
+                                <div class="title">学习统计</div>
+                                <div class="subtitle">记录番茄数、学习时长、连续天数</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">⚙️</div>
+                            <div class="content">
+                                <div class="title">自定义设置</div>
+                                <div class="subtitle">调整学习时长、休息时长、长休息间隔</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">🎯</div>
+                            <div class="content">
+                                <div class="title">每日目标</div>
+                                <div class="subtitle">根据德语级别设定推荐番茄数</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">💡 使用场景</div>
+                    <div class="data-grid">
+                        <div class="data-item">
+                            <div class="label">词汇学习</div>
+                            <div class="value">1-2番茄</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="label">语法练习</div>
+                            <div class="value">2-3番茄</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="label">AI对话</div>
+                            <div class="value">1-2番茄</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="label">演讲学习</div>
+                            <div class="value">1-2番茄</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="label">写作练习</div>
+                            <div class="value">1-2番茄</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="label">每日推荐</div>
+                            <div class="value">4-8番茄</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">📅 每日推荐番茄数</div>
+                    <div class="feature-card">
+                        <h3>根据德语级别调整</h3>
+                        <div class="item-list">
+                            <div class="list-item">
+                                <div class="icon">🌱</div>
+                                <div class="content">
+                                    <div class="title">A1-A2: 4个番茄</div>
+                                    <div class="subtitle">每天2小时，适合初学者</div>
+                                </div>
+                            </div>
+                            <div class="list-item">
+                                <div class="icon">📿</div>
+                                <div class="content">
+                                    <div class="title">B1-B2: 6个番茄</div>
+                                    <div class="subtitle">每天2.5小时，稳步提升</div>
+                                </div>
+                            </div>
+                            <div class="list-item">
+                                <div class="icon">👑</div>
+                                <div class="content">
+                                    <div class="title">C1-C2: 8个番茄</div>
+                                    <div class="subtitle">每天3.3小时，高强度学习</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>🎯 番茄工作法优势</h4>
+                    <ul>
+                        <li>提高专注力，减少拖延</li>
+                        <li>定时休息，保护大脑</li>
+                        <li>可视化进度，增强成就感</li>
+                        <li>建立学习习惯，提高效率</li>
+                        <li>科学分配时间，劳逸结合</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Testing Tab -->
+            <div id="testing" class="tab-content">
+                <div class="feature-section">
+                    <div class="feature-title">🧪 测试进展</div>
+
+                    <div class="feature-card">
+                        <h3>✅ Alpha测试完成</h3>
+                        <p>内部测试已完成，核心功能验证通过</p>
+                        <div class="feature-stats">
+                            <div class="stat-item">📅 2周测试</div>
+                            <div class="stat-item">🐛 Bug修复</div>
+                            <div class="stat-item">✅ P0功能验证</div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>🔄 Beta测试准备中</h3>
+                        <p>招募100-200名测试用户，预计4周测试周期</p>
+                        <div class="feature-stats">
+                            <div class="stat-item">👥 100-200用户</div>
+                            <div class="stat-item">📋 30+测试用例</div>
+                            <div class="stat-item">📊 性能监控</div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>🎯 测试目标</h3>
+                        <div class="item-list">
+                            <div class="list-item">
+                                <div class="icon">📉</div>
+                                <div class="content">
+                                    <div class="title">崩溃率 < 0.5%</div>
+                                </div>
+                            </div>
+                            <div class="list-item">
+                                <div class="icon">⏱️</div>
+                                <div class="content">
+                                    <div class="title">启动时间 < 3秒</div>
+                                </div>
+                            </div>
+                            <div class="list-item">
+                                <div class="icon">😊</div>
+                                <div class="content">
+                                    <div class="title">满意度 > 4.5/5</div>
+                                </div>
+                            </div>
+                            <div class="list-item">
+                                <div class="icon">💰</div>
+                                <div class="content">
+                                    <div class="title">转化率 > 15%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">🐛 Bug跟踪系统</div>
+                    <div class="feature-card">
+                        <h3>完整的测试框架</h3>
+                        <p>自动化测试 + 手动测试，全面的Bug追踪</p>
+                        <div class="feature-stats">
+                            <div class="stat-item">📊 严重程度分级</div>
+                            <div class="stat-item">🔍 测试用例管理</div>
+                            <div class="stat-item">📈 性能监控</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>🎁 Beta测试福利</h4>
+                    <ul>
+                        <li>30天免费试用所有高级功能</li>
+                        <li>前10名活跃者获得终身免费版</li>
+                        <li>前50名活跃者获得50%折扣</li>
+                        <li>Beta测试证书</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Grammar Tab -->
+            <div id="grammar" class="tab-content">
+                <div class="feature-section">
+                    <div class="feature-title">📚 动词变位表</div>
+                    <div class="feature-card">
+                        <h3>35+个常用动词完整变位</h3>
+                        <p>规则、不规则、情态动词，支持现在时、过去时、完成时</p>
+                        <div class="grammar-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>人称</th>
+                                        <th>sein (是)</th>
+                                        <th>haben (有)</th>
+                                        <th>werden (成为)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>ich</td>
+                                        <td>bin</td>
+                                        <td>habe</td>
+                                        <td>werde</td>
+                                    </tr>
+                                    <tr>
+                                        <td>du</td>
+                                        <td>bist</td>
+                                        <td>hast</td>
+                                        <td>wirst</td>
+                                    </tr>
+                                    <tr>
+                                        <td>er/sie/es</td>
+                                        <td>ist</td>
+                                        <td>hat</td>
+                                        <td>wird</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">📖 名词格变表</div>
+                    <div class="feature-card">
+                        <h3>25+个名词四格变化</h3>
+                        <p>阳性、阴性、中性，单数、复数，完整冠词变化</p>
+                        <div class="grammar-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>格</th>
+                                        <th>阳性</th>
+                                        <th>阴性</th>
+                                        <th>中性</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Nominativ</td>
+                                        <td>der Tisch</td>
+                                        <td>die Stadt</td>
+                                        <td>das Buch</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Akkusativ</td>
+                                        <td>den Tisch</td>
+                                        <td>die Stadt</td>
+                                        <td>das Buch</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dativ</td>
+                                        <td>dem Tisch</td>
+                                        <td>der Stadt</td>
+                                        <td>dem Buch</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Genitiv</td>
+                                        <td>des Tisches</td>
+                                        <td>der Stadt</td>
+                                        <td>des Buches</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">✨ 词族与构词法</div>
+                    <div class="feature-card">
+                        <h3>18个前缀 + 21个后缀</h3>
+                        <p>可分/不可分前缀，名词/形容词/动词后缀，完整词族系统</p>
+                        <div class="item-list">
+                            <div class="list-item">
+                                <div class="icon">🔤</div>
+                                <div class="content">
+                                    <div class="title">前缀示例</div>
+                                    <div class="subtitle">ab-, an-, auf-, be-, ver-, ent-, er-, ge-</div>
+                                </div>
+                            </div>
+                            <div class="list-item">
+                                <div class="icon">📝</div>
+                                <div class="content">
+                                    <div class="title">后缀示例</div>
+                                    <div class="subtitle">-ung, -heit, -keit, -schaft, -lich, -ig</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vocabulary Tab -->
+            <div id="vocabulary" class="tab-content">
+                <div class="feature-section">
+                    <div class="feature-title">📚 形容词变格表</div>
+                    <div class="feature-card">
+                        <h3>100+形容词完整变格</h3>
+                        <p>弱变化、强变化、混合变化，三维表格展示</p>
+                        <div class="feature-stats">
+                            <div class="stat-item">🎯 A-Z字母排序</div>
+                            <div class="stat-item">💡 包含词义、反义词</div>
+                            <div class="stat-item">📝 每个词附例句</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">🎖️ 词汇示例 (A-Z)</div>
+                    <div class="item-list">
+                        <div class="list-item">
+                            <div class="icon">A</div>
+                            <div class="content">
+                                <div class="title">alt - 老的</div>
+                                <div class="subtitle">反义词：jung | 例句：Der Mann ist alt.</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">G</div>
+                            <div class="content">
+                                <div class="title">groß - 大的</div>
+                                <div class="subtitle">反义词：klein | 例句：Das ist ein großes Haus.</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">F</div>
+                            <div class="content">
+                                <div class="title">fleißig - 勤奋的</div>
+                                <div class="subtitle">反义词：faul | 例句：Er ist ein fleißiger Schüler.</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">Z</div>
+                            <div class="content">
+                                <div class="title">zufrieden - 满意的</div>
+                                <div class="subtitle">反义词：unzufrieden | 例句：Ich bin zufrieden.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>📖 词汇特色</h4>
+                    <ul>
+                        <li>100+形容词，A-Z完整覆盖</li>
+                        <li>每个词包含词义、反义词、例句</li>
+                        <li>按字母排序，方便查找</li>
+                        <li>支持搜索和筛选</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Listening Tab -->
+            <div id="listening" class="tab-content">
+                <div class="feature-section">
+                    <div class="feature-title">🎧 听力训练系统</div>
+                    <div class="feature-card">
+                        <h3>12个分级听力材料 (A1-B2)</h3>
+                        <p>对话、独白、公告、采访、讲座、新闻，多种题型</p>
+                        <div class="data-grid">
+                            <div class="data-item">
+                                <div class="label">A1级</div>
+                                <div class="value">3个材料</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">A2级</div>
+                                <div class="value">3个材料</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">B1级</div>
+                                <div class="value">3个材料</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">B2级</div>
+                                <div class="value">3个材料</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">🎯 题型类型</div>
+                    <div class="item-list">
+                        <div class="list-item">
+                            <div class="icon">✅</div>
+                            <div class="content">
+                                <div class="title">选择题</div>
+                                <div class="subtitle">从多个选项中选择正确答案</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">⚖️</div>
+                            <div class="content">
+                                <div class="title">判断题</div>
+                                <div class="subtitle">判断陈述是否正确</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">✍️</div>
+                            <div class="content">
+                                <div class="title">填空题</div>
+                                <div class="subtitle">填入合适的词语</div>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <div class="icon">💬</div>
+                            <div class="content">
+                                <div class="title">简答题</div>
+                                <div class="subtitle">用德语回答问题</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">📊 学习追踪</div>
+                    <div class="feature-card">
+                        <h3>完整的进度跟踪系统</h3>
+                        <p>听力次数、完成度、正确率、历史记录</p>
+                        <div class="feature-stats">
+                            <div class="stat-item">⏱️ 实时播放进度</div>
+                            <div class="stat-item">📈 自动评分系统</div>
+                            <div class="stat-item">📝 原文和词汇注释</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Speech Tab -->
+            <div id="speech" class="tab-content">
+                <div class="feature-section">
+                    <div class="feature-title">🎤 25位德国演讲者</div>
+                    <p style="color: #718096; margin-bottom: 16px; font-size: 14px;">涵盖政治、商业、学术、文化等多个领域的顶尖德语演讲者</p>
+
+                    <div class="speaker-card">
+                        <div class="speaker-avatar">M</div>
+                        <div class="speaker-info">
+                            <div class="speaker-name">Angela Merkel</div>
+                            <div class="speaker-title">前德国总理 · 政治家</div>
+                            <div class="speaker-tags">
+                                <span class="tag">政治演讲</span>
+                                <span class="tag">女性</span>
+                                <span class="tag">中级</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="speaker-card">
+                        <div class="speaker-avatar">S</div>
+                        <div class="speaker-info">
+                            <div class="speaker-name">Olaf Scholz</div>
+                            <div class="speaker-title">德国总理 · 政治家</div>
+                            <div class="speaker-tags">
+                                <span class="tag">政治演讲</span>
+                                <span class="tag">男性</span>
+                                <span class="tag">高级</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="speaker-card">
+                        <div class="speaker-avatar">K</div>
+                        <div class="speaker-info">
+                            <div class="speaker-name">Joe Kaeser</div>
+                            <div class="speaker-title">西门子前CEO · 商业领袖</div>
+                            <div class="speaker-tags">
+                                <span class="tag">商业演讲</span>
+                                <span class="tag">男性</span>
+                                <span class="tag">专家</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="speaker-card">
+                        <div class="speaker-avatar">G</div>
+                        <div class="speaker-info">
+                            <div class="speaker-name">Veronika Grimm</div>
+                            <div class="speaker-title">经济学家 · 学者</div>
+                            <div class="speaker-tags">
+                                <span class="tag">学术演讲</span>
+                                <span class="tag">女性</span>
+                                <span class="tag">高级</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="speaker-card">
+                        <div class="speaker-avatar">H</div>
+                        <div class="speaker-info">
+                            <div class="speaker-name">Frank-Walter Steinmeier</div>
+                            <div class="speaker-title">德国总统 · 政治家</div>
+                            <div class="speaker-tags">
+                                <span class="tag">政治演讲</span>
+                                <span class="tag">男性</span>
+                                <span class="tag">高级</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="speaker-card">
+                        <div class="speaker-avatar">B</div>
+                        <div class="speaker-info">
+                            <div class="speaker-name">Ursula von der Leyen</div>
+                            <div class="speaker-title">欧盟委员会主席 · 政治家</div>
+                            <div class="speaker-tags">
+                                <span class="tag">政治演讲</span>
+                                <span class="tag">女性</span>
+                                <span class="tag">高级</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="speaker-card">
+                        <div class="speaker-avatar">Z</div>
+                        <div class="speaker-info">
+                            <div class="speaker-name">Christian Lindner</div>
+                            <div class="speaker-title">德国财政部长 · 政治家</div>
+                            <div class="speaker-tags">
+                                <span class="tag">政治演讲</span>
+                                <span class="tag">男性</span>
+                                <span class="tag">中级</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="speaker-card">
+                        <div class="speaker-avatar">N</div>
+                        <div class="speaker-info">
+                            <div class="speaker-name">Annalena Baerbock</div>
+                            <div class="speaker-title">德国外交部长 · 政治家</div>
+                            <div class="speaker-tags">
+                                <span class="tag">政治演讲</span>
+                                <span class="tag">女性</span>
+                                <span class="tag">中级</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="speaker-card">
+                        <div class="speaker-avatar">D</div>
+                        <div class="speaker-info">
+                            <div class="speaker-name">Harald Lesch</div>
+                            <div class="speaker-title">物理学家 · 科学传播者</div>
+                            <div class="speaker-tags">
+                                <span class="tag">科学演讲</span>
+                                <span class="tag">男性</span>
+                                <span class="tag">高级</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="speaker-card">
+                        <div class="speaker-avatar">R</div>
+                        <div class="speaker-info">
+                            <div class="speaker-name">Richard David Precht</div>
+                            <div class="speaker-title">哲学家 · 作家</div>
+                            <div class="speaker-tags">
+                                <span class="tag">哲学演讲</span>
+                                <span class="tag">男性</span>
+                                <span class="tag">专家</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">📊 演讲者分类统计</div>
+                    <div class="data-grid">
+                        <div class="data-item">
+                            <div class="label">政治演讲</div>
+                            <div class="value">8 位</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="label">商业领袖</div>
+                            <div class="value">6 位</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="label">学术专家</div>
+                            <div class="value">5 位</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="label">文化人物</div>
+                            <div class="value">3 位</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="label">女性演讲者</div>
+                            <div class="value">10 位</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="label">男性演讲者</div>
+                            <div class="value">15 位</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">💡 演讲学习功能</div>
+                    <div class="feature-card">
+                        <h3>真实德语环境</h3>
+                        <p>学习最地道的德语表达和发音</p>
+                        <div class="feature-stats">
+                            <div class="stat-item">🎙️ 真实演讲素材</div>
+                            <div class="stat-item">📝 完整转录文本</div>
+                            <div class="stat-item">💬 中德对照翻译</div>
+                            <div class="stat-item">📚 重点词汇注释</div>
+                            <div class="stat-item">🎯 语法和文化注释</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>🌟 学习优势</h4>
+                    <ul>
+                        <li>接触母语者级别的德语</li>
+                        <li>学习地道的表达方式</li>
+                        <li>了解德国文化背景</li>
+                        <li>多种演讲类型：政治、商业、学术、TED</li>
+                        <li>难度分级：初级到专家</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Writing Tab -->
+            <div id="writing" class="tab-content">
+                <div class="feature-section">
+                    <div class="feature-title">✍️ 写作智能批改</div>
+                    <div class="feature-card">
+                        <h3>12个分级写作任务 (A1-B2)</h3>
+                        <p>邮件、作文、信件、报告、议论文，多类型覆盖</p>
+                        <div class="data-grid">
+                            <div class="data-item">
+                                <div class="label">A1级</div>
+                                <div class="value">3个任务</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">A2级</div>
+                                <div class="value">3个任务</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">B1级</div>
+                                <div class="value">3个任务</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">B2级</div>
+                                <div class="value">3个任务</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">🔍 智能批改功能</div>
+                    <div class="feature-card">
+                        <h3>基于规则的自动批改系统</h3>
+                        <p>无需API，本地实现，即时反馈</p>
+                        <div class="item-list">
+                            <div class="list-item">
+                                <div class="icon">📝</div>
+                                <div class="content">
+                                    <div class="title">语法检查</div>
+                                    <div class="subtitle">名词大写、动词变位、冠词使用</div>
+                                </div>
+                            </div>
+                            <div class="list-item">
+                                <div class="icon">✅</div>
+                                <div class="content">
+                                    <div class="title">拼写检查</div>
+                                    <div class="subtitle">常见错误识别</div>
+                                </div>
+                            </div>
+                            <div class="list-item">
+                                <div class="icon">📊</div>
+                                <div class="content">
+                                    <div class="title">多维度评分</div>
+                                    <div class="subtitle">语法、词汇、内容、连贯性</div>
+                                </div>
+                            </div>
+                            <div class="list-item">
+                                <div class="icon">💡</div>
+                                <div class="content">
+                                    <div class="title">详细反馈</div>
+                                    <div class="subtitle">错误说明、改进建议、改进版本</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">📖 写作模板</div>
+                    <div class="feature-card">
+                        <h3>3种常用写作模板</h3>
+                        <p>邮件、议论文、描述文结构说明和有用句型</p>
+                        <div class="feature-stats">
+                            <div class="stat-item">📧 邮件模板</div>
+                            <div class="stat-item">📝 议论文模板</div>
+                            <div class="stat-item">📄 描述文模板</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div id="analytics" class="tab-content">
+                <div class="feature-section">
+                    <div class="feature-title">📊 学习数据可视化</div>
+                    <div class="feature-card">
+                        <h3>完整的统计仪表盘</h3>
+                        <p>学习时间、活动分布、技能掌握度、成就系统</p>
+                        <div class="data-grid">
+                            <div class="data-item">
+                                <div class="label">总学习天数</div>
+                                <div class="value">动态统计</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">总学习时长</div>
+                                <div class="value">自动记录</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">平均每日</div>
+                                <div class="value">智能计算</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">当前连续</div>
+                                <div class="value">天数追踪</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">🎯 个性化学习路径</div>
+                    <div class="feature-card">
+                        <h3>智能诊断和推荐系统</h3>
+                        <p>根据学习数据生成个性化学习计划</p>
+                        <div class="item-list">
+                            <div class="list-item">
+                                <div class="icon">🔍</div>
+                                <div class="content">
+                                    <div class="title">学习诊断</div>
+                                    <div class="subtitle">技能水平分析、弱项识别</div>
+                                </div>
+                            </div>
+                            <div class="list-item">
+                                <div class="icon">💡</div>
+                                <div class="content">
+                                    <div class="title">智能推荐</div>
+                                    <div class="subtitle">基于数据的个性化推荐</div>
+                                </div>
+                            </div>
+                            <div class="list-item">
+                                <div class="icon">🗺️</div>
+                                <div class="content">
+                                    <div class="title">学习路径</div>
+                                    <div class="subtitle">词汇、语法、交际、考试准备</div>
+                                </div>
+                            </div>
+                            <div class="list-item">
+                                <div class="icon">🔓</div>
+                                <div class="content">
+                                    <div class="title">自适应解锁</div>
+                                    <div class="subtitle">阶段式学习设计</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section">
+                    <div class="feature-title">🏆 成就系统</div>
+                    <div class="feature-card">
+                        <h3>10个预设成就激励学习</h3>
+                        <div class="data-grid">
+                            <div class="data-item">
+                                <div class="label">🌱 初学者</div>
+                                <div class="value">完成第一天</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">🔥 坚持一周</div>
+                                <div class="value">连续7天</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">🏆 月度冠军</div>
+                                <div class="value">连续30天</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">⏱️ 学习达人</div>
+                                <div class="value">10小时</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>Aeryn-Deutsch</strong> - 专业德语学习App</p>
+            <p>从A1到C2 · AI对话练习 · 25位德国演讲者 · 100K+词汇</p>
+            <p>📅 更新日期: 2026-02-08 | 🚀 Beta测试准备中</p>
+            <div class="footer-links">
+                <a href="#overview" onclick="showTab('overview')">总览</a>
+                <a href="#ai-chat" onclick="showTab('ai-chat')">AI对话</a>
+                <a href="#subscription" onclick="showTab('subscription')">订阅</a>
+                <a href="#c2-path" onclick="showTab('c2-path')">C2路径</a>
+                <a href="#pomodoro" onclick="showTab('pomodoro')">番茄钟</a>
+                <a href="#testing" onclick="showTab('testing')">测试</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+
+            // Scroll to top of content
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Add touch feedback for mobile
+        document.querySelectorAll('.btn, .nav-tab, .feature-card, .speaker-card').forEach(element => {
+            element.addEventListener('touchstart', function() {
+                this.style.opacity = '0.7';
+            });
+            element.addEventListener('touchend', function() {
+                this.style.opacity = '1';
+            });
+        });
+    </script>
+</body>
+</html>

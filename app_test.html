@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Aeryn-Deutsch - 德语学习</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --primary: #667EEA;
+            --secondary: #764BA2;
+            --der: #3B82F6;
+            --die: #EC4899;
+            --das: #10B981;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --background: #F9FAFB;
+            --surface: #FFFFFF;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --border: #E5E7EB;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+            background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* 手机模拟器框架 */
+        .phone-frame {
+            width: 100%;
+            max-width: 375px;
+            height: 100vh;
+            max-height: 812px;
+            background: var(--background);
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 状态栏 */
+        .status-bar {
+            height: 44px;
+            background: var(--surface);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .status-bar.left {
+            display: flex;
+            gap: 4px;
+        }
+
+        .status-bar.right {
+            display: flex;
+            gap: 6px;
+        }
+
+        /* 主内容区 */
+        .app-content {
+            height: calc(100% - 44px - 70px);
+            overflow-y: auto;
+            overflow-x: hidden;
+            background: var(--background);
+        }
+
+        /* 页面容器 */
+        .page {
+            display: none;
+            min-height: 100%;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 底部导航 */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: var(--surface);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid var(--border);
+            padding-bottom: env(safe-area-inset-bottom, 10px);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: 8px 8px;
+            transition: all 0.2s;
+            color: var(--text-secondary);
+            flex: 1;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-item:active {
+            transform: scale(0.95);
+        }
+
+        .nav-icon {
+            font-size: 24px;
+        }
+
+        .nav-label {
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        /* 通用组件 */
+        .app-bar {
+            background: var(--surface);
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .app-bar-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 16px;
+            margin: 16px 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .progress-ring {
+            width: 120px;
+            height: 120px;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .progress-ring-circle {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring-bg {
+            fill: none;
+            stroke: var(--border);
+            stroke-width: 8;
+        }
+
+        .progress-ring-progress {
+            fill: none;
+            stroke: var(--der);
+            stroke-width: 8;
+            stroke-linecap: round;
+            stroke-dasharray: 314;
+            stroke-dashoffset: 78;
+            transition: stroke-dashoffset 0.5s ease;
+        }
+
+        .progress-ring-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .progress-ring-level {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--der);
+        }
+
+        .progress-ring-percent {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* 首页样式 */
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+        }
+
+        .task-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .task-icon.completed {
+            background: var(--success);
+            color: white;
+        }
+
+        .task-icon.pending {
+            background: var(--border);
+            color: var(--text-secondary);
+        }
+
+        .task-text {
+            flex: 1;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 0 20px;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card:active {
+            transform: scale(0.95);
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .feature-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .feature-subtitle {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        /* Flashcard样式 */
+        .flashcard {
+            perspective: 1000px;
+            height: 300px;
+            margin: 20px;
+            cursor: pointer;
+        }
+
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-front,
+        .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .flashcard-front {
+            background: linear-gradient(135deg, var(--der) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .flashcard-back {
+            background: var(--surface);
+            transform: rotateY(180deg);
+            color: var(--text-primary);
+        }
+
+        .flashcard-word {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .flashcard-hint {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .flashcard-meaning {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .flashcard-example {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        .flashcard-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-warning {
+            background: var(--warning);
+            color: white;
+        }
+
+        .btn-error {
+            background: var(--error);
+            color: white;
+        }
+
+        /* AI对话样式 */
+        .chat-container {
+            height: calc(100% - 140px);
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        .chat-message {
+            margin-bottom: 16px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .chat-message.user {
+            flex-direction: row-reverse;
+        }
+
+        .chat-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .chat-avatar.ai {
+            background: linear-gradient(135deg, var(--der) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .chat-avatar.user {
+            background: var(--border);
+        }
+
+        .chat-bubble {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .chat-message.ai .chat-bubble {
+            background: var(--surface);
+            color: var(--text-primary);
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-message.user .chat-bubble {
+            background: var(--primary);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-input-area {
+            position: absolute;
+            bottom: 70px;
+            left: 0;
+            right: 0;
+            padding: 12px 16px;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 8px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            font-size: 14px;
+            background: var(--background);
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .send-button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        /* 番茄时钟样式 */
+        .pomodoro-timer {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .pomodoro-ring {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .pomodoro-ring-circle {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .pomodoro-ring-bg {
+            fill: none;
+            stroke: var(--border);
+            stroke-width: 12;
+        }
+
+        .pomodoro-ring-progress {
+            fill: none;
+            stroke: var(--primary);
+            stroke-width: 12;
+            stroke-linecap: round;
+            stroke-dasharray: 565;
+            stroke-dashoffset: 0;
+            transition: stroke-dashoffset 1s linear;
+        }
+
+        .pomodoro-time {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .pomodro-time-display {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .pomodoro-status {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+
+        .pomodoro-controls {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .pomodoro-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .pomodoro-btn:active {
+            transform: scale(0.95);
+        }
+
+        .pomodoro-btn.primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .pomodoro-btn.secondary {
+            background: var(--surface);
+            color: var(--text-primary);
+        }
+
+        .pomodoro-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 20px;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        /* 订阅样式 */
+        .trial-banner {
+            margin: 20px;
+            padding: 20px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .trial-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .trial-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .trial-features {
+            text-align: left;
+            margin: 16px 0;
+        }
+
+        .trial-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 8px 0;
+            font-size: 14px;
+        }
+
+        .plan-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 16px;
+            margin: 12px 20px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .plan-card:active {
+            transform: scale(0.98);
+        }
+
+        .plan-card.best-value {
+            border-color: var(--primary);
+            position: relative;
+        }
+
+        .plan-badge {
+            position: absolute;
+            top: -10px;
+            right: 16px;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .plan-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .plan-price {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 12px 0;
+        }
+
+        .plan-discount {
+            display: inline-block;
+            background: var(--error);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .plan-features {
+            margin: 12px 0;
+        }
+
+        .plan-feature {
+            font-size: 14px;
+            color: var(--text-primary);
+            margin: 6px 0;
+        }
+
+        /* 语法样式 */
+        .grammar-section {
+            margin-bottom: 24px;
+        }
+
+        .grammar-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            padding: 0 20px;
+        }
+
+        .verb-table {
+            background: var(--surface);
+            border-radius: 16px;
+            margin: 0 20px;
+            overflow: hidden;
+        }
+
+        .verb-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .verb-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+
+        .verb-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .gender-color {
+            font-weight: 600;
+        }
+
+        .gender-der { color: var(--der); }
+        .gender-die { color: var(--die); }
+        .gender-das { color: var(--das); }
+
+        /* 演讲样式 */
+        .speech-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 16px;
+            margin: 12px 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .speech-card:active {
+            transform: scale(0.98);
+        }
+
+        .speech-speaker {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .speech-title {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .speech-level {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Toast通知 */
+        .toast {
+            position: fixed;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--text-primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* 场景选择器 */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 0 20px;
+        }
+
+        .scenario-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .scenario-card:active {
+            transform: scale(0.95);
+        }
+
+        .scenario-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .scenario-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 360px) {
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            body {
+                padding: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-frame">
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <div class="left">
+                <span id="currentTime">9:41</span>
+            </div>
+            <div class="right">
+                <span>📶</span>
+                <span>📡</span>
+                <span>🔋</span>
+            </div>
+        </div>
+
+        <!-- 主内容区 -->
+        <div class="app-content">
+            <!-- 首页 -->
+            <div id="home-page" class="page active">
+                <div class="app-bar">
+                    <div class="app-bar-title">Aeryn-Deutsch</div>
+                </div>
+
+                <!-- 进度环 -->
+                <div class="card" style="text-align: center;">
+                    <div class="progress-ring">
+                        <svg class="progress-ring-circle">
+                            <circle class="progress-ring-bg" cx="60" cy="60" r="50"></circle>
+                            <circle class="progress-ring-progress" cx="60" cy="60" r="50"></circle>
+                        </svg>
+                        <div class="progress-ring-text">
+                            <div class="progress-ring-level">B1</div>
+                            <div class="progress-ring-percent">75%</div>
+                        </div>
+                    </div>
+                    <div style="color: var(--text-secondary); font-size: 14px;">当前德语水平</div>
+                </div>
+
+                <!-- 今日任务 -->
+                <div class="card">
+                    <div class="card-title">📚 今日实战</div>
+                    <div class="task-item">
+                        <div class="task-icon completed">✓</div>
+                        <div class="task-text">完成 20 题，正确 18 题</div>
+                    </div>
+                    <div class="task-item">
+                        <div class="task-icon completed">✓</div>
+                        <div class="task-text">准确率 90%</div>
+                    </div>
+                    <div class="task-item">
+                        <div class="task-icon pending">○</div>
+                        <div class="task-text">45 词待复习</div>
+                    </div>
+                    <div class="task-item">
+                        <div class="task-icon completed">✓</div>
+                        <div class="task-text">连续学习 7 天</div>
+                    </div>
+                    <div class="task-item">
+                        <div class="task-icon completed">✓</div>
+                        <div class="task-text">累计学习 30 天</div>
+                    </div>
+                </div>
+
+                <!-- 功能入口 -->
+                <div style="padding: 0 20px; margin-bottom: 20px;">
+                    <div style="font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text-primary);">快速开始</div>
+                    <div class="feature-grid">
+                        <div class="feature-card" onclick="showPage('vocabulary')">
+                            <div class="feature-icon">📖</div>
+                            <div class="feature-title">词汇</div>
+                            <div class="feature-subtitle">Vocabulary</div>
+                        </div>
+                        <div class="feature-card" onclick="showPage('grammar')">
+                            <div class="feature-icon">📝</div>
+                            <div class="feature-title">语法</div>
+                            <div class="feature-subtitle">Grammar</div>
+                        </div>
+                        <div class="feature-card" onclick="showPage('chat')">
+                            <div class="feature-icon">🤖</div>
+                            <div class="feature-title">AI对话</div>
+                            <div class="feature-subtitle">Chat</div>
+                        </div>
+                        <div class="feature-card" onclick="showPage('pomodoro')">
+                            <div class="feature-icon">🍅</div>
+                            <div class="feature-title">番茄钟</div>
+                            <div class="feature-subtitle">Timer</div>
+                        </div>
+                        <div class="feature-card" onclick="showPage('speech')">
+                            <div class="feature-icon">🎙️</div>
+                            <div class="feature-title">演讲</div>
+                            <div class="feature-subtitle">Speech</div>
+                        </div>
+                        <div class="feature-card" onclick="showPage('subscription')">
+                            <div class="feature-icon">💳</div>
+                            <div class="feature-title">订阅</div>
+                            <div class="feature-subtitle">Premium</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 词汇页面 -->
+            <div id="vocabulary-page" class="page">
+                <div class="app-bar">
+                    <div class="app-bar-title">📚 词汇学习</div>
+                </div>
+
+                <div class="flashcard" onclick="flipCard(this)">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="flashcard-word">das Buch</div>
+                            <div class="flashcard-hint">点击查看释义</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="flashcard-meaning">书 (中性)</div>
+                            <div class="flashcard-example">Ich lese ein Buch.<br>我在读书。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard-buttons" style="padding: 0 20px;">
+                    <button class="btn btn-error" onclick="showToast('已标记为困难')">😓 困难</button>
+                    <button class="btn btn-warning" onclick="showToast('需要复习')">🤔 模糊</button>
+                    <button class="btn btn-success" onclick="showToast('已掌握！')">😊 简单</button>
+                </div>
+
+                <div style="padding: 20px; text-align: center; color: var(--text-secondary); font-size: 14px;">
+                    今日复习进度: 15/50
+                </div>
+            </div>
+
+            <!-- 语法页面 -->
+            <div id="grammar-page" class="page">
+                <div class="app-bar">
+                    <div class="app-bar-title">📖 语法学习</div>
+                </div>
+
+                <div class="grammar-section">
+                    <div class="grammar-title">名词性别</div>
+                    <div class="card">
+                        <div style="margin-bottom: 12px;">
+                            <span class="gender-color gender-der">der</span> Hund (狗) - 阳性
+                        </div>
+                        <div style="margin-bottom: 12px;">
+                            <span class="gender-color gender-die">die</span> Katze (猫) - 阴性
+                        </div>
+                        <div>
+                            <span class="gender-color gender-das">das</span> Kind (孩子) - 中性
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grammar-section">
+                    <div class="grammar-title">动词变位 - sein (是)</div>
+                    <div class="verb-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>人称</th>
+                                    <th>变位</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ich (我)</td>
+                                    <td><strong>bin</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>du (你)</td>
+                                    <td><strong>bist</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>er/sie/es (他/她/它)</td>
+                                    <td><strong>ist</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>wir (我们)</td>
+                                    <td><strong>sind</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>ihr (你们)</td>
+                                    <td><strong>seid</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>sie/Sie (他们/您)</td>
+                                    <td><strong>sind</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="grammar-section">
+                    <div class="grammar-title">名词格变</div>
+                    <div class="verb-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>格</th>
+                                    <th><span class="gender-color gender-der">der</span></th>
+                                    <th><span class="gender-color gender-die">die</span></th>
+                                    <th><span class="gender-color gender-das">das</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>N (第一格)</td>
+                                    <td>der</td>
+                                    <td>die</td>
+                                    <td>das</td>
+                                </tr>
+                                <tr>
+                                    <td>A (第四格)</td>
+                                    <td>den</td>
+                                    <td>die</td>
+                                    <td>das</td>
+                                </tr>
+                                <tr>
+                                    <td>D (第三格)</td>
+                                    <td>dem</td>
+                                    <td>der</td>
+                                    <td>dem</td>
+                                </tr>
+                                <tr>
+                                    <td>G (第二格)</td>
+                                    <td>des</td>
+                                    <td>der</td>
+                                    <td>des</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI对话页面 -->
+            <div id="chat-page" class="page">
+                <div class="app-bar">
+                    <div class="app-bar-title">🤖 AI对话练习</div>
+                </div>
+
+                <div class="chat-container" id="chatContainer">
+                    <div class="chat-message ai">
+                        <div class="chat-avatar ai">🤖</div>
+                        <div class="chat-bubble">Hallo! 你好！我是你的德语AI助手。我们可以一起练习德语对话。你想聊什么话题？</div>
+                    </div>
+                </div>
+
+                <div class="chat-input-area">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="输入德语消息..." onkeypress="handleChatKeypress(event)">
+                    <button class="send-button" onclick="sendMessage()">➤</button>
+                </div>
+            </div>
+
+            <!-- 番茄时钟页面 -->
+            <div id="pomodoro-page" class="page">
+                <div class="app-bar">
+                    <div class="app-bar-title">🍅 番茄时钟</div>
+                </div>
+
+                <div class="pomodoro-timer">
+                    <div class="pomodoro-ring">
+                        <svg class="pomodoro-ring-circle">
+                            <circle class="pomodoro-ring-bg" cx="100" cy="100" r="90"></circle>
+                            <circle class="pomodoro-ring-progress" id="timerProgress" cx="100" cy="100" r="90"></circle>
+                        </svg>
+                        <div class="pomodoro-time">
+                            <div class="pomodro-time-display" id="timeDisplay">25:00</div>
+                            <div class="pomodoro-status" id="timerStatus">专注学习</div>
+                        </div>
+                    </div>
+
+                    <div class="pomodoro-controls">
+                        <button class="pomodoro-btn primary" id="startBtn" onclick="toggleTimer()">▶</button>
+                        <button class="pomodoro-btn secondary" onclick="resetTimer()">↺</button>
+                    </div>
+                </div>
+
+                <div class="pomodoro-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="todayCount">3</div>
+                        <div class="stat-label">今日完成</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalCount">87</div>
+                        <div class="stat-label">总计番茄</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="streakCount">7</div>
+                        <div class="stat-label">连续天数</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">📊 今日目标</div>
+                    <div style="text-align: center; color: var(--text-secondary);">
+                        根据您的 B1 水平，建议完成 <strong style="color: var(--primary);">6</strong> 个番茄
+                    </div>
+                    <div style="margin-top: 12px;">
+                        <div style="background: var(--border); height: 8px; border-radius: 4px; overflow: hidden;">
+                            <div style="background: var(--primary); height: 100%; width: 50%; border-radius: 4px;"></div>
+                        </div>
+                        <div style="text-align: center; font-size: 12px; color: var(--text-secondary); margin-top: 4px;">3/6 完成</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 演讲页面 -->
+            <div id="speech-page" class="page">
+                <div class="app-bar">
+                    <div class="app-bar-title">🎙️ 德国演讲</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">25位德国演讲者</div>
+                    <div style="color: var(--text-secondary); font-size: 14px;">真实演讲素材，从政治家到学者</div>
+                </div>
+
+                <div class="speech-card" onclick="showToast('正在加载演讲...')">
+                    <div class="speech-speaker">Angela Merkel</div>
+                    <div class="speech-title">前德国总理演讲集</div>
+                    <div class="speech-level">C1</div>
+                </div>
+
+                <div class="speech-card" onclick="showToast('正在加载演讲...')">
+                    <div class="speech-speaker">Albert Einstein</div>
+                    <div class="speech-title">科学与和平演讲</div>
+                    <div class="speech-level">B2</div>
+                </div>
+
+                <div class="speech-card" onclick="showToast('正在加载演讲...')">
+                    <div class="speech-speaker">Johann Wolfgang von Goethe</div>
+                    <div class="speech-title">文学作品选读</div>
+                    <div class="speech-level">C2</div>
+                </div>
+
+                <div class="speech-card" onclick="showToast('正在加载演讲...')">
+                    <div class="speech-speaker">Immanuel Kant</div>
+                    <div class="speech-title">哲学思想演讲</div>
+                    <div class="speech-level">C2</div>
+                </div>
+            </div>
+
+            <!-- 订阅页面 -->
+            <div id="subscription-page" class="page">
+                <div class="app-bar">
+                    <div class="app-bar-title">💳 订阅方案</div>
+                </div>
+
+                <div class="trial-banner">
+                    <div class="trial-icon">🎁</div>
+                    <div class="trial-title">7天免费试用</div>
+                    <div>体验所有高级功能</div>
+                    <div class="trial-features">
+                        <div class="trial-feature">✅ 高级AI对话 (GPT-4/Claude/Gemini/DeepSeek)</div>
+                        <div class="trial-feature">✅ 无限对话次数</div>
+                        <div class="trial-feature">✅ 无广告体验</div>
+                    </div>
+                    <button class="btn" style="background: white; color: var(--primary);" onclick="showToast('🎉 试用已开始！')">开始免费试用</button>
+                </div>
+
+                <div style="padding: 20px 0; font-size: 18px; font-weight: 600; color: var(--text-primary);">选择订阅方案</div>
+
+                <div class="plan-card" onclick="showToast('已选择月度订阅')">
+                    <div class="plan-name">
+                        📅 月度订阅
+                    </div>
+                    <div class="plan-price">€10.00/月</div>
+                    <div class="plan-features">
+                        <div class="plan-feature">✅ 高级AI对话</div>
+                        <div class="plan-feature">✅ 无限对话次数</div>
+                        <div class="plan-feature">✅ 无广告体验</div>
+                    </div>
+                </div>
+
+                <div class="plan-card best-value" onclick="showToast('已选择季度订阅 - 节省33%')">
+                    <div class="plan-badge">推荐</div>
+                    <div class="plan-name">
+                        📆 季度订阅
+                    </div>
+                    <div class="plan-price">
+                        €20.00/季
+                        <span class="plan-discount">节省33%</span>
+                    </div>
+                    <div class="plan-features">
+                        <div class="plan-feature">✅ 高级AI对话</div>
+                        <div class="plan-feature">✅ 无限对话次数</div>
+                        <div class="plan-feature">✅ 无广告体验</div>
+                        <div class="plan-feature">🎁 季度报告</div>
+                    </div>
+                </div>
+
+                <div class="plan-card" onclick="showToast('已选择年度订阅 - 节省42%')">
+                    <div class="plan-name">
+                        📅 年度订阅
+                    </div>
+                    <div class="plan-price">
+                        €70.00/年
+                        <span class="plan-discount">节省42%</span>
+                    </div>
+                    <div class="plan-features">
+                        <div class="plan-feature">✅ 高级AI对话</div>
+                        <div class="plan-feature">✅ 无限对话次数</div>
+                        <div class="plan-feature">✅ 无广告体验</div>
+                        <div class="plan-feature">🎁 月度学习报告</div>
+                        <div class="plan-feature">🎁 专属学习资料</div>
+                    </div>
+                </div>
+
+                <div class="plan-card" onclick="showToast('已选择家庭组订阅 - 5人共享')">
+                    <div class="plan-name">
+                        👨‍👩‍👧‍👦 家庭组订阅
+                    </div>
+                    <div class="plan-price">
+                        €150.00/年
+                        <span class="plan-discount">每人€2.5/月</span>
+                    </div>
+                    <div class="plan-features">
+                        <div class="plan-feature">✅ 5个账户共享</div>
+                        <div class="plan-feature">✅ 高级AI对话</div>
+                        <div class="plan-feature">✅ 无限对话次数</div>
+                        <div class="plan-feature">✅ 无广告体验</div>
+                        <div class="plan-feature">🎁 家庭学习报告</div>
+                        <div class="plan-feature">🎁 家长监控面板</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部导航 -->
+        <div class="bottom-nav">
+            <div class="nav-item active" onclick="showPage('home')">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-label">主页</div>
+            </div>
+            <div class="nav-item" onclick="showPage('vocabulary')">
+                <div class="nav-icon">📚</div>
+                <div class="nav-label">词汇</div>
+            </div>
+            <div class="nav-item" onclick="showPage('grammar')">
+                <div class="nav-icon">📖</div>
+                <div class="nav-label">语法</div>
+            </div>
+            <div class="nav-item" onclick="showPage('chat')">
+                <div class="nav-icon">🤖</div>
+                <div class="nav-label">对话</div>
+            </div>
+            <div class="nav-item" onclick="showPage('speech')">
+                <div class="nav-icon">🎙️</div>
+                <div class="nav-label">演讲</div>
+            </div>
+            <div class="nav-item" onclick="showPage('pomodoro')">
+                <div class="nav-icon">🍅</div>
+                <div class="nav-label">番茄</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast通知 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // 更新时间
+        function updateTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            document.getElementById('currentTime').textContent = `${hours}:${minutes}`;
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        // 页面切换
+        function showPage(pageName) {
+            // 隐藏所有页面
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // 显示目标页面
+            const targetPage = document.getElementById(pageName + '-page');
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+
+            // 更新导航状态 - 高亮当前点击的导航项
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                const onclickAttr = item.getAttribute('onclick');
+                if (onclickAttr && onclickAttr.includes(`'${pageName}'`)) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        // Toast通知
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        // Flashcard翻转
+        function flipCard(card) {
+            card.classList.toggle('flipped');
+        }
+
+        // 番茄时钟
+        let timerInterval = null;
+        let timerRunning = false;
+        let timeLeft = 25 * 60; // 25分钟
+        const totalTime = 25 * 60;
+
+        function toggleTimer() {
+            const btn = document.getElementById('startBtn');
+            if (timerRunning) {
+                clearInterval(timerInterval);
+                timerRunning = false;
+                btn.textContent = '▶';
+            } else {
+                timerInterval = setInterval(updateTimer, 1000);
+                timerRunning = true;
+                btn.textContent = '⏸';
+            }
+        }
+
+        function updateTimer() {
+            if (timeLeft > 0) {
+                timeLeft--;
+                updateTimerDisplay();
+            } else {
+                clearInterval(timerInterval);
+                timerRunning = false;
+                document.getElementById('startBtn').textContent = '▶';
+                showToast('🎉 番茄钟完成！休息一下吧~');
+                document.getElementById('todayCount').textContent = parseInt(document.getElementById('todayCount').textContent) + 1;
+            }
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timeDisplay').textContent =
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            // 更新进度环
+            const progress = document.getElementById('timerProgress');
+            const circumference = 565;
+            const offset = circumference * (1 - timeLeft / totalTime);
+            progress.style.strokeDashoffset = offset;
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerRunning = false;
+            timeLeft = 25 * 60;
+            updateTimerDisplay();
+            document.getElementById('startBtn').textContent = '▶';
+        }
+
+        // AI对话
+        const aiResponses = [
+            "Sehr gut! 你的德语越来越好了。继续练习！",
+            "Ja, das ist richtig! 你说得对。",
+            "Interessant! 有意思的表达方式。",
+            "Genau! 完全正确！",
+            "Gut gemacht! 做得好！",
+            "Noch eine Frage? 还有什么问题吗？",
+            "Das verstehe ich. 我明白了。"
+        ];
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // 添加用户消息
+            addChatMessage(message, 'user');
+            input.value = '';
+
+            // 模拟AI响应
+            setTimeout(() => {
+                const response = aiResponses[Math.floor(Math.random() * aiResponses.length)];
+                addChatMessage(response, 'ai');
+            }, 1000);
+        }
+
+        function addChatMessage(text, type) {
+            const container = document.getElementById('chatContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${type}`;
+            messageDiv.innerHTML = `
+                <div class="chat-avatar ${type}">${type === 'ai' ? '🤖' : '👤'}</div>
+                <div class="chat-bubble">${text}</div>
+            `;
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function handleChatKeypress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // 初始化
+        updateTimerDisplay();
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+name: aeryn_deutsch
+description: "Aeryn-Deutsch: Intelligent German Learning System"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # UI & State Management
+  cupertino_icons: ^1.0.6
+  provider: ^6.1.5+1
+  riverpod: ^2.4.9
+  flutter_riverpod: ^2.4.9
+
+  # Database & Storage
+  path_provider: ^2.1.1
+  shared_preferences: ^2.2.2
+
+  # Network & API
+  http: ^1.1.2
+  dio: ^5.4.0
+  connectivity_plus: ^2.3.9
+
+  # NLP & AI
+  flutter_tts: ^3.8.3
+  speech_to_text: ^6.5.1
+  record: ^5.0.4
+  audio_session: ^0.1.18
+
+  # RSS & News
+  html: ^0.15.4
+
+  # Utilities
+  intl: ^0.17.0
+  logger: ^2.0.2+1
+  uuid: ^4.2.2
+  collection: ^1.18.0
+
+  # Error Tracking
+  sentry_flutter: ^8.0.0
+
+  # Widgets
+  flutter_widget_from_html: ^0.14.0
+  cached_network_image: ^3.3.0
+  shimmer: ^3.0.0
+  sqflite: ^2.4.2
+  path: ^1.9.1
+  path_provider_linux: ^2.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/audio/
+    - assets/data/
+
+  fonts:
+    - family: NotoSans
+      fonts:
+        - asset: assets/fonts/NotoSans-Regular.ttf
+        - asset: assets/fonts/NotoSans-Bold.ttf
+          weight: 700

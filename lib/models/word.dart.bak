@@ -1,0 +1,712 @@
+import 'package:flutter/material.dart';
+import 'package:record/record.dart';
+import 'package:audio_session/audio_session.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+import 'dart:math';
+
+/// 口语输出系统 - Oral Production System
+///
+/// C2级别要求：在任何话题上都能流利、准确地表达
+/// 覆盖：学术、医疗、政治、冲突、日常等场景
+class OralProductionSystem {
+  final AudioRecorder _recorder = AudioRecorder();
+  final Random _random = Random();
+
+  /// 开始录音
+  Future<String> startRecording() async {
+    try {
+      // 检查权限
+      if (await _recorder.hasPermission()) {
+        final directory = await getTemporaryDirectory();
+        final path = '${directory.path}/recording_${DateTime.now().millisecondsSinceEpoch}.m4a';
+
+        await _recorder.start(
+          const RecordConfig(
+            encoder: AudioEncoder.aacLc,
+            bitRate: 128000,
+            sampleRate: 44100,
+          ),
+          path: path,
+        );
+
+        return path;
+      }
+    } catch (e) {
+      debugPrint('录音启动失败: $e');
+    }
+    return '';
+  }
+
+  /// 停止录音
+  Future<String?> stopRecording() async {
+    try {
+      final path = await _recorder.stop();
+      return path;
+    } catch (e) {
+      debugPrint('录音停止失败: $e');
+      return null;
+    }
+  }
+
+  /// 生成口语任务
+  OralTask generateTask({
+    required ScenarioType scenarioType,
+    required CEFRLevel level,
+  }) {
+    switch (scenarioType) {
+      case ScenarioType.academic:
+        return _generateAcademicTask(level);
+      case ScenarioType.medical:
+        return _generateMedicalTask(level);
+      case ScenarioType.political:
+        return _generatePoliticalTask(level);
+      case ScenarioType.conflict:
+        return _generateConflictTask(level);
+      case ScenarioType.jobInterview:
+        return _generateJobInterviewTask(level);
+      case ScenarioType.casual:
+        return _generateCasualTask(level);
+    }
+  }
+
+  /// 学术场景任务生成
+  OralTask _generateAcademicTask(CEFRLevel level) {
+    final academicTopics = [
+      'Klimawandel und erneuerbare Energien',
+      'Künstliche Intelligenz in der Medizin',
+      'Globalisierung und ihre Auswirkungen',
+      'Demokratie im digitalen Zeitalter',
+      'Bildungssystemreform',
+    ];
+
+    final topic = academicTopics[_random.nextInt(academicTopics.length)];
+
+    return OralTask(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      scenarioType: ScenarioType.academic,
+      level: level,
+      title: 'Akademische Diskussion: $topic',
+      description: '你将在一个学术研讨会上就"$topic"进行3分钟的即兴发言。',
+      context: _generateAcademicContext(topic),
+      targetLanguage: _generateAcademicTarget(topic),
+      keyVocabulary: _getAcademicVocabulary(topic),
+      grammarFocus: ['Nominalisierung', 'Passiv', 'Funktionsverbgefüge', 'Akademische Ausdrücke'],
+      timeLimitMinutes: 3,
+      difficultyFactors: [
+        DifficultyFactor.abstract,
+        DifficultyFactor.specialized,
+        DifficultyFactor.structural,
+      ],
+      evaluationCriteria: _getAcademicEvaluationCriteria(),
+    );
+  }
+
+  /// 医疗场景任务生成
+  OralTask _generateMedicalTask(CEFRLevel level) {
+    final symptoms = [
+      'Kopfschmerzen und Übelkeit',
+      'Bauchschmerzen und Fieber',
+      'Husten und Atemnot',
+      'Rückenschmerzen',
+      'Allergische Reaktion',
+    ];
+
+    final symptom = symptoms[_random.nextInt(symptoms.length)];
+
+    return OralTask(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      scenarioType: ScenarioType.medical,
+      level: level,
+      title: 'Arztbesuch: Symptome beschreiben',
+      description: '你在德国看病，需要向医生描述你的症状："$symptom"',
+      context: '''
+        Sie sind beim Arzt. Sagen Sie:
+        1. Was haben Sie für Beschwerden?
+        2. Seit wann haben Sie diese Symptome?
+        3. Wie stark sind die Schmerzen (1-10)?
+        4. Haben Sie Vorerkrankungen?
+        5. Nehmen Sie Medikamente?
+      ''',
+      targetLanguage: _generateMedicalTarget(symptom),
+      keyVocabulary: [
+        'der Schmerz', 'das Symptom', 'beschreiben', 'seit',
+        'die Übelkeit', 'das Fieber', 'der Husten', 'die Atemnot',
+        'Vorerkrankung', 'Medikamente einnehmen', 'verschreiben',
+      ],
+      grammarFocus: ['Perfekt', 'Modalverben', 'Reflexivverben'],
+      timeLimitMinutes: 2,
+      difficultyFactors: [
+        DifficultyFactor.precise,
+        DifficultyFactor.personal,
+      ],
+      evaluationCriteria: _getMedicalEvaluationCriteria(),
+    );
+  }
+
+  /// 政治场景任务生成
+  OralTask _generatePoliticalTask(CEFRLevel level) {
+    final topics = [
+      'Energiepolitik und Wärmepumpenpflicht',
+      'Migrationspolitik',
+      'Bildung und Chancengleichheit',
+      'Rüstungsexporte',
+      'Europäische Integration',
+    ];
+
+    final topic = topics[_random.nextInt(topics.length)];
+
+    return OralTask(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      scenarioType: ScenarioType.political,
+      level: level,
+      title: 'Politische Diskussion: $topic',
+      description: '在一个政治讨论节目中，你需要就"$topic"阐述你的观点。',
+      context: _generatePoliticalContext(topic),
+      targetLanguage: _generatePoliticalTarget(topic),
+      keyVocabulary: _getPoliticalVocabulary(topic),
+      grammarFocus: ['Konjunktiv II', 'Frgewichtige Ausdrücke', 'Nominalisierung'],
+      timeLimitMinutes: 4,
+      difficultyFactors: [
+        DifficultyFactor.controversial,
+        DifficultyFactor.abstract,
+        DifficultyFactor.persuasive,
+      ],
+      evaluationCriteria: _getPoliticalEvaluationCriteria(),
+    );
+  }
+
+  /// 冲突解决场景任务生成
+  OralTask _generateConflictTask(CEFRLevel level) {
+    final conflicts = [
+      {
+        'scenario': 'Nachbar Lärm',
+        'context': 'Ihr Nachbar macht jeden Abend bis 2 Uhr morgens Lärm. Sie haben ihn schon dreifach höflich gebeten, aber er ignoriert Sie.',
+        'goal': 'Beschwerde vorbringen und Lösung fordern',
+      },
+      {
+        'scenario': 'Gestrige Kellnerin',
+        'context': 'Im Restaurant wurden Sie sehr unfreundlich bedient und die Rechnung war falsch. Sie möchten mit dem Manager sprechen.',
+        'goal': 'Problem schildern und Entschädigung verlangen',
+      },
+      {
+        'scenario': 'Vermieter increased Miete',
+        'context': 'Ihr Vermieter will die Miete um 20% erhöhen, was in Ihrem Bereich illegal ist.',
+        'goal': 'Rechtlich einwandfrei argumentieren',
+      },
+    ];
+
+    final conflict = conflicts[_random.nextInt(conflicts.length)];
+
+    return OralTask(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      scenarioType: ScenarioType.conflict,
+      level: level,
+      title: 'Konfliktlösung: ${conflict['scenario']}',
+      description: conflict['goal'] as String,
+      context: conflict['context'] as String,
+      targetLanguage: '''
+        Sagen Sie:
+        1. Was ist das Problem? (sachlich)
+        2. Wie haben Sie sich bereits bemüht?
+        3. Was erwarten Sie als Lösung?
+        4. Bleiben Sie höflich aber bestimmt
+
+        Verwenden Sie:
+        - "Ich verstehe, aber..."
+        - "Ich fordere..."
+        - "Lassen Sie uns eine Lösung finden..."
+      ''',
+      keyVocabulary: [
+        'der Konflikt', 'die Beschwerde', 'unzumutbar', 'ignorieren',
+        'die Lösung', 'der Kompromiss', 'höflich aber bestimmt',
+        'rechtlich', 'unfreundlich', 'die Entschädigung',
+      ],
+      grammarFocus: ['Konjunktiv II', 'Förmliche Sprache', 'Strukturierte Argumentation'],
+      timeLimitMinutes: 3,
+      difficultyFactors: [
+        DifficultyFactor.emotional,
+        DifficultyFactor.persuasive,
+        DifficultyFactor.sensitive,
+      ],
+      evaluationCriteria: _getConflictEvaluationCriteria(),
+    );
+  }
+
+  /// 求职面试场景
+  OralTask _generateJobInterviewTask(CEFRLevel level) {
+    final positions = [
+      'Software Engineer bei einem Startup in Berlin',
+      'Projektmanagerin bei einer Agentur',
+      'Marketing Assistent bei einem mittelständischen Unternehmen',
+    ];
+
+    final position = positions[_random.nextInt(positions.length)];
+
+    return OralTask(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      scenarioType: ScenarioType.jobInterview,
+      level: level,
+      title: 'Vorstellungsgespräch',
+      description: '你正在面试职位：$position',
+      context: '''
+        Der Personalchef fragt: "Erzählen Sie mir bitte über sich selbst und warum Sie sich für diese Position interessieren."
+
+        Antworten Sie auf Deutsch:
+        1. Ihre Ausbildung und Erfahrung
+        2. Ihre Stärken
+        3. Warum dieses Unternehmen?
+        4. Ihre Gehaltsvorstellung
+      ''',
+      targetLanguage: _generateJobInterviewTarget(position),
+      keyVocabulary: [
+        'die Ausbildung', 'die Erfahrung', 'die Stärke', 'das Unternehmen',
+        'das Gehalt', 'die Verantwortung', 'teamfähig', 'motiviert',
+        'die Herausforderung', 'der Beitrag',
+      ],
+      grammarFocus: ['Höflichkeitsformen', 'Perfekt', 'Zukunftsformen'],
+      timeLimitMinutes: 2,
+      difficultyFactors: [
+        DifficultyFactor.professional,
+        DifficultyFactor.personal,
+      ],
+      evaluationCriteria: _getJobInterviewEvaluationCriteria(),
+    );
+  }
+
+  /// 日常闲聊场景
+  OralTask _generateCasualTask(CEFRLevel level) {
+    final topics = [
+      'Ihr letztes Wochenende',
+      'Ihr Lieblingsfilm',
+      'Deutsche Kultur vs. Ihre Kultur',
+      'Hobbys und Interessen',
+      'Reiseerlebnisse',
+    ];
+
+    final topic = topics[_random.nextInt(topics.length)];
+
+    return OralTask(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      scenarioType: ScenarioType.casual,
+      level: level,
+      title: 'Gespräch: $topic',
+      description: '在咖啡馆与新朋友聊关于"$topic"的话题',
+      context: '''
+        Sagen Sie:
+        - Was machen Sie gerne?
+        - Warum mögen Sie das?
+        - Haben Sie interessante Erlebnisse?
+        - Stellen Sie Rückfragen!
+      ''',
+      targetLanguage: _generateCasualTarget(topic),
+      keyVocabulary: _getCasualVocabulary(topic),
+      grammarFocus: ['Perfekt', 'Umgangssprache', 'Rückfragen stellen'],
+      timeLimitMinutes: 2,
+      difficultyFactors: [
+        DifficultyFactor.social,
+        DifficultyFactor.spontaneous,
+      ],
+      evaluationCriteria: _getCasualEvaluationCriteria(),
+    );
+  }
+
+  /// 评估口语录音
+  Future<OralEvaluation> evaluateRecording({
+    required String recordingPath,
+    required OralTask task,
+    required String targetTranscript,
+  }) async {
+    // 这里应该调用 Whisper API 进行语音识别
+    final userTranscript = await _transcribeAudio(recordingPath);
+
+    // 评估各个方面
+    final pronunciationScore = await _evaluatePronunciation(userTranscript);
+    final grammarScore = await _evaluateGrammar(userTranscript, task);
+    final vocabularyScore = await _evaluateVocabulary(userTranscript, task);
+    final fluencyScore = await _evaluateFluency(recordingPath);
+    final contentScore = await _evaluateContent(userTranscript, task);
+
+    final overallScore = (
+      pronunciationScore * 0.2 +
+      grammarScore * 0.2 +
+      vocabularyScore * 0.15 +
+      fluencyScore * 0.25 +
+      contentScore * 0.2
+    );
+
+    return OralEvaluation(
+      taskId: task.id,
+      userTranscript: userTranscript,
+      targetTranscript: targetTranscript,
+      overallScore: overallScore,
+      pronunciationScore: pronunciationScore,
+      grammarScore: grammarScore,
+      vocabularyScore: vocabularyScore,
+      fluencyScore: fluencyScore,
+      contentScore: contentScore,
+      feedback: _generateFeedback(task, overallScore),
+      improvements: _generateImprovements(task, userTranscript),
+      timestamp: DateTime.now(),
+    );
+  }
+
+  // ==================== 私有辅助方法 ====================
+
+  String _generateAcademicContext(String topic) {
+    return '''
+      Sie sind auf einer akademischen Konferenz. Ihr Publikum besteht aus
+      Professoren und Forschern. Sprechen Sie formell und strukturiert.
+
+      Struktur:
+      1. Einleitung (Thema vorstellen)
+      2. These (Ihre Hauptposition)
+      3. Argumente (mindestens 3)
+      4. Gegenargumente adressieren
+      5. Schlussfolgerung
+    ''';
+  }
+
+  String _generateAcademicTarget(String topic) {
+    return '''
+      Verwenden Sie akademische Ausdrücke:
+      - "Es lässt sich feststellen, dass..."
+      - "Ein wesentlicher Aspekt ist..."
+      - "Dies führt zu der Annahme, dass..."
+      - "Hingegen muss beachtet werden..."
+      - "Zusammenfassend lässt sich sagen..."
+
+      Strukturieren Sie Ihren Vortrag logisch.
+    ''';
+  }
+
+  List<String> _getAcademicVocabulary(String topic) {
+    return [
+      'die Analyse', 'der Ansatz', 'das Konzept', 'die These',
+      'das Argument', 'die Schlussfolgerung', 'der Nachweis',
+      'korrelieren', 'implizieren', 'darlegen', 'verifizieren',
+      'substantiell', 'relevant', 'signifikant',
+    ];
+  }
+
+  List<EvaluationCriterion> _getAcademicEvaluationCriteria() {
+    return [
+      EvaluationCriterion(name: 'Struktur', weight: 0.25, description: 'Logischer Aufbau'),
+      EvaluationCriterion(name: 'Fachbegriffe', weight: 0.2, description: 'Akademische Vokabeln'),
+      EvaluationCriterion(name: 'Komplexität', weight: 0.2, description: 'Syntaktische Variation'),
+      EvaluationCriterion(name: 'Kohärenz', weight: 0.2, description: 'Rote Faden'),
+      EvaluationCriterion(name: 'Präzision', weight: 0.15, description: 'Exakte Ausdrucksweise'),
+    ];
+  }
+
+  String _generateMedicalTarget(String symptom) {
+    return '''
+      Beispiel: "Seit drei Tagen habe ich starke Kopfschmerzen.
+      Dazu kommt Übelkeit, besonders morgens. Die Schmerzen sind
+      etwa eine 7 auf einer Skala von 1 bis 10. Ich habe keine
+      Vorerkrankungen und nehme keine Medikamente."
+    ''';
+  }
+
+  List<EvaluationCriterion> _getMedicalEvaluationCriteria() {
+    return [
+      EvaluationCriterion(name: 'Präzision', weight: 0.3, description: 'Genaue Symptombeschreibung'),
+      EvaluationCriterion(name: 'Medizinische Vokabeln', weight: 0.25, description: 'Fachbegriffe'),
+      EvaluationCriterion(name: 'Tempus', weight: 0.2, description: 'Perfekt korrekt'),
+      EvaluationCriterion(name: 'Verständlichkeit', weight: 0.15, description: 'Für Arzt klar'),
+      EvaluationCriterion(name: 'Vollständigkeit', weight: 0.1, description: 'Alle relevanten Infos'),
+    ];
+  }
+
+  String _generatePoliticalContext(String topic) {
+    return '''
+      Sie sind in einer politischen Diskussionssendung.
+      Sie haben 4 Minuten Zeit, um Ihre Position zu $topic
+      darzulegen. Seien Sie überzeugend, aber respektvoll gegenüber
+      anderen Meinungen.
+
+      Wichtige rhetorische Mittel:
+      - Dreierregel (Argument 1, 2, 3)
+      - Kontrast (Im Gegensatz dazu...)
+      - Metaphern (sinnbilder)
+      - Aktive Verben (nicht Passiv)
+    ''';
+  }
+
+  String _generatePoliticalTarget(String topic) {
+    return '''
+      Struktur:
+      1. Eröffnung: "Meiner Meinung nach..."
+      2. These: Position klar benennen
+      3. Begründung: Mindestens 3 Argumente
+      4. Gegenposition: "Gegner sagen X, aber..."
+      5. Schluss: "Deshalb bin ich der Ansicht, dass..."
+
+      Verwenden Sie Konjunktiv II für Höflichkeit:
+      - "Es wäre wichtig, wenn..."
+      - "Man könnte darüber diskutieren, ob..."
+    ''';
+  }
+
+  List<String> _getPoliticalVocabulary(String topic) {
+    return [
+      'die Position', 'der Standpunkt', 'das Argument', 'der Gegenargument',
+      'die Maßnahme', 'implementieren', 'förderlich', 'kontraproduktiv',
+      'der Konsens', 'kompromissbereit', 'nachhaltig', 'priorisieren',
+    ];
+  }
+
+  List<EvaluationCriterion> _getPoliticalEvaluationCriteria() {
+    return [
+      EvaluationCriterion(name: 'Überzeugungskraft', weight: 0.3, description: 'Rhetorische Qualität'),
+      EvaluationCriterion(name: 'Argumentation', weight: 0.25, description: 'Logische Struktur'),
+      EvaluationCriterion(name: 'Wortschatz', weight: 0.2, description: 'Politische Vokabeln'),
+      EvaluationCriterion(name: 'Höflichkeit', weight: 0.15, description: 'Konjunktiv II'),
+      EvaluationCriterion(name: 'Reaktionsfähigkeit', weight: 0.1, description: 'Auf Gegner eingehen'),
+    ];
+  }
+
+  List<EvaluationCriterion> _getConflictEvaluationCriteria() {
+    return [
+      EvaluationCriterion(name: 'Klarheit', weight: 0.3, description: 'Problem deutlich benennen'),
+      EvaluationCriterion(name: 'Bestimmtheit', weight: 0.25, description: 'Klare Forderung'),
+      EvaluationCriterion(name: 'Höflichkeit', weight: 0.2, description: 'Nicht aggressiv'),
+      EvaluationCriterion(name: 'Lösungsorientierung', weight: 0.15, description: 'Konstruktiv'),
+      EvaluationCriterion(name: 'Rechtliche Sicherheit', weight: 0.1, description: 'Angemessen'),
+    ];
+  }
+
+  List<EvaluationCriterion> _getJobInterviewEvaluationCriteria() {
+    return [
+      EvaluationCriterion(name: 'Selbstpräsentation', weight: 0.3, description: 'Stärken betonen'),
+      EvaluationCriterion(name: 'Fachkompetenz', weight: 0.25, description: 'Berufliche Vokabeln'),
+      EvaluationCriterion(name: 'Motivation', weight: 0.2, description: 'Begeisterung zeigen'),
+      EvaluationCriterion(name: 'Formalität', weight: 0.15, description: 'Höflichkeitsformen'),
+      EvaluationCriterion(name: 'Authentizität', weight: 0.1, description: 'Natürlich wirken'),
+    ];
+  }
+
+  List<EvaluationCriterion> _getCasualEvaluationCriteria() {
+    return [
+      EvaluationCriterion(name: 'Spontanität', weight: 0.3, description: 'Natürliches Sprechen'),
+      EvaluationCriterion(name: 'Interesse', weight: 0.25, description: 'Rückfragen stellen'),
+      EvaluationCriterion(name: 'Umgangssprache', weight: 0.2, description: 'Nicht zu formell'),
+      EvaluationCriterion(name: 'Humor', weight: 0.15, description: 'Lockerheit'),
+      EvaluationCriterion(name: 'Dynamik', weight: 0.1, description: 'Zwiegespräch'),
+    ];
+  }
+
+  Future<String> _transcribeAudio(String path) async {
+    // TODO: 调用 Whisper API
+    // 暂时返回模拟结果
+    return '这是模拟的语音识别结果';
+  }
+
+  Future<double> _evaluatePronunciation(String transcript) async {
+    // TODO: 调用发音评估API
+    return 85.0;
+  }
+
+  Future<double> _evaluateGrammar(String transcript, OralTask task) async {
+    // TODO: 语法分析
+    return 78.0;
+  }
+
+  Future<double> _evaluateVocabulary(String transcript, OralTask task) async {
+    // TODO: 词汇评估
+    return 82.0;
+  }
+
+  Future<double> _evaluateFluency(String recordingPath) async {
+    // TODO: 流利度评估
+    return 75.0;
+  }
+
+  Future<double> _evaluateContent(String transcript, OralTask task) async {
+    // TODO: 内容评估
+    return 80.0;
+  }
+
+  String _generateFeedback(OralTask task, double score) {
+    if (score >= 90) {
+      return 'Ausgezeichnet! Ihre mündliche Ausdrucksfähigkeit ist auf einem sehr hohen Niveau.';
+    } else if (score >= 80) {
+      return 'Sehr gut! Sie haben sich klar und verständlich ausgedrückt. Einige kleine Verbesserungen möglich.';
+    } else if (score >= 70) {
+      return 'Gut! Ihr Inhalt war verständlich, aber es gibt noch Raum für Verbesserungen in der Grammatik und im Wortschatz.';
+    } else if (score >= 60) {
+      return 'Akzeptabel. Sie können sich verständigen, aber sollten an Grammatik und Wortschatz arbeiten.';
+    } else {
+      return 'Sie brauchen noch mehr Übung. Konzentrieren Sie sich auf die Grundlagen.';
+    }
+  }
+
+  List<String> _generateImprovements(OralTask task, String transcript) {
+    return [
+      'Verwenden Sie mehr Konnektoren',
+      'Achten Sie auf die Verbstellung',
+      'Erweitern Sie Ihren Wortschatz im Bereich ${task.scenarioType}',
+    ];
+  }
+
+  String _generateJobInterviewTarget(String position) {
+    return '''
+      Beispielantwort: "Ich habe Informatik studiert und bereits 3 Jahre
+      Erfahrung in der Softwareentwicklung. Meine größten Stärken sind
+      Teamfähigkeit und Problemlösungskompetenz. Ich interessiere mich
+      besonders für Ihr Unternehmen, weil... Ich stelle mir ein
+      Jahresgehalt von vor."
+    ''';
+  }
+
+  String _generateCasualTarget(String topic) {
+    return '''
+      Seien Sie locker und verwenden Sie Umgangssprache:
+      - "Echt jetzt?"
+      - "Also, ich finde..."
+      - "Was meinst du dazu?"
+      - "Hast du schon mal...?"
+    ''';
+  }
+
+  List<String> _getCasualVocabulary(String topic) {
+    return [
+      'echt', 'total', 'halt', 'mal', 'ne', 'so',
+      'quatschen', 'toll', 'super', 'klasse',
+    ];
+  }
+}
+
+// ==================== 数据模型 ====================
+
+enum ScenarioType {
+  academic,      // 学术讨论
+  medical,       // 医疗场景
+  political,     // 政治讨论
+  conflict,      // 冲突解决
+  jobInterview,  // 求职面试
+  casual,        // 日常闲聊
+}
+
+enum CEFRLevel {
+  A1, A2, B1, B2, C1, C2,
+}
+
+enum DifficultyFactor {
+  abstract,       // 抽象话题
+  specialized,    // 专业术语
+  structural,     // 结构复杂
+  precise,        // 需要精确表达
+  personal,       // 个人相关
+  controversial,  // 争议性
+  persuasive,     // 需要说服力
+  emotional,      // 情绪化场景
+  sensitive,      // 敏感话题
+  professional,   // 专业场景
+  social,         // 社交场景
+  spontaneous,    // 即兴发挥
+}
+
+class OralTask {
+  final String id;
+  final ScenarioType scenarioType;
+  final CEFRLevel level;
+  final String title;
+  final String description;
+  final String context;
+  final String targetLanguage;
+  final List<String> keyVocabulary;
+  final List<String> grammarFocus;
+  final int timeLimitMinutes;
+  final List<DifficultyFactor> difficultyFactors;
+  final List<EvaluationCriterion> evaluationCriteria;
+
+  OralTask({
+    required this.id,
+    required this.scenarioType,
+    required this.level,
+    required this.title,
+    required this.description,
+    required this.context,
+    required this.targetLanguage,
+    required this.keyVocabulary,
+    required this.grammarFocus,
+    required this.timeLimitMinutes,
+    required this.difficultyFactors,
+    required this.evaluationCriteria,
+  });
+
+  String get difficultyText {
+    return difficultyFactors.map((f) {
+      switch (f) {
+        case DifficultyFactor.abstract: return 'Abstrakt';
+        case DifficultyFactor.specialized: return 'Fachsprachlich';
+        case DifficultyFactor.structural: return 'Strukturell komplex';
+        case DifficultyFactor.precise: return 'Präzision erforderlich';
+        case DifficultyFactor.personal: return 'Persönlich';
+        case DifficultyFactor.controversial: return 'Kontrovers';
+        case DifficultyFactor.persuasive: return 'Überzeugend';
+        case DifficultyFactor.emotional: return 'Emotional';
+        case DifficultyFactor.sensitive: return 'Sensibel';
+        case DifficultyFactor.professional: return 'Professionell';
+        case DifficultyFactor.social: return 'Sozial';
+        case DifficultyFactor.spontaneous: return 'Spontan';
+      }
+    }).join(', ');
+  }
+}
+
+class EvaluationCriterion {
+  final String name;
+  final double weight;
+  final String description;
+
+  EvaluationCriterion({
+    required this.name,
+    required this.weight,
+    required this.description,
+  });
+}
+
+class OralEvaluation {
+  final String taskId;
+  final String userTranscript;
+  final String targetTranscript;
+  final double overallScore;
+  final double pronunciationScore;
+  final double grammarScore;
+  final double vocabularyScore;
+  final double fluencyScore;
+  final double contentScore;
+  final String feedback;
+  final List<String> improvements;
+  final DateTime timestamp;
+
+  OralEvaluation({
+    required this.taskId,
+    required this.userTranscript,
+    required this.targetTranscript,
+    required this.overallScore,
+    required this.pronunciationScore,
+    required this.grammarScore,
+    required this.vocabularyScore,
+    required this.fluencyScore,
+    required this.contentScore,
+    required this.feedback,
+    required this.improvements,
+    required this.timestamp,
+  });
+
+  int get stars => (overallScore / 20).ceil();
+
+  Map<String, dynamic> toJson() {
+    return {
+      'taskId': taskId,
+      'overallScore': overallScore,
+      'stars': stars,
+      'feedback': feedback,
+      'improvements': improvements,
+      'timestamp': timestamp.toIso8601String(),
+    };
+  }
+}

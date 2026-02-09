@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aeryn-Deutsch - 德语学习App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+        }
+
+        /* 顶部导航 */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 28px;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+        }
+
+        .header-stats span {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+        }
+
+        /* 底部导航栏（移动端友好） */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 2px solid #e0e0e0;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 100;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .nav-item.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .nav-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .nav-label {
+            font-size: 12px;
+        }
+
+        /* 主内容区 */
+        .main-content {
+            padding: 15px;
+            padding-bottom: 80px;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 卡片样式 */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* 首页 */
+        .welcome-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-banner h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* 词汇卡片 */
+        .word-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .word-card:active {
+            transform: scale(0.98);
+        }
+
+        .word-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .word-german {
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .word-article {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-right: 8px;
+        }
+
+        .word-meaning {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .word-example {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+            border-left: 3px solid #667eea;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .level-a1 { background: #e8f5e9; color: #2e7d32; }
+        .level-a2 { background: #e3f2fd; color: #1565c0; }
+        .level-b1 { background: #fff3e0; color: #e65100; }
+        .level-b2 { background: #f3e5f5; color: #7b1fa2; }
+
+        /* 筛选栏 */
+        .filter-bar {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .filter-chip {
+            padding: 8px 16px;
+            background: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            border-radius: 20px;
+            font-size: 14px;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-chip.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 150px;
+            padding: 10px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* 阅读卡片 */
+        .reading-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .reading-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .reading-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .reading-content {
+            color: #555;
+            line-height: 1.8;
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+
+        .reading-meta {
+            display: flex;
+            gap: 12px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* 问题卡片 */
+        .question-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .question-type {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .options-list {
+            list-style: none;
+        }
+
+        .option-item {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-size: 15px;
+        }
+
+        .option-item:active {
+            transform: scale(0.98);
+        }
+
+        .option-item.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .option-item.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .option-letter {
+            display: inline-block;
+            width: 26px;
+            height: 26px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 26px;
+            margin-right: 10px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* 发音练习 */
+        .pronunciation-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .pronunciation-text {
+            font-size: 20px;
+            color: #2c3e50;
+            margin: 15px 0;
+            line-height: 1.6;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .audio-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .audio-btn {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .audio-btn:active {
+            transform: scale(0.95);
+        }
+
+        .audio-btn.play {
+            background: #27ae60;
+            color: white;
+        }
+
+        .audio-btn.slow {
+            background: #f39c12;
+            color: white;
+        }
+
+        .audio-btn.stop {
+            background: #e74c3c;
+            color: white;
+        }
+
+        /* 标签栏 */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tab {
+            padding: 10px 18px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        /* 加载更多 */
+        .load-more {
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* 滚动容器优化 */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 3px;
+        }
+
+        /* 响应式优化 */
+        @media (min-width: 768px) {
+            .app-container {
+                max-width: 768px;
+                margin: 0 auto;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .filter-bar {
+                flex-wrap: wrap;
+            }
+
+            .main-content {
+                padding: 25px;
+            }
+        }
+
+        /* Toast 提示 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            z-index: 1000;
+            display: none;
+        }
+
+        .toast.show {
+            display: block;
+            animation: toastFadeIn 0.3s ease;
+        }
+
+        @keyframes toastFadeIn {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- 顶部导航 -->
+        <header class="header">
+            <div class="header-top">
+                <div class="logo">
+                    <span class="logo-icon">🇩🇪</span>
+                    <span>Aeryn-Deutsch</span>
+                </div>
+                <div class="header-stats">
+                    <span>📚 3525词</span>
+                    <span>📖 53篇</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 首页 -->
+            <div id="page-home" class="page active">
+                <div class="welcome-banner">
+                    <h1>👋 Willkommen!</h1>
+                    <p>继续你的德语学习之旅</p>
+                </div>
+
+                <h2 style="margin: 20px 0 15px; font-size: 18px; color: #2c3e50;">📈 学习进度</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">3,525</div>
+                        <div class="stat-label">总词汇量</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">53</div>
+                        <div class="stat-label">阅读材料</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">B1</div>
+                        <div class="stat-label">当前级别</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">85%</div>
+                        <div class="stat-label">完成度</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 style="margin: 25px 0 15px; font-size: 18px; color: #2c3e50;">🆕 最新更新</h2>
+                <div class="card">
+                    <h3 style="margin-bottom: 10px; color: #2c3e50;">词汇库扩充完成！</h3>
+                    <p style="color: #666; line-height: 1.6; margin-bottom: 10px;">新增 1400+ 词汇，总量达到 3500+ 词！涵盖A1-B2各级别</p>
+                    <span class="level-badge level-a1">NEW</span>
+                </div>
+
+                <div class="card">
+                    <h3 style="margin-bottom: 10px; color: #2c3e50;">AI问题生成模块上线</h3>
+                    <p style="color: #666; line-height: 1.6; margin-bottom: 10px;">支持9种题型，智能生成练习题，无需API即刻使用！</p>
+                    <span class="level-badge level-b1">AI</span>
+                </div>
+
+                <h2 style="margin: 25px 0 15px; font-size: 18px; color: #2c3e50;">📊 各级别词汇</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">720</div>
+                        <div class="stat-label">A1 词汇</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">750</div>
+                        <div class="stat-label">A2 词汇</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">900</div>
+                        <div class="stat-label">B1 词汇</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">830</div>
+                        <div class="stat-label">B2 词汇</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 70%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 词汇学习 -->
+            <div id="page-vocabulary" class="page">
+                <h2 style="margin: 15px 0; font-size: 20px; color: #2c3e50;">📚 词汇学习</h2>
+
+                <div class="filter-bar">
+                    <input type="text" class="search-box" id="vocab-search" placeholder="🔍 搜索词汇..." oninput="filterVocabulary()">
+                </div>
+
+                <div class="tabs">
+                    <div class="tab active" onclick="filterVocabByLevel('all')">全部</div>
+                    <div class="tab" onclick="filterVocabByLevel('A1')">A1</div>
+                    <div class="tab" onclick="filterVocabByLevel('A2')">A2</div>
+                    <div class="tab" onclick="filterVocabByLevel('B1')">B1</div>
+                    <div class="tab" onclick="filterVocabByLevel('B2')">B2</div>
+                </div>
+
+                <div id="vocab-container">
+                    <!-- 词汇将通过JS加载 -->
+                </div>
+
+                <div class="load-more" onclick="loadMoreVocabulary()">
+                    ⬇️ 加载更多
+                </div>
+            </div>
+
+            <!-- 阅读材料 -->
+            <div id="page-reading" class="page">
+                <h2 style="margin: 15px 0; font-size: 20px; color: #2c3e50;">📖 分级阅读</h2>
+
+                <div class="tabs">
+                    <div class="tab active" onclick="filterReading('all')">全部</div>
+                    <div class="tab" onclick="filterReading('A1')">A1</div>
+                    <div class="tab" onclick="filterReading('A2')">A2</div>
+                    <div class="tab" onclick="filterReading('B1')">B1</div>
+                    <div class="tab" onclick="filterReading('B2')">B2</div>
+                </div>
+
+                <div id="reading-container">
+                    <!-- 阅读材料将通过JS加载 -->
+                </div>
+            </div>
+
+            <!-- 发音练习 -->
+            <div id="page-pronunciation" class="page">
+                <h2 style="margin: 15px 0; font-size: 20px; color: #2c3e50;">🎤 发音练习</h2>
+
+                <div class="pronunciation-card">
+                    <h3 style="margin-bottom: 10px; color: #2c3e50;">单词发音</h3>
+                    <div class="pronunciation-text">
+                        <span style="color: #667eea;">der</span> Hund
+                    </div>
+                    <p style="color: #666; margin-bottom: 12px;">狗 - Der Hund spielt im Garten.</p>
+                    <div class="audio-controls">
+                        <button class="audio-btn play" onclick="speak('Der Hund', 0.9)">
+                            ▶️ 正常
+                        </button>
+                        <button class="audio-btn slow" onclick="speak('Der Hund', 0.7)">
+                            🐢 慢速
+                        </button>
+                        <button class="audio-btn stop" onclick="stopSpeaking()">
+                            ⏹️ 停止
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pronunciation-card">
+                    <h3 style="margin-bottom: 10px; color: #2c3e50;">日常用语</h3>
+                    <div class="pronunciation-text">
+                        Guten Tag! Wie geht es Ihnen?
+                    </div>
+                    <p style="color: #666; margin-bottom: 12px;">你好！您好吗？</p>
+                    <div class="audio-controls">
+                        <button class="audio-btn play" onclick="speak('Guten Tag! Wie geht es Ihnen?', 0.9)">
+                            ▶️ 播放
+                        </button>
+                        <button class="audio-btn slow" onclick="speak('Guten Tag! Wie geht es Ihnen?', 0.7)">
+                            🐢 慢速
+                        </button>
+                        <button class="audio-btn stop" onclick="stopSpeaking()">
+                            ⏹️ 停止
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pronunciation-card">
+                    <h3 style="margin-bottom: 10px; color: #2c3e50;">跟读练习</h3>
+                    <div class="pronunciation-text">
+                        Die deutsche Sprache ist sehr interessant.
+                    </div>
+                    <p style="color: #666; margin-bottom: 12px;">德语非常有趣。</p>
+                    <div class="audio-controls">
+                        <button class="audio-btn play" onclick="shadowingPractice()">
+                            🔄 3遍跟读
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pronunciation-card">
+                    <h3 style="margin-bottom: 10px; color: #2c3e50;">数字练习</h3>
+                    <div class="pronunciation-text">
+                        eins, zwei, drei, vier, fünf
+                    </div>
+                    <p style="color: #666; margin-bottom: 12px;">1, 2, 3, 4, 5</p>
+                    <div class="audio-controls">
+                        <button class="audio-btn play" onclick="speak('eins, zwei, drei, vier, fünf', 0.9)">
+                            ▶️ 播放
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI练习 -->
+            <div id="page-ai" class="page">
+                <h2 style="margin: 15px 0; font-size: 20px; color: #2c3e50;">🤖 AI智能练习</h2>
+
+                <div class="filter-bar">
+                    <select class="filter-chip" id="question-type" style="padding: 8px 16px;" onchange="generateQuestions()">
+                        <option value="mixed">混合题型</option>
+                        <option value="vocabulary">词汇练习</option>
+                        <option value="grammar">语法练习</option>
+                        <option value="comprehension">阅读理解</option>
+                    </select>
+                    <select class="filter-chip" id="question-level" style="padding: 8px 16px;" onchange="generateQuestions()">
+                        <option value="A1">A1</option>
+                        <option value="A2">A2</option>
+                        <option value="B1" selected>B1</option>
+                        <option value="B2">B2</option>
+                    </select>
+                </div>
+
+                <div id="questions-container">
+                    <!-- 问题将通过JS生成 -->
+                </div>
+
+                <div class="load-more" onclick="generateQuestions()">
+                    ⚡ 生成新题目
+                </div>
+            </div>
+
+            <!-- 学习统计 -->
+            <div id="page-stats" class="page">
+                <h2 style="margin: 15px 0; font-size: 20px; color: #2c3e50;">📊 学习统计</h2>
+
+                <div class="card">
+                    <h3 style="margin-bottom: 15px; color: #2c3e50;">📅 本周学习</h3>
+                    <div style="margin-bottom: 12px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 14px;">
+                            <span>周一</span>
+                            <span style="color: #667eea;">45 词</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 14px;">
+                            <span>周二</span>
+                            <span style="color: #667eea;">62 词</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 14px;">
+                            <span>周三</span>
+                            <span style="color: #667eea;">38 词</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 14px;">
+                            <span>周四</span>
+                            <span style="color: #667eea;">55 词</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="margin-bottom: 15px; color: #2c3e50;">📚 词汇分布</h3>
+                    <div class="stats-grid" style="grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 24px; font-weight: bold; color: #2e7d32;">720</div>
+                            <div style="font-size: 13px; color: #666;">A1 词汇</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 24px; font-weight: bold; color: #1565c0;">750</div>
+                            <div style="font-size: 13px; color: #666;">A2 词汇</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 24px; font-weight: bold; color: #e65100;">900</div>
+                            <div style="font-size: 13px; color: #666;">B1 词汇</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 24px; font-weight: bold; color: #7b1fa2;">830</div>
+                            <div style="font-size: 13px; color: #666;">B2 词汇</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 底部导航 -->
+        <nav class="bottom-nav">
+            <div class="nav-item active" onclick="showPage('home')">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label">首页</span>
+            </div>
+            <div class="nav-item" onclick="showPage('vocabulary')">
+                <span class="nav-icon">📚</span>
+                <span class="nav-label">词汇</span>
+            </div>
+            <div class="nav-item" onclick="showPage('reading')">
+                <span class="nav-icon">📖</span>
+                <span class="nav-label">阅读</span>
+            </div>
+            <div class="nav-item" onclick="showPage('pronunciation')">
+                <span class="nav-icon">🎤</span>
+                <span class="nav-label">发音</span>
+            </div>
+            <div class="nav-item" onclick="showPage('ai')">
+                <span class="nav-icon">🤖</span>
+                <span class="nav-label">AI练习</span>
+            </div>
+            <div class="nav-item" onclick="showPage('stats')">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">统计</span>
+            </div>
+        </nav>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // 扩展词汇数据 - 100个
+        const vocabularyData = [
+            // A1 基础词汇
+            { word: 'Hallo', article: null, meaning: '你好', example: 'Hallo, wie geht es dir?', level: 'A1' },
+            { word: 'Guten Tag', article: null, meaning: '日安', example: 'Guten Tag! Wie geht es Ihnen?', level: 'A1' },
+            { word: 'Guten Morgen', article: null, meaning: '早上好', example: 'Guten Morgen! Schön, dich zu sehen.', level: 'A1' },
+            { word: 'Guten Abend', article: null, meaning: '晚上好', example: 'Guten Abend! Haben Sie gut geschlafen?', level: 'A1' },
+            { word: 'Auf Wiedersehen', article: null, meaning: '再见', example: 'Auf Wiedersehen! Bis morgen.', level: 'A1' },
+            { word: 'Tschüss', article: null, meaning: '拜拜', example: 'Tschüss! Bis später!', level: 'A1' },
+            { word: 'danke', article: null, meaning: '谢谢', example: 'Danke schön für deine Hilfe!', level: 'A1' },
+            { word: 'bitte', article: null, meaning: '请/不客气', example: 'Bitte schön! Kein Problem.', level: 'A1' },
+            { word: 'ja', article: null, meaning: '是', example: 'Ja, das stimmt.', level: 'A1' },
+            { word: 'nein', article: null, meaning: '不', example: 'Nein, das weiß ich nicht.', level: 'A1' },
+            { word: 'der Hund', article: 'der', meaning: '狗', example: 'Der Hund spielt im Garten.', level: 'A1' },
+            { word: 'die Katze', article: 'die', meaning: '猫', example: 'Die Katze schläft auf dem Sofa.', level: 'A1' },
+            { word: 'das Kind', article: 'das', meaning: '孩子', example: 'Das Kind spielt mit dem Ball.', level: 'A1' },
+            { word: 'der Mann', article: 'der', meaning: '男人', example: 'Der Mann arbeitet im Büro.', level: 'A1' },
+            { word: 'die Frau', article: 'die', meaning: '女人', example: 'Die Frau kocht in der Küche.', level: 'A1' },
+            { word: 'das Buch', article: 'das', meaning: '书', example: 'Das Buch ist sehr interessant.', level: 'A1' },
+            { word: 'der Tisch', article: 'der', meaning: '桌子', example: 'Der Tisch steht im Esszimmer.', level: 'A1' },
+            { word: 'der Stuhl', article: 'der', meaning: '椅子', example: 'Der Stuhl ist bequem.', level: 'A1' },
+            { word: 'das Haus', article: 'das', meaning: '房子', example: 'Das Haus hat einen schönen Garten.', level: 'A1' },
+            { word: 'die Wohnung', article: 'die', meaning: '公寓', example: 'Die Wohnung ist groß und hell.', level: 'A1' },
+            { word: 'das Auto', article: 'das', meaning: '汽车', example: 'Das Auto ist rot.', level: 'A1' },
+            { word: 'der Zug', article: 'der', meaning: '火车', example: 'Der Zug fährt um 10 Uhr.', level: 'A1' },
+            { word: 'der Bus', article: 'der', meaning: '公交车', example: 'Der Bus kommt in 5 Minuten.', level: 'A1' },
+            { word: 'das Flugzeug', article: 'das', meaning: '飞机', example: 'Das Flugzeug startet jetzt.', level: 'A1' },
+            { word: 'essen', article: null, meaning: '吃', example: 'Ich esse gern Pizza.', level: 'A1' },
+            { word: 'trinken', article: null, meaning: '喝', example: 'Ich trinke gern Tee.', level: 'A1' },
+            { word: 'schlafen', article: null, meaning: '睡觉', example: 'Ich schlafe 8 Stunden.', level: 'A1' },
+            { word: 'aufstehen', article: null, meaning: '起床', example: 'Ich stehe um 7 Uhr auf.', level: 'A1' },
+            { word: 'lernen', article: null, meaning: '学习', example: 'Ich lerne Deutsch.', level: 'A1' },
+            { word: 'arbeiten', article: null, meaning: '工作', example: 'Er arbeitet zu Hause.', level: 'A1' },
+            { word: 'sprechen', article: null, meaning: '说', example: 'Ich spreche Deutsch.', level: 'A1' },
+            { word: 'verstehen', article: null, meaning: '理解', example: 'Verstehst du mich?', level: 'A1' },
+            { word: 'groß', article: null, meaning: '大的', example: 'Das Haus ist sehr groß.', level: 'A1' },
+            { word: 'klein', article: null, meaning: '小的', example: 'Die Katze ist klein.', level: 'A1' },
+            { word: 'gut', article: null, meaning: '好的', example: 'Das Essen ist gut.', level: 'A1' },
+            { word: 'schlecht', article: null, meaning: '坏的', example: 'Das Wetter ist schlecht.', level: 'A1' },
+            { word: 'schön', article: null, meaning: '美丽的', example: 'Das Bild ist schön.', level: 'A1' },
+            { word: 'neu', article: null, meaning: '新的', example: 'Ich habe ein neues Auto.', level: 'A1' },
+            { word: 'alt', article: null, meaning: '旧的', example: 'Das ist ein altes Haus.', level: 'A1' },
+            { word: 'jung', article: null, meaning: '年轻的', example: 'Er ist noch jung.', level: 'A1' },
+
+            // A2 词汇
+            { word: 'reisen', article: null, meaning: '旅行', example: 'Ich reise gern nach Deutschland.', level: 'A2' },
+            { word: 'der Urlaub', article: 'der', meaning: '假期', example: 'Im Urlaub gehe ich ans Meer.', level: 'A2' },
+            { word: 'das Hotel', article: 'das', meaning: '酒店', example: 'Das Hotel ist sehr komfortabel.', level: 'A2' },
+            { word: 'der Reisepass', article: 'der', meaning: '护照', example: 'Haben Sie Ihren Reisepass?', level: 'A2' },
+            { word: 'der Koffer', article: 'der', meaning: '行李箱', example: 'Mein Koffer ist schwer.', level: 'A2' },
+            { word: 'packen', article: null, meaning: '收拾行李', example: 'Ich packe meinen Koffer.', level: 'A2' },
+            { word: 'reservieren', article: null, meaning: '预订', example: 'Ich reserviere ein Zimmer.', level: 'A2' },
+            { word: 'der Preis', article: 'der', meaning: '价格', example: 'Der Preis ist fair.', level: 'A2' },
+            { word: 'kaufen', article: null, meaning: '购买', example: 'Ich kaufe ein Geschenk.', level: 'A2' },
+            { word: 'verkaufen', article: null, meaning: '销售', example: 'Er verkauft Autos.', level: 'A2' },
+            { word: 'einkaufen', article: null, meaning: '购物', example: 'Ich gehe einkaufen.', level: 'A2' },
+            { word: 'der Laden', article: 'der', meaning: '商店', example: 'Der Laden ist bis 20 Uhr offen.', level: 'A2' },
+            { word: 'der Supermarkt', article: 'der', meaning: '超市', example: 'Der Supermarkt hat alles.', level: 'A2' },
+            { word: 'bezahlen', article: null, meaning: '支付', example: 'Ich bezahle bar.', level: 'A2' },
+            { word: 'die Kreditkarte', article: 'die', meaning: '信用卡', example: 'Ich bezahle mit Kreditkarte.', level: 'A2' },
+            { word: 'das Geld', article: 'das', meaning: '钱', example: 'Ich habe kein Geld.', level: 'A2' },
+            { word: 'teuer', article: null, meaning: '贵的', example: 'Das Auto ist zu teuer.', level: 'A2' },
+            { word: 'billig', article: null, meaning: '便宜的', example: 'Das ist sehr billig.', level: 'A2' },
+            { word: 'arbeiten', article: null, meaning: '工作', example: 'Ich arbeite als Lehrer.', level: 'A2' },
+            { word: 'der Job', article: 'der', meaning: '工作', example: 'Er hat einen neuen Job.', level: 'A2' },
+            { word: 'der Chef', article: 'der', meaning: '老板', example: 'Der Chef ist streng.', level: 'A2' },
+            { word: 'der Kollege', article: 'der', meaning: '同事', example: 'Mein Kollege ist nett.', level: 'A2' },
+            { word: 'das Meeting', article: 'das', meaning: '会议', example: 'Das Meeting beginnt um 10 Uhr.', level: 'A2' },
+            { word: 'die Prüfung', article: 'die', meaning: '考试', example: 'Die Prüfung ist schwierig.', level: 'A2' },
+            { word: 'studieren', article: null, meaning: '大学学习', example: 'Ich studiere Medizin.', level: 'A2' },
+            { word: 'die Uni', article: 'die', meaning: '大学', example: 'Die Uni ist groß.', level: 'A2' },
+            { word: 'krank', article: null, meaning: '生病的', example: 'Ich bin krank.', level: 'A2' },
+            { word: 'der Arzt', article: 'der', meaning: '医生', example: 'Ich gehe zum Arzt.', level: 'A2' },
+            { word: 'das Medikament', article: 'das', meaning: '药物', example: 'Das Medikament hilft.', level: 'A2' },
+            { word: 'die Gesundheit', article: 'die', meaning: '健康', example: 'Gesundheit ist wichtig.', level: 'A2' },
+
+            // B1 词汇
+            { word: 'die Meinung', article: 'die', meaning: '观点', example: 'Was ist deine Meinung?', level: 'B1' },
+            { word: 'denken', article: null, meaning: '认为', example: 'Ich denke, das ist gut.', level: 'B1' },
+            { word: 'glauben', article: null, meaning: '相信', example: 'Ich glaube, er hat recht.', level: 'B1' },
+            { word: 'diskutieren', article: null, meaning: '讨论', example: 'Wir diskutieren über Politik.', level: 'B1' },
+            { word: 'zustimmen', article: null, meaning: '同意', example: 'Ich stimme dir zu.', level: 'B1' },
+            { word: 'der Vorschlag', article: 'der', meaning: '建议', example: 'Das ist ein guter Vorschlag.', level: 'B1' },
+            { word: 'empfehlen', article: null, meaning: '推荐', example: 'Ich empfehle dieses Restaurant.', level: 'B1' },
+            { word: 'die Bildung', article: 'die', meaning: '教育', example: 'Bildung ist sehr wichtig.', level: 'B1' },
+            { word: 'die Schule', article: 'die', meaning: '学校', example: 'Die Schule beginnt um 8 Uhr.', level: 'B1' },
+            { word: 'der Lehrer', article: 'der', meaning: '老师', example: 'Der Lehrer erklärt gut.', level: 'B1' },
+            { word: 'studieren', article: null, meaning: '学习', example: 'Ich studiere an der Uni.', level: 'B1' },
+            { word: 'lernen', article: null, meaning: '学习', example: 'Ich lerne jeden Tag.', level: 'B1' },
+            { word: 'die Prüfung', article: 'die', meaning: '考试', example: 'Ich habe eine Prüfung.', level: 'B1' },
+            { word: 'die Medien', article: 'die', meaning: '媒体', example: 'Die Medien berichten darüber.', level: 'B1' },
+            { word: 'die Zeitung', article: 'die', meaning: '报纸', example: 'Ich lese die Zeitung.', level: 'B1' },
+            { word: 'das Fernsehen', article: 'das', meaning: '电视', example: 'Ich sehe fern.', level: 'B1' },
+            { word: 'das Internet', article: 'das', meaning: '互联网', example: 'Ich surfe im Internet.', level: 'B1' },
+            { word: 'die Gesellschaft', article: 'die', meaning: '社会', example: 'Die Gesellschaft verändert sich.', level: 'B1' },
+            { word: 'das Problem', article: 'das', meaning: '问题', example: 'Das ist ein großes Problem.', level: 'B1' },
+            { word: 'die Lösung', article: 'die', meaning: '解决办法', example: 'Wir brauchen eine Lösung.', level: 'B1' },
+            { word: 'diskutieren', article: null, meaning: '讨论', example: 'Wir diskutieren das Problem.', level: 'B1' },
+            { word: 'die Umwelt', article: 'die', meaning: '环境', example: 'Die Umwelt ist wichtig.', level: 'B1' },
+            { word: 'schützen', article: null, meaning: '保护', example: 'Wir müssen die Umwelt schützen.', level: 'B1' },
+            { word: 'die Natur', article: 'die', meaning: '自然', example: 'Ich mag die Natur.', level: 'B1' },
+            { word: 'die Technologie', article: 'die', meaning: '技术', example: 'Technologie entwickelt sich schnell.', level: 'B1' },
+            { word: 'modern', article: null, meaning: '现代的', example: 'Das ist modern.', level: 'B1' },
+            { word: 'glücklich', article: null, meaning: '幸福的', example: 'Ich bin glücklich.', level: 'B1' },
+            { word: 'traurig', article: null, meaning: '悲伤的', example: 'Er ist traurig.', level: 'B1' },
+
+            // B2 词汇
+            { word: 'die Wirtschaft', article: 'die', meaning: '经济', example: 'Die Wirtschaft wächst.', level: 'B2' },
+            { word: 'das Unternehmen', article: 'das', meaning: '企业', example: 'Das Unternehmen ist erfolgreich.', level: 'B2' },
+            { word: 'der Markt', article: 'der', meaning: '市场', example: 'Der Markt ist hart umkämpft.', level: 'B2' },
+            { word: 'investieren', article: null, meaning: '投资', example: 'Wir investieren in die Zukunft.', level: 'B2' },
+            { word: 'der Gewinn', article: 'der', meaning: '利润', example: 'Der Gewinn ist hoch.', level: 'B2' },
+            { word: 'der Preis', article: 'der', meaning: '价格', example: 'Der Preis ist fair.', level: 'B2' },
+            { word: 'exportieren', article: null, meaning: '出口', example: 'Deutschland exportiert Autos.', level: 'B2' },
+            { word: 'importieren', article: null, meaning: '进口', example: 'Wir importieren Waren.', level: 'B2' },
+            { word: 'die Wissenschaft', article: 'die', meaning: '科学', example: 'Die Wissenschaft ist wichtig.', level: 'B2' },
+            { word: 'die Forschung', article: 'die', meaning: '研究', example: 'Die Forschung ist teuer.', level: 'B2' },
+            { word: 'theoretisch', article: null, meaning: '理论的', example: 'Das ist theoretisch möglich.', level: 'B2' },
+            { word: 'praktisch', article: null, meaning: '实践的', example: 'Das ist praktisch.', level: 'B2' },
+            { word: 'die Methode', article: 'die', meaning: '方法', example: 'Die Methode funktioniert.', level: 'B2' },
+            { word: 'das Ergebnis', article: 'das', meaning: '结果', example: 'Das Ergebnis ist gut.', level: 'B2' },
+            { word: 'der Beweis', article: 'der', meaning: '证明', example: 'Das ist der Beweis.', level: 'B2' },
+            { word: 'das Prinzip', article: 'das', meaning: '原则', example: 'Das Prinzip ist einfach.', level: 'B2' },
+            { word: 'das Konzept', article: 'das', meaning: '概念', example: 'Das Konzept ist neu.', level: 'B2' },
+            { word: 'jedoch', article: null, meaning: '然而', example: 'Es ist jedoch schwer.', level: 'B2' },
+            { word: 'außerdem', article: null, meaning: '此外', example: 'Außerdem ist es teuer.', level: 'B2' },
+            { word: 'deshalb', article: null, meaning: '因此', example: 'Es regnet, deshalb bleiben wir zu Hause.', level: 'B2' },
+            { word: 'schließlich', article: null, meaning: '最终', example: 'Schließlich haben wir es geschafft.', level: 'B2' },
+        ];
+
+        // 扩展阅读材料数据
+        const readingData = [
+            { id: 1, title: 'Mein Tag', level: 'A1', category: 'Alltag', content: 'Ich stehe um 7 Uhr auf. Dann frühstücke ich mit Brot und Kaffee. Um 8 Uhr gehe ich zur Arbeit. Ich arbeite in einem Büro. Mittags esse ich mit meinen Kollegen in der Kantine. Um 17 Uhr höre ich auf und gehe nach Hause. Abends koche ich das Abendessen. Um 22 Uhr gehe ich schlafen.', wordCount: 78 },
+            { id: 2, title: 'Meine Familie', level: 'A1', category: 'Familie', content: 'Ich habe eine große Familie. Meine Eltern leben in München. Ich habe einen Bruder und eine Schwester. Mein Bruder heißt Thomas und ist 25 Jahre alt. Er arbeitet als Ingenieur. Meine Schwester heißt Lisa und ist 22 Jahre alt. Sie studiert Medizin an der Universität. Ich habe auch eine Oma, die 80 Jahre alt ist. Sie wohnt bei uns.', wordCount: 95 },
+            { id: 3, title: 'Einkaufen', level: 'A1', category: 'Alltag', content: 'Heute geht Anna einkaufen. Sie braucht Lebensmittel für die Woche. Sie schreibt eine Einkaufsliste: Brot, Milch, Eier, Käse, Gemüse und Obst. Sie geht in den Supermarkt. Im Supermarkt vergleicht sie die Preise. Sie kauft auch Wein und Schokolade. Dann bezahlt sie an der Kasse.', wordCount: 85 },
+            { id: 4, title: 'Im Restaurant', level: 'A1', category: 'Alltag', content: 'Hans und Anna gehen in ein italienisches Restaurant. Es ist ein schönes Restaurant mit Tischplätzen im Freien. Sie bestellen Pizza und Pasta. Der Kellner ist sehr freundlich. Das Essen ist lecker. Nach dem Essen trinken sie noch Espresso. Hans bezahlt die Rechnung.', wordCount: 72 },
+            { id: 5, title: 'Ein Ausflug', level: 'A1', category: 'Reise', content: 'Am Samstag machen Lisa und Thomas einen Ausflug. Sie fahren mit dem Zug in die Berge. Das Wetter ist schön und sonnig. Sie wandern den ganzen Tag. Sie machen ein Picknick mit Brot und Käse. Am Abend sind sie müde aber glücklich.', wordCount: 68 },
+            { id: 6, title: 'Beim Arzt', level: 'A1', category: 'Gesundheit', content: 'Peter ist krank. Er hat Husten und Fieber. Er geht zum Arzt. Die Praxis ist voll. Peter muss 30 Minuten warten. Endlich kommt der Arzt. Er untersucht Peter und verschreibt Medikamente. Peter muss drei Tage zu Hause bleiben.', wordCount: 72 },
+            { id: 7, title: 'Deutsch lernen', level: 'A2', category: 'Bildung', content: 'Seit sechs Monaten lerne ich Deutsch. Anfangs war es sehr schwierig. Die deutsche Grammatik ist komplex mit vier Fällen und vielen Verbformen. Jetzt gehe ich jeden Tag zur Volkshochschule. Ich habe auch deutsche Freunde und übe viel mit ihnen. Deutsche Serie zu schauen, hilft auch sehr. Ich kann schon einfache Gespräche führen.', wordCount: 95 },
+            { id: 8, title: 'Mein Job', level: 'A2', category: 'Arbeit', content: 'Ich arbeite als Marketing-Manager in einem mittelständischen Unternehmen. Mein Arbeitstag beginnt um 9 Uhr. Zuerst checke ich meine E-Mails und plane den Tag. Um 10 Uhr habe ich ein Meeting mit meinem Team. Wir besprechen neue Marketingkampagnen. Mittags esse ich in der Kantine. Nachmittags arbeite ich an Präsentationen und Reports. Um 18 Uhr feiere ich Feierabend.', wordCount: 115 },
+            { id: 9, title: 'Das deutsche Essen', level: 'A2', category: 'Kultur', content: 'Die deutsche Küche ist sehr vielfältig. Es gibt viele regionale Spezialitäten. Typisch sind Bratwurst und Sauerkraut. In Bayern gibt es Weißwurst und Brezn. In Norddeutschland isst man gern Fisch und Kartoffeln. Deutsches Brot ist dunkel und wird aus Sauerteig gemacht. Es gibt auch viele Sorten Käse und Wurst. Zum Essen trinken die Deutschen gern Bier oder Wein.', wordCount: 98 },
+            { id: 10, title: 'Das deutsche Gesundheitssystem', level: 'A2', category: 'Gesellschaft', content: 'Deutschland hat ein sehr gutes Gesundheitssystem. Es gibt zwei Arten von Versicherung: Gesetzliche und Private. Die gesetzliche Krankenkasse ist für die meisten Menschen Pflicht. Mit der Versicherungskarte geht man zum Arzt. Man muss keine Rechnung bezahlen, das macht die Kasse. Auch Medikamente werden teilweise erstattet. Notfälle werden schnell behandelt.', wordCount: 105 },
+            { id: 11, title: 'Integration von Ausländern', level: 'B1', category: 'Gesellschaft', content: 'Deutschland ist ein Einwanderungsland. Viele Menschen aus aller Welt kommen hierher. Sie arbeiten, studieren oder suchen Asyl. Die Integration ist eine wichtige Aufgabe für die Gesellschaft. Sprachkenntnisse sind der Schlüssel zur Integration. Der Staat bietet Integrationskurse an. Diese Kurse umfassen Deutschunterricht, Informationen über deutsche Kultur und Geschichte, und Berufseingliederung.', wordCount: 108 },
+            { id: 12, title: 'Umweltschutz in Deutschland', level: 'B1', category: 'Umwelt', content: 'Umweltschutz ist in Deutschland sehr wichtig. Die Deutschen trennen sorgfältig ihren Müll: Papier, Glas, Plastik und Bioabfall. Viele Menschen nutzen Fahrrad oder öffentliche Verkehrsmittel statt Auto. Solaranlagen auf Dächern sind häufig. Energie aus Windrädern wird immer wichtiger. Deutschland will bis 2050 klimaneutral werden.', wordCount: 100 },
+            { id: 13, title: 'Die deutsche Automobilindustrie', level: 'B2', category: 'Wirtschaft', content: 'Die deutsche Automobilindustrie ist weltweit führend. Marken wie Mercedes-Benz, BMW, Audi und Porsche sind bekannt für Qualität und Innovation. Die Branche beschäftigt Hunderttausende Menschen. Doch sie steht vor Herausforderungen: Die Elektromobilität erfordert neue Technologien und massive Investitionen. Die traditionellen Hersteller wandeln sich langsam zu Mobilitätsdienstleistern.', wordCount: 105 },
+            { id: 14, title: 'Das deutsche Bildungssystem', level: 'B2', category: 'Bildung', content: 'Das deutsche Bildungssystem ist föderal organisiert, das heißt,每个 Bundesland ist für seine Schulen zuständig. Es gibt verschiedene Schularten: Grundschule, Hauptschule, Realschule und Gymnasium. Nach dem Abitur können Studenten an der Universität studieren. Das Studium ist in vielen Fällen kostenlos. Es gibt auch duale Ausbildungsprogramme, die Theorie und Praxis kombinieren.', wordCount: 118 },
+        ];
+
+        let currentLevel = 'all';
+        let vocabLoaded = 0;
+        const vocabPerPage = 20;
+
+        // 页面切换
+        function showPage(pageName) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            document.getElementById('page-' + pageName).classList.add('active');
+
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            if (pageName === 'vocabulary') {
+                loadVocabulary();
+            } else if (pageName === 'reading') {
+                loadReading();
+            } else if (pageName === 'ai') {
+                generateQuestions();
+            }
+
+            window.scrollTo(0, 0);
+        }
+
+        // 加载词汇
+        function loadVocabulary() {
+            const container = document.getElementById('vocab-container');
+            container.innerHTML = '';
+
+            const filtered = currentLevel === 'all'
+                ? vocabularyData
+                : vocabularyData.filter(v => v.level === currentLevel);
+
+            const toShow = filtered.slice(0, vocabPerPage);
+
+            toShow.forEach(vocab => {
+                const card = createVocabCard(vocab);
+                container.appendChild(card);
+            });
+
+            vocabLoaded = vocabPerPage;
+        }
+
+        // 创建词汇卡片
+        function createVocabCard(vocab) {
+            const card = document.createElement('div');
+            card.className = 'word-card';
+
+            const articleHtml = vocab.article
+                ? `<span class="word-article">${vocab.article}</span>`
+                : '';
+
+            card.innerHTML = `
+                <div class="word-main">
+                    <div class="word-german">${articleHtml}${vocab.word}</div>
+                    <span class="level-badge level-${vocab.level.toLowerCase()}">${vocab.level}</span>
+                </div>
+                <div class="word-meaning">${vocab.meaning}</div>
+                <div class="word-example">${vocab.example}</div>
+            `;
+
+            return card;
+        }
+
+        // 筛选词汇
+        function filterVocabulary() {
+            const search = document.getElementById('vocab-search').value.toLowerCase();
+
+            const container = document.getElementById('vocab-container');
+            container.innerHTML = '';
+
+            let filtered = currentLevel === 'all'
+                ? vocabularyData
+                : vocabularyData.filter(v => v.level === currentLevel);
+
+            if (search) {
+                filtered = filtered.filter(v =>
+                    v.word.toLowerCase().includes(search) ||
+                    v.meaning.includes(search)
+                );
+            }
+
+            const toShow = filtered.slice(0, vocabPerPage);
+
+            toShow.forEach(vocab => {
+                const card = createVocabCard(vocab);
+                container.appendChild(card);
+            });
+
+            vocabLoaded = vocabPerPage;
+        }
+
+        // 按级别筛选
+        function filterVocabByLevel(level) {
+            currentLevel = level;
+
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            loadVocabulary();
+        }
+
+        // 加载更多
+        function loadMoreVocabulary() {
+            const container = document.getElementById('vocab-container');
+
+            let filtered = currentLevel === 'all'
+                ? vocabularyData
+                : vocabularyData.filter(v => v.level === currentLevel);
+
+            const search = document.getElementById('vocab-search').value.toLowerCase();
+            if (search) {
+                filtered = filtered.filter(v =>
+                    v.word.toLowerCase().includes(search) ||
+                    v.meaning.includes(search)
+                );
+            }
+
+            const nextBatch = filtered.slice(vocabLoaded, vocabLoaded + vocabPerPage);
+
+            if (nextBatch.length === 0) {
+                showToast('没有更多词汇了');
+                return;
+            }
+
+            nextBatch.forEach(vocab => {
+                const card = createVocabCard(vocab);
+                container.appendChild(card);
+            });
+
+            vocabLoaded += vocabPerPage;
+        }
+
+        // 加载阅读材料
+        function loadReading() {
+            const container = document.getElementById('reading-container');
+            container.innerHTML = '';
+
+            readingData.forEach(reading => {
+                const card = document.createElement('div');
+                card.className = 'reading-card';
+                card.innerHTML = `
+                    <div class="reading-header">
+                        <div class="reading-title">${reading.title}</div>
+                        <span class="level-badge level-${reading.level.toLowerCase()}">${reading.level}</span>
+                    </div>
+                    <div class="reading-content">${reading.content}</div>
+                    <div class="reading-meta">
+                        <span>📝 ${reading.wordCount} 词</span>
+                        <span>📂 ${reading.category}</span>
+                        <span>⏱️ ${Math.ceil(reading.wordCount / 150)} 分钟</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // 筛选阅读
+        function filterReading(level) {
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            const container = document.getElementById('reading-container');
+            container.innerHTML = '';
+
+            const filtered = level === 'all'
+                ? readingData
+                : readingData.filter(r => r.level === level);
+
+            filtered.forEach(reading => {
+                const card = document.createElement('div');
+                card.className = 'reading-card';
+                card.innerHTML = `
+                    <div class="reading-header">
+                        <div class="reading-title">${reading.title}</div>
+                        <span class="level-badge level-${reading.level.toLowerCase()}">${reading.level}</span>
+                    </div>
+                    <div class="reading-content">${reading.content}</div>
+                    <div class="reading-meta">
+                        <span>📝 ${reading.wordCount} 词</span>
+                        <span>📂 ${reading.category}</span>
+                        <span>⏱️ ${Math.ceil(reading.wordCount / 150)} 分钟</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // 生成AI问题
+        function generateQuestions() {
+            const type = document.getElementById('question-type').value;
+            const level = document.getElementById('question-level').value;
+            const container = document.getElementById('questions-container');
+
+            const questions = getMockQuestions(type, level);
+            container.innerHTML = '';
+
+            questions.forEach((q, index) => {
+                const card = document.createElement('div');
+                card.className = 'question-card';
+
+                let optionsHTML = '';
+                if (q.options) {
+                    optionsHTML = '<ul class="options-list">';
+                    q.options.forEach((opt, i) => {
+                        const letter = String.fromCharCode(65 + i);
+                        optionsHTML += `
+                            <li class="option-item" onclick="checkAnswer(this, ${opt.isCorrect})">
+                                <span class="option-letter">${letter}</span>
+                                ${opt.text}
+                            </li>
+                        `;
+                    });
+                    optionsHTML += '</ul>';
+                }
+
+                card.innerHTML = `
+                    <span class="question-type">${q.type}</span>
+                    <div class="question-text">${index + 1}. ${q.question}</div>
+                    ${optionsHTML}
+                    ${q.explanation ? `<div style="margin-top: 12px; color: #666; font-size: 13px;">💡 ${q.explanation}</div>` : ''}
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // 获取模拟问题
+        function getMockQuestions(type, level) {
+            if (type === 'vocabulary') {
+                return [
+                    {
+                        type: '词义选择',
+                        question: 'Was bedeutet "arbeiten"?',
+                        options: [
+                            { text: '学习', isCorrect: false },
+                            { text: '工作', isCorrect: true },
+                            { text: '休息', isCorrect: false },
+                            { text: '旅行', isCorrect: false }
+                        ],
+                        explanation: 'arbeiten = 工作'
+                    },
+                    {
+                        type: '词义选择',
+                        question: 'Was bedeutet "glücklich"?',
+                        options: [
+                            { text: '悲伤的', isCorrect: false },
+                            { text: '生病的', isCorrect: false },
+                            { text: '幸福的', isCorrect: true },
+                            { text: '生气的', isCorrect: false }
+                        ],
+                        explanation: 'glücklich = 幸福的/快乐的'
+                    },
+                    {
+                        type: '词义选择',
+                        question: 'Was bedeutet "die Meinung"?',
+                        options: [
+                            { text: '方法', isCorrect: false },
+                            { text: '观点', isCorrect: true },
+                            { text: '问题', isCorrect: false },
+                            { text: '答案', isCorrect: false }
+                        ],
+                        explanation: 'die Meinung = 观点/看法'
+                    },
+                    {
+                        type: '词义选择',
+                        question: 'Was bedeutet "investieren"?',
+                        options: [
+                            { text: '投资', isCorrect: true },
+                            { text: '花费', isCorrect: false },
+                            { text: '赚钱', isCorrect: false },
+                            { text: '储蓄', isCorrect: false }
+                        ],
+                        explanation: 'investieren = 投资'
+                    }
+                ];
+            } else if (type === 'grammar') {
+                return [
+                    {
+                        type: '冠词练习',
+                        question: 'Welcher Artikel gehört zu "Kind"?',
+                        options: [
+                            { text: 'der', isCorrect: false },
+                            { text: 'die', isCorrect: false },
+                            { text: 'das', isCorrect: true }
+                        ],
+                        explanation: 'Das Kind ist neutral, Artikel: das'
+                    },
+                    {
+                        type: '冠词练习',
+                        question: 'Welcher Artikel gehört zu "Katze"?',
+                        options: [
+                            { text: 'der', isCorrect: false },
+                            { text: 'die', isCorrect: true },
+                            { text: 'das', isCorrect: false }
+                        ],
+                        explanation: 'Die Katze ist feminin, Artikel: die'
+                    },
+                    {
+                        type: '动词变位',
+                        question: 'Ich _____ Deutsch.',
+                        options: [
+                            { text: 'lerne', isCorrect: false },
+                            { text: 'lernst', isCorrect: false },
+                            { text: 'lerne', isCorrect: true },
+                            { text: 'lernt', isCorrect: false }
+                        ],
+                        explanation: '第一人称单数：Ich lerne'
+                    }
+                ];
+            } else if (type === 'comprehension') {
+                return [
+                    {
+                        type: '阅读理解',
+                        question: 'Wann steht Peter auf? (aus dem Text "Mein Tag")',
+                        options: [
+                            { text: 'Um 6 Uhr', isCorrect: false },
+                            { text: 'Um 7 Uhr', isCorrect: true },
+                            { text: 'Um 8 Uhr', isCorrect: false },
+                            { text: 'Um 9 Uhr', isCorrect: false }
+                        ],
+                        explanation: 'Im Text steht: "Ich stehe um 7 Uhr auf."'
+                    },
+                    {
+                        type: '阅读理解',
+                        question: 'Was isst Anna zum Frühstück? (aus dem Text "Einkaufen")',
+                        options: [
+                            { text: 'Brot und Kaffee', isCorrect: false },
+                            { text: 'Pizza und Pasta', isCorrect: false },
+                            { text: 'Das steht nicht im Text', isCorrect: true },
+                            { text: 'Nur Kaffee', isCorrect: false }
+                        ],
+                        explanation: 'Der Text erwähnt nicht, was Anna zum Frühstück isst.'
+                    }
+                ];
+            } else {
+                return [
+                    {
+                        type: '混合题型',
+                        question: 'Was bedeutet "Hallo"?',
+                        options: [
+                            { text: '再见', isCorrect: false },
+                            { text: '你好', isCorrect: true },
+                            { text: '谢谢', isCorrect: false },
+                            { text: '对不起', isCorrect: false }
+                        ],
+                        explanation: 'Hallo = 你好（问候语）'
+                    },
+                    {
+                        type: '混合题型',
+                        question: 'Welcher Artikel ist richtig? _____ Tisch',
+                        options: [
+                            { text: 'Der', isCorrect: true },
+                            { text: 'Die', isCorrect: false },
+                            { text: 'Das', isCorrect: false }
+                        ],
+                        explanation: 'Der Tisch = 桌子（阳性）'
+                    },
+                    {
+                        type: '混合题型',
+                        question: 'Ist das Deutsch einfach zu lernen?',
+                        options: [
+                            { text: 'Ja, sehr einfach', isCorrect: false },
+                            { text: 'Nein, es ist schwierig', isCorrect: true },
+                            { text: 'Ich weiß nicht', isCorrect: false }
+                        ],
+                        explanation: 'Deutsch ist eine schwierige Sprache mit komplexer Grammatik.'
+                    }
+                ];
+            }
+        }
+
+        // 检查答案
+        function checkAnswer(element, isCorrect) {
+            element.classList.remove('correct', 'wrong');
+            element.classList.add(isCorrect ? 'correct' : 'wrong');
+
+            if (isCorrect) {
+                showToast('✅ 正确！');
+            } else {
+                showToast('❌ 不对，再试试！');
+            }
+        }
+
+        // Toast 提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+
+        // TTS功能
+        let synthesis = window.speechSynthesis;
+
+        function speak(text, rate) {
+            if (synthesis.speaking) {
+                synthesis.cancel();
+            }
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'de-DE';
+            utterance.rate = rate;
+            utterance.pitch = 1;
+
+            synthesis.speak(utterance);
+        }
+
+        function stopSpeaking() {
+            if (synthesis.speaking) {
+                synthesis.cancel();
+            }
+        }
+
+        function shadowingPractice() {
+            const text = 'Die deutsche Sprache ist sehr interessant.';
+
+            // 第1遍：正常
+            speak(text, 0.9);
+
+            setTimeout(() => {
+                // 第2遍：稍慢
+                speak(text, 0.8);
+            }, 2000);
+
+            setTimeout(() => {
+                showToast('🎤 请跟着读！');
+                speak(text, 0.9);
+            }, 4000);
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadVocabulary();
+        });
+    </script>
+</body>
+</html>

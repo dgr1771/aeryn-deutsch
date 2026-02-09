@@ -1,0 +1,75 @@
+infinitive,english,chinese,type,ich,du,er,wir,ihr,sie,prateritum_ich,prateritum_du,prateritum_er,prateritum_wir,prateritum_ihr,prateritum_sie,perfect,cefr_level
+sein,to be,是,strong,bin,bist,ist,sind,seid,sind,war,warst,war,waren,wart,waren,ist,A1
+haben,to have,有,strong,habe,hast,hat,haben,habt,haben,hatte,hattest,hatte,hatten,hattet,hatten,hat,A1
+werden,to become,变成,strong,werde,wirst,wird,werden,werdet,werden,wurde,wurdest,wurde,wurden,wurdet,wurden,ist,A1
+können,can,能,modal,kann,kannst,kann,können,könnt,können,konnte,konntest,konnte,konnten,konntet,konnten,hat,A1
+müssen,must,必须,modal,muss,muss,muss,müssen,müsst,müssen, musste,musstest,musste,mussten,musstet,mussten,hat,A1
+wollen,to want,想要,modal,will,willst,will,wollen,wollt,wollen,wollte,wolltest,wollte,wollten,wolltet,wollten,hat,A1
+sollen,should,应该,modal,soll,sollst,soll,sollen,sollt,sollen,sollte,solltest,sollte,sollten,solltet,sollten,hat,A1
+dürfen,may,可以,modal,darf,darfst,darf,dürfen,dürft,dürfen,durfte,durftest,durfte,durften,durftet,durften,hat,A1
+mögen,to like,喜欢,modal,mag,magst,mag,mögen,mögt,mögen,mochtest,mochte,mochte,mochten,mochtet,mochten,hat,A2
+lesen,to read,读,strong,leise,liest,liest,lesen,lest,lesen,las,lasst,las,lasen,last,lasen,hat,A1
+schreiben,to write,写,weak,schreibe,schreibst,schreibt,schreiben,schreibt,schreiben,schrieb,schriebst,schrieb,schrieben,schriebt,schrieben,hat,A1
+sprechen,to speak,说,mixed,spreche,sprichst,spricht,sprechen,sprecht,sprechen,sprach,sprachst,sprach,sprachen,spracht,sprachen,hat,A1
+hören,to hear,听,weak,höre,hörst,hört,hören,hört,hören,hörte,hörtest,hörte,hörten,hörtet,hörten,hat,A1
+sehen,to see,看,strong,sehe,siehst,sieht,sehen,seht,sehen,sah,sahst,sah,sahen,sahet,sahen,hat,A1
+gehen,to go,走,strong,gehe,gehst,geht,gehen,geht,gehen,ging,gingst,ging,gingen,gingt,gingen,ist,A1
+kommen,to come,来,weak,komme,kommst,kommt,kommen,kommt,kommen,kam,kamst,kam,kamen,kamt,kamen,ist,A1
+laufen,to run,跑,strong,laufe,läufst,läuft,laufen,lauft,laufen,liefl,liefs,lief,liefen,lieft,liefen,ist,A1
+essen,to eat,吃,strong,esse,isst,isst,essen,esst,essen,aß,aßt,aß,aßen,aßt,aßen,hat,A1
+trinken,to drink,喝,weak,trinke,trinkst,trinkt,trinken,trinkt,trinken,trank,trankst,trank,tranken,trankt,tranken,hat,A1
+schlafen,to sleep,睡,strong,schlafe,schläfst,schläft,schlafen,schlaft,schlafen,schlief,schliefst,schlief,schliefen,schliefet,schliefen,hat,A1
+arbeiten,to work,工作,weak,arbeite,arbeitst,arbeitet,arbeiten,arbeitet,arbeiten,arbeitete,arbeitetest,arbeitete,arbeiteten,arbeitetet,arbeiteten,hat,A1
+lernen,to learn,学习,weak,lerne,lernst,lernt,lernen,lert,lernen,lernte,lerntest,lernte,lernten,lertet,lernten,hat,A1
+studieren,to study,研究,weak,studiere,studierst,studiert,studieren,studiert,studieren,studierte,studiertest,studierte,studierten,studiertet,studierten,hat,A1
+spielen,to play,玩,weak,spiele,spielst,spielt,spielen,spielt,spielen,spielte,spieltest,spielte,spielten,spieltet,spielten,hat,A1
+machen,to do,做,weak,mache,machst,macht,machen,macht,machen,machte,machtest,machte,machten,machtet,machten,hat,A1
+finden,to find,找,weak,finde,findest,findet,finden,findet,finden,fand,fandest,fand,fanden,fandet,fanden,hat,A1
+kaufen,to buy,买,weak,kaufe,kaufst,kauft,kaufen,kauft,kaufen,kaufte,kauftest,kaufte,kauften,kaufietet,kauften,hat,A1
+verkaufen,to sell,卖,weak,verkaufe,verkaufst,verkauft,verkaufen,verkauft,verkaufen,verkaufte,verkauftest,verkaufte,verkauften,verkauftet,verkauften,hat,A2
+denken,to think,想,strong,denke,denkst,denkt,denken,denkt,denken,dachte,dachtest,dachte,dachten,dachtet,dachten,hat,A2
+wissen,to know,知道,strong,weiß,weißt,weiß,wissen,wisst,wissen,wusste,wusstest,wusste,wussten,wusstet,wussten,hat,A1
+fahren,to drive,驾驶,strong,fahre,fährst,fährt,fahren,fahrt,fahren,fuhr,fuhrest,fuhr,fuhren,fuhret,fuhren,ist,A1
+fliegen,to fly,飞,weak,fliege,fliegst,fliegt,fliegen,fliegt,fliegen,flog,flogst,flog,flogen,flogt,flogen,ist,A2
+stehen,to stand,站,weak,stehe,stehst,steht,stehen,steht,stehen,stand,standest,stand,standen,standet,standen,hat,A2
+sitzen,to sit,坐,weak,sitze,sitzt,sitzt,sitzen,sitzt,sitzen,saß,saßest,saß,saßen,saßet,saßen,hat,A2
+liegen,to lie,躺,weak,liege,liegst,liegt,liegen,liegt,liegen,lag,lagst,lag,lagen,lagt,lagen,hat,A2
+geben,to give,给,strong,gebe,gibst,gibt,geben,gebt,geben,gab,gabst,gab,gaben,gabt,gaben,hat,A1
+nehmen,to take,拿,strong,nehme,nimmt,nimmt,nehmen,nehmt,nehmen,nahm,nahmst,nahm,nahmen,nahmt,nahmen,hat,A2
+bringen,to bring,带,weak,bringst,bringst,bringt,bringen,bringt,bringen,brachte,brachtest,brachte,brachten,brachtet,brachten,hat,A1
+sagen,to say,说,weak,sage,sagst,sagt,sagen,sagt,sagen,sagte,sagtest,sagte,sagten,sagtet,sagten,hat,A1
+fragen,to ask,问,weak,frage,fragst,fragt,fragen,fragt,fragen,fragte,fragtest,fragte,fragten,fragtet,fragten,hat,A1
+antworten,to answer,回答,weak,antworte,antwortest,antwortet,antworten,antwortet,antworten,antwortete,antwortetest,antwortete,antworteten,antwortetet,antworteten,hat,A2
+verstehen,to understand,理解,weak,verstehe,verstehst,versteht,verstehen,versteht,verstehen,verstand,verstandest,verstand,verstanden,verstandet,verstanden,hat,A1
+beginnen,to begin,开始,weak,beginne,beginnst,beginnt,beginnen,beginnt,beginnen,beginnate,beginntest,beginnate,beginnaten,beginntet,beginnaten,hat,A2
+enden,to end,结束,weak,ende,endet,endet,enden,endet,enden,endete,endetest,endete,endeten,endetet,endeten,hat,A2
+gewinnen,to win,赢,win,gewinnst,gewinnt,gewinnen,gewinnt,gewinnen,gann,gannst,gann,gannen,gannt,gannen,hat,B1
+verlieren,to lose,输,weak,verliere,verlierst,verliert,verlieren,verliert,verlieren,verlor,verlorst,verlor,verloren,verloret,verloren,hat,B1
+helfen,to help,帮助,strong,hilfe,hilfst,hilft,helfen,helft,helfen,half,halfst,half,halfenhalft,halfen,hat,A2
+leben,to live,生活,weak,lebe,lebst,lebt,leben,lebt,leben,lebte,lebtest,lebte,lebten,lebtet,lebten,hat,A1
+sterben,to die,死,strong,sterbe,stirbst,stirbt,sterben,sterbt,sterben,starb,starbst,starb,starben,starbt,starben,ist,B2
+fehlen,to lack,缺少,weak,fehle,fehlst,fehlt,fehlen,fehlt,fehlen,fehlte,fehltest,fehlte,fehlten,fehltet,fehlten,hat,A2
+passen,to fit,合适,weak,passse,passst,passst,passen,passst,passen,passste,passstest,passste,passsten,passstet,passsten,hat,A2
+gelingen,to succeed,成功,strong,gelingt,gelingst,gelingt,gelingen,gelingt,gelingen,gelang,glangst,gelang,gelangen,gangt,gelangen,ist,B1
+misslingen,to fail,失败,strong,misslingt,misslingst,misslingt,misslingen,misslingt,misslingen,misslang,mislangst,mislang,mislangen,mislangt,mislangen,ist,B2
+wachsen,to grow,生长,strong,wachse,wächst,wächst,wachsen,wachst,wachsen,wuchs,wuchsest,wuchs,wuchsen,wuchst,wuchsen,ist,B1
+treffen,to meet,见面,mixed,treffe,triffst,trifft,treffen,trefft,treffen,traf,trafst,traf,trafen,traft,trafen,hat,A1
+erwarten,to expect,期待,weak,erwarte,erwartest,erwartet,erwarten,erwartet,erwarten,erwartete,erwartetest,erwartete,erwarteten,erwartetet,erwarteten,hat,B1
+hoffen,to hope,希望,weak,hoffe,hoffst,hofft,hoffen,hofft,hoffen,hoffte,hofftest,hoffte,hofften,hofftet,hofften,hat,A2
+warten,to wait,等待,weak,warte,wartest,wartet,warten,wartet,warten,wartete,wartetest,wartete,warteten,wartetet,warteten,hat,A2
+meinen,to mean,意思是,weak,meine,meinst,meint,meinen,meint,meinen,meinte,meintest,meinte,meinten,meintet,meinten,hat,A1
+glauben,to believe,相信,weak,glaube,glaubst,glaubt,glauben,glaubt,glauben,glaubte,glaubtest,glaubte,glaubten,glaubtet,glaubten,hat,A1
+lieben,to love,爱,weak,liebe,liebst,liebt,lieben,liebt,lieben,liebte,liebtest,liebte,liebten,liebtet,liebten,hat,A1
+hasen,to hate,恨,weak,hasse,hasst,hhasst,hasen,hasst,hasen,hasste,hasstest,hasste,hassten,hasstet,hassten,hat,B1
+lieben,to like,喜欢,weak,liebe,liebst,liebt,lieben,liebt,lieben,liebte,liebtest,liebte,liebten,liebtet,liebten,hat,A1
+interessieren,to interest,使感兴趣,weak,interessiere,interessierst,interessiert,interessieren,interessiert,interessieren,interessierte,interessiertest,interessierte,interessierten,interessietet,interessierten,hat,A2
+änderen,to change,改变,weak,ändere,änderst,ändert,ändern,ändert,ändern,änderte,ändertest,änderte,änderten,ändertet,änderten,hat,A2
+versuchen,to try,尝试,weak,versuche,versuchst,versucht,versuchen,versucht,versuchen,versuchte,versuchtest,versuchte,versuchten,versuchttet,versuchten,hat,A2
+brauchen,to need,需要,weak,brauche,brauchst,braucht,brauchen,braucht,brauchen,brauchte,brauchtest,brauchte,brauchten,brauchtet,brauchten,hat,A1
+wünschen,to wish,希望,weak,wünsche,wünschst,wünscht,wünschen,wünscht,wünschen,wünschte,wünschtest,wünschte,wünschten,wünschtet,wünschten,hat,A2
+fehlen,to be missing,缺席,weak,fehle,fehlst,fehlt,fehlen,fehlt,fehlen,fehlte,fehltest,fehlte,fehlten,fehltet,fehlten,hat,A2
+gefallen,to please,使高兴,mixed,gefalle,gefällst,gefällt,gefallen,gefällt,gefallen,gefiel,gefielst,gefiel,gefielen,gefielt,gefielen,hat,A2
+gehören,to belong,属于,weak,gehöre,gehörst,gehört,gehören,gehört,gehören,gehörte,gehörtest,gehörte,gehörten,gehörtet,gehörten,hat,A2
+fehlen,to be missing,缺少,weak,fehle,fehlst,fehlt,fehlen,fehlt,fehlen,fehlte,fehltest,fehlte,fehlten,fehltet,fehlten,hat,A2
+passen,to fit,合适,weak,passse,passst,passst,passen,passst,passen,passste,passstest,passste,passsten,passstet,passsten,hat,A2
+stehen,to stand,站,weak,stehe,stehst,steht,stehen,steht,stehen,stand,standest,stand,standen,standet,standen,hat,A2
