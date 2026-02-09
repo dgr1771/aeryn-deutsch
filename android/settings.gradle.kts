@@ -24,19 +24,3 @@ plugins {
 }
 
 include(":app")
-
-// 为所有项目提供 flutter 扩展配置
-gradle.beforeProject {
-    val flutterExt = project.extensions.findByType(
-        groovy.lang.GroovyObject::class.java
-    )?.properties?.get("flutter")
-
-    // 如果 flutter 扩展不存在，创建一个简单的
-    if (flutterExt == null) {
-        project.extensions.add("flutter", object {
-            val compileSdkVersion = 36
-            val minSdkVersion = 21
-            val targetSdkVersion = 36
-        })
-    }
-}
