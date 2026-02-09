@@ -23,7 +23,7 @@ dependencies:
   # Network & API
   http: ^1.1.2
   dio: ^5.4.0
-  connectivity_plus: ^2.3.9
+  connectivity_plus: ^6.0.0
 
   # NLP & AI
   flutter_tts: ^3.8.3
