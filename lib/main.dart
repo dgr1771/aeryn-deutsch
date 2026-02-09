@@ -86,7 +86,7 @@ class AerynDeutschApp extends StatelessWidget {
         brightness: Brightness.dark,
       ),
       fontFamily: 'NotoSans',
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         centerTitle: false,
         elevation: 0,
         backgroundColor: Colors.grey[900],
