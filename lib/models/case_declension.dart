@@ -3,12 +3,6 @@ library;
 
 import '../core/grammar_engine.dart';
 
-/// 数
-enum Number {
-  singular,   // 单数
-  plural,     // 复数
-}
-
 /// 冠词类型
 enum ArticleType {
   definite,   // 定冠词 (der/die/das)

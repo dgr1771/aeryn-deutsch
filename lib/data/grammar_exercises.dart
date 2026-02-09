@@ -1059,49 +1059,49 @@ List<Map<String, dynamic>>? getExtendedExercises(String topic, String level) {
 List<Map<String, dynamic>> getAllKasusExercises(String level) {
   final base = getKasusExercises(level);
   final extended = getExtendedExercises('kasus', level);
-  return [...base, ...extended];
+  return [...base, ...?extended];
 }
 
 List<Map<String, dynamic>> getAllVerbExercises(String level) {
   final base = getVerbConjugationExercises(level);
   final extended = getExtendedExercises('verb', level);
-  return [...base, ...extended];
+  return [...base, ...?extended];
 }
 
 List<Map<String, dynamic>> getAllAdjectiveExercises(String level) {
   final base = getAdjectiveExercises(level);
   final extended = getExtendedExercises('adjective', level);
-  return [...base, ...extended];
+  return [...base, ...?extended];
 }
 
 List<Map<String, dynamic>> getAllSubordinateClauseExercises(String level) {
   final base = getSubordinateClauseExercises(level);
   final extended = getExtendedExercises('clause', level);
-  return [...base, ...extended];
+  return [...base, ...?extended];
 }
 
 List<Map<String, dynamic>> getAllPassiveExercises(String level) {
   final base = getPassiveExercises(level);
   final extended = getExtendedExercises('passive', level);
-  return [...base, ...extended];
+  return [...base, ...?extended];
 }
 
 List<Map<String, dynamic>> getAllKonjunktivExercises(String level) {
   final base = getKonjunktivExercises(level);
   final extended = getExtendedExercises('konjunktiv', level);
-  return [...base, ...extended];
+  return [...base, ...?extended];
 }
 
 List<Map<String, dynamic>> getAllPrepositionExercises(String level) {
   final base = getPrepositionExercises(level);
   final extended = getExtendedExercises('preposition', level);
-  return [...base, ...extended];
+  return [...base, ...?extended];
 }
 
 List<Map<String, dynamic>> getAllSentenceStructureExercises(String level) {
   final base = getSentenceStructureExercises(level);
   final extended = getExtendedExercises('complex', level);
-  return [...base, ...extended];
+  return [...base, ...?extended];
 }
 
 /// 统计题库总数（包括扩展）
@@ -1127,19 +1127,13 @@ int getTotalExerciseCount() {
 
 /// 统计扩展题库数量
 Map<String, int> getExtendedExerciseCount() {
-  final verbExCount = verbExercisesA2.length + verbExercisesB1.length;
-  final clauseCount = clauseExercisesB1.length;
-  final genderCount = genderExercisesA1.length;
-  final prepCount = prepositionExercisesB1.length;
-  final passiveCount = passiveExercisesB2.length;
-  final complexCount = complexSentencesC1.length;
-
+  // TODO: 实现扩展题库后，替换为实际变量
   return {
-    'verb': verbExCount,
-    'clause': clauseCount,
-    'gender': genderCount,
-    'preposition': prepCount,
-    'passive': passiveCount,
-    'complex': complexCount,
+    'verb': 0,
+    'clause': 0,
+    'gender': 0,
+    'preposition': 0,
+    'passive': 0,
+    'complex': 0,
   };
 }

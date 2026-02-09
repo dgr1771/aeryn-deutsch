@@ -181,10 +181,10 @@ class OnboardingPlanScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: color.shade50,
+        color: color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: color.shade200,
+          color: color.withOpacity(0.3),
           width: 1,
         ),
       ),
@@ -241,7 +241,7 @@ class OnboardingPlanScreen extends StatelessWidget {
             width: 56,
             height: 56,
             decoration: BoxDecoration(
-              color: _getTaskColor(task.type).shade100,
+              color: _getTaskColor(task.type).withOpacity(0.15),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(

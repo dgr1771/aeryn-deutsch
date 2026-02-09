@@ -108,7 +108,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
     noun: 'Computer',
     gender: GermanGender.der,
     number: Number.singular,
-    definitiveArticle: {
+    definiteArticle: {
       GermanCase.nominativ: 'der',
       GermanCase.akkusativ: 'den',
       GermanCase.dativ: 'dem',
@@ -139,7 +139,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
     noun: 'Student',
     gender: GermanGender.der,
     number: Number.singular,
-    definitiveArticle: {
+    definiteArticle: {
       GermanCase.nominativ: 'der',
       GermanCase.akkusativ: 'den',
       GermanCase.dativ: 'dem',
@@ -172,7 +172,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
     noun: 'Stadt',
     gender: GermanGender.die,
     number: Number.singular,
-    definitiveArticle: {
+    definiteArticle: {
       GermanCase.nominativ: 'die',
       GermanCase.akkusativ: 'die',
       GermanCase.dativ: 'der',
@@ -203,7 +203,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
     noun: 'Universität',
     gender: GermanGender.die,
     number: Number.singular,
-    definitiveArticle: {
+    definiteArticle: {
       GermanCase.nominativ: 'die',
       GermanCase.akkusativ: 'die',
       GermanCase.dativ: 'der',
@@ -234,7 +234,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
     noun: 'Straße',
     gender: GermanGender.die,
     number: Number.singular,
-    definitiveArticle: {
+    definiteArticle: {
       GermanCase.nominativ: 'die',
       GermanCase.akkusativ: 'die',
       GermanCase.dativ: 'der',
@@ -265,7 +265,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
     noun: 'Schule',
     gender: GermanGender.die,
     number: Number.singular,
-    definitiveArticle: {
+    definiteArticle: {
       GermanCase.nominativ: 'die',
       GermanCase.akkusativ: 'die',
       GermanCase.dativ: 'der',
@@ -296,7 +296,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
     noun: 'Party',
     gender: GermanGender.die,
     number: Number.singular,
-    definitiveArticle: {
+    definiteArticle: {
       GermanCase.nominativ: 'die',
       GermanCase.akkusativ: 'die',
       GermanCase.dativ: 'der',
@@ -329,7 +329,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
     noun: 'Auto',
     gender: GermanGender.das,
     number: Number.singular,
-    definitiveArticle: {
+    definiteArticle: {
       GermanCase.nominativ: 'das',
       GermanCase.akkusativ: 'das',
       GermanCase.dativ: 'dem',
@@ -360,7 +360,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
     noun: 'Fahrrad',
     gender: GermanGender.das,
     number: Number.singular,
-    definitiveArticle: {
+    definiteArticle: {
       GermanCase.nominativ: 'das',
       GermanCase.akkusativ: 'das',
       GermanCase.dativ: 'dem',
@@ -391,7 +391,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
     noun: 'Hotel',
     gender: GermanGender.das,
     number: Number.singular,
-    definitiveArticle: {
+    definiteArticle: {
       GermanCase.nominativ: 'das',
       GermanCase.akkusativ: 'das',
       GermanCase.dativ: 'dem',
@@ -422,7 +422,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
     noun: 'Problem',
     gender: GermanGender.das,
     number: Number.singular,
-    definitiveArticle: {
+    definiteArticle: {
       GermanCase.nominativ: 'das',
       GermanCase.akkusativ: 'das',
       GermanCase.dativ: 'dem',
@@ -453,7 +453,7 @@ final List<NounPhraseDeclension> expandedNounDeclensions = [
     noun: 'Gefühl',
     gender: GermanGender.das,
     number: Number.singular,
-    definitiveArticle: {
+    definiteArticle: {
       GermanCase.nominativ: 'das',
       GermanCase.akkusativ: 'das',
       GermanCase.dativ: 'dem',

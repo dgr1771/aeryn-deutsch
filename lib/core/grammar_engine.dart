@@ -16,6 +16,12 @@ enum GermanCase {
   genitiv,   // 属格
 }
 
+/// 数（单数/复数）枚举
+enum Number {
+  singular, // 单数
+  plural,   // 复数
+}
+
 /// 语言等级枚举
 enum LanguageLevel {
   A1,
