@@ -4,6 +4,7 @@
 library;
 
 import 'word.dart';
+import '../core/grammar_engine.dart';
 
 /// 学习目标类型
 enum LearningGoal {

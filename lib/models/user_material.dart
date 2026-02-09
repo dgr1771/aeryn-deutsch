@@ -395,3 +395,4 @@ class MaterialTag {
       'usageCount': usageCount,
     };
   }
+}

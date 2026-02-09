@@ -4,7 +4,7 @@
 library;
 
 import 'database_helper.dart';
-import 'user_progress_dao.dart' show UserProgressDAO, VocabularyProgressEntity;
+import 'user_progress_dao.dart' show UserProgressDAO, UserProgressEntity, VocabularyProgressEntity, StudySessionEntity, SkillProgressEntity;
 import 'skill_progress_dao.dart';
 import 'vocabulary_progress_dao.dart';
 import '../core/learning_path/skill_tree.dart';

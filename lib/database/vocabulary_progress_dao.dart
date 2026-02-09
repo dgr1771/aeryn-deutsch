@@ -6,6 +6,7 @@ library;
 import 'package:sqflite/sqflite.dart';
 import 'database_helper.dart';
 import 'user_progress_dao.dart' show VocabularyProgressEntity;
+import '../core/grammar_engine.dart';
 
 /// 词汇进度DAO
 class VocabularyProgressDAO {
