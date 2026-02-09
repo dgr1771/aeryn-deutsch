@@ -28,7 +28,7 @@ dependencies:
   # NLP & AI
   flutter_tts: ^3.8.3
   speech_to_text: ^6.5.1
-  record: ^5.0.4
+  # record: ^5.0.4  # 暂时禁用（依赖audio_session）
   # audio_session: ^0.1.21  # 暂时禁用以完成构建
 
   # RSS & News
@@ -44,7 +44,7 @@ dependencies:
   sentry_flutter: ^8.0.0
 
   # Widgets
-  flutter_widget_from_html: ^0.14.0
+  # flutter_widget_from_html: ^0.14.0  # 暂时禁用（依赖just_audio→audio_session）
   cached_network_image: ^3.3.0
   shimmer: ^3.0.0
   sqflite: ^2.3.3+1
