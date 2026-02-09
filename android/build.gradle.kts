@@ -13,34 +13,6 @@ allprojects {
         }
     }
 }
-
-// 为所有子项目提供 Flutter 扩展对象
-gradle.beforeProject {
-    // 创建 flutter 扩展，供插件使用
-    project.extensions.create("flutter", FlutterExtension::class.java)
-}
-
-// Flutter 扩展类定义
-open class FlutterExtension {
-    val compileSdkVersion: Int = 36
-    val minSdkVersion: Int = 21
-    val targetSdkVersion: Int = 36
-}
-
-subprojects {
-    afterEvaluate {
-        if (project.hasProperty("android")) {
-            val android = project.extensions.getByName("android")
-            if (android is com.android.build.gradle.LibraryExtension) {
-                android.compileSdk = 36
-                android.defaultConfig {
-                    minSdk = 21
-                    targetSdk = 36
-                }
-            }
-        }
-    }
-}
 allprojects {
     gradle.projectsEvaluated {
         tasks.withType<JavaCompile> {
@@ -59,6 +31,24 @@ subprojects {
     val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
     project.layout.buildDirectory.value(newSubprojectBuildDir)
 }
+
+// 为插件项目配置 Android SDK 版本
+subprojects {
+    afterEvaluate {
+        if (project.name != "app") {
+            plugins.withId("com.android.library") {
+                configure<com.android.build.gradle.LibraryExtension> {
+                    compileSdk = 36
+                    defaultConfig {
+                        minSdk = 21
+                        targetSdk = 36
+                    }
+                }
+            }
+        }
+    }
+}
+
 subprojects {
     project.evaluationDependsOn(":app")
 }
